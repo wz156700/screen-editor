@@ -1,0 +1,31 @@
+html.dark {
+    /* 编辑器背景 */
+    --ap-editor-text: #fff;
+    --ap-editor-bg: #18181c;
+
+    /* 模块的边线颜色 */
+    --ap-editor-border: #000000;
+
+    /* 主要文字颜色 */
+    --ap-editor-color: #a4b6c0;
+
+    /* 左侧一级导航 */
+    --ap-editor-left-nav-one: #232324;
+
+    /* 导航激活状态 */
+    --ap-editor-left-nav-bg: rgba(69, 69, 66, 0.7);
+    --ap-editor-left-nav-text: #e7ebed;
+
+    /* 导航激活状态 */
+    --ap-editor-disabled-bg: #262727;
+    --ap-editor-disabled-text: #5f5f61;
+    /* 项目 */
+    --ap-editor-project-item-bg: #18181c;
+    --ap-editor-project-bg: #101014;
+    --ap-editor-project-item-footer: #262629;
+    --ap-editor-project-item-release: #2df34f;
+    --ap-editor-project-item-unrelease: #eaf029;
+    /* 编辑器 每个图例 */
+    --ap-editor-echarts-titlebg: #2A2A2B;
+    --ap-editor-echarts-bg: #232324;
+}

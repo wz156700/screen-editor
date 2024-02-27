@@ -1,0 +1,13 @@
+html.dark {
+    /* 自定义深色背景颜色 */
+    --el-fill-color-blank: #232324;
+    --el-text-color-primary: #a4b6c0;
+    --el-border-color-lighter: #000000;
+    --el-input-border-color: #000000;
+    --el-border-color: #000000;
+    --el-bg-color: #0c0c0e;
+    --el-bg-color-overlay: #4d4d53;
+    --el-border-color-light: #18181c;
+    --el-text-color-regular: #fff;
+    --el-fill-color-light: #2e3135;
+}
