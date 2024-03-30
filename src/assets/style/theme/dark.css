@@ -1,7 +1,7 @@
 html.dark {
     /* 编辑器背景 */
     --ap-editor-text: #fff;
-    --ap-editor-bg: #18181c;
+    --ap-editor-bg: #3b565e;
 
     /* 模块的边线颜色 */
     --ap-editor-border: #000000;
