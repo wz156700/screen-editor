@@ -85,6 +85,7 @@ const updataDomItem = (target) => {
     angleY: 0,
   });
 };
+
 // 批量更新
 const updataDomItems = (target) => {
   let arrItems = [];
@@ -138,6 +139,7 @@ function createRect(top, left, item) {
   });
   canvas.add(rt);
 }
+
 // 初始化
 const getInfo = () => {
   w = apEditorMain.value.offsetWidth;
@@ -207,6 +209,7 @@ const getInfo = () => {
   // 当元素添加到画布上时触发。
   canvas.on("object:added", function (event) {
     let target = event.target; // 获取目标元素
+    console.log("target~~", target);
     if (NotDom.includes(target.name)) return;
     emit("addDOM", {
       name: target.name,
@@ -369,6 +372,7 @@ const getInfo = () => {
       new Error("目标元素为空");
       return;
     }
+    console.log("currentType.fabricType~~~", currentType.fabricType);
     switch (currentType.fabricType) {
       case "rect":
         createRect(pointerVpt.y, pointerVpt.x, currentType);
@@ -388,6 +392,7 @@ const resizeInfo = () => {
   canvas.renderAll();
   getPosition();
 };
+
 onMounted(() => {
   getInfo();
   window.addEventListener("resize", resizeInfo, false);

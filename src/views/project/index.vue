@@ -171,11 +171,13 @@ const addItem = () => {
 };
 
 const projectList = ref([]);
+
 const okButton = async () => {
   await ruleFormRef.value.validate(async (valid, fields) => {
     if (valid) {
       if (form.uuid) {
         let result = await indexDBSearch("project", form.uuid);
+        console.log("result~~~", result);
         indexDBUpdata("project", {
           ...result,
           name: form.name,
