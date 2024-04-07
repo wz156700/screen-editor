@@ -1,5 +1,5 @@
 <!--
-作者: nodebook@qq.com
+
 组件名称: 地图组件
 -->
 <template>

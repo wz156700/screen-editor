@@ -1,85 +1,87 @@
 <!--
-作者: nodebook@qq.com
+
 组件名称: span文本组件
 -->
 <template>
-    <div class="ap-wviews-span" :style="{
-        color: color,
-        fontSize: fontSize + 'px',
-        fontStyle: fontStyle,
-        fontWeight: fontWeight,
-        justifyContent: justifyContent,
-        alignItems: alignItems,
-        letterSpacing:  letterSpacing > 0 ?  letterSpacing + 'px' : 'normal'
+  <div
+    class="ap-wviews-span"
+    :style="{
+      color: color,
+      fontSize: fontSize + 'px',
+      fontStyle: fontStyle,
+      fontWeight: fontWeight,
+      justifyContent: justifyContent,
+      alignItems: alignItems,
+      letterSpacing: letterSpacing > 0 ? letterSpacing + 'px' : 'normal',
     }"
     :class="overflow ? 'ap-wviews-overflow' : ''"
-    >
+  >
     {{ content }}
-    </div>
+  </div>
 </template>
 
 <script setup>
 const props = defineProps({
-    // 文本内容
-    content: {
-        type: String,
-        default: '文件组件'
-    },
-    // 文本颜色
-    color: {
-        type: String,
-        default: '#fff'
-    },
-    // 文字大小
-    fontSize:{
-        type: Number,
-        default: 14
-    },
-    // 字体类型
-    fontStyle: {
-        type: String,
-        default: 'normal'
-    },
-    // 字体粗细
-    fontWeight: {
-        type: String,
-        default: 'normal'
-    },
-    // 横向
-    justifyContent:{
-        type: String,
-        default: 'center'
-    },
-    // 纵向
-    alignItems:{
-        type: String,
-        default: 'center'
-    },
-    // 字体间距
-    letterSpacing:{
-        type: Number,
-        default: null
-    },
-    // 是否溢出隐藏
-    overflow: {
-        type: Boolean,
-        default: false
-    }
-})
+  // 文本内容
+  content: {
+    type: String,
+    default: "文件组件",
+  },
+  // 文本颜色
+  color: {
+    type: String,
+    default: "#fff",
+  },
+  // 文字大小
+  fontSize: {
+    type: Number,
+    default: 14,
+  },
+  // 字体类型
+  fontStyle: {
+    type: String,
+    default: "normal",
+  },
+  // 字体粗细
+  fontWeight: {
+    type: String,
+    default: "normal",
+  },
+  // 横向
+  justifyContent: {
+    type: String,
+    default: "center",
+  },
+  // 纵向
+  alignItems: {
+    type: String,
+    default: "center",
+  },
+  // 字体间距
+  letterSpacing: {
+    type: Number,
+    default: null,
+  },
+  // 是否溢出隐藏
+  overflow: {
+    type: Boolean,
+    default: false,
+  },
+});
 defineOptions({ name: "apWviewText1" });
 </script>
 
 <style scoped>
-.ap-wviews-span{
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    border: 1px solid transparent;
+.ap-wviews-span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border: 1px solid transparent;
 }
-.ap-wviews-overflow{
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
+.ap-wviews-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

@@ -1,5 +1,5 @@
 <!--
-作者: nodebook@qq.com
+
 组件名称: 图片预览
 -->
 <template>

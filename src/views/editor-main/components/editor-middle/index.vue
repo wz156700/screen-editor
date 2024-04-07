@@ -1,5 +1,4 @@
 <!--
-作者: nodebook@qq.com
 组件名称: 可视化编辑器
 -->
 <template>

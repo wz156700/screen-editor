@@ -1,5 +1,5 @@
 <!--
-作者: nodebook@qq.com
+
 组件名称: 可视化编辑器主内容区
 -->
 <template>

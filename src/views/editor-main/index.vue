@@ -1,5 +1,5 @@
 <!--
-作者: nodebook@qq.com
+
 组件名称: 编辑器主页面
 -->
 <template>

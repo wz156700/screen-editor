@@ -1,5 +1,5 @@
 <!--
-作者: nodebook@qq.com
+
 组件名称: 组件管理
 -->
 <template>
