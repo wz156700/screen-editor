@@ -105,6 +105,7 @@ const addDOM = (val) => {
 };
 // 移动元素
 const updataDOM = (val) => {
+  console.log("val", val);
   if (!val.uuid) return;
   domData[val.uuid] = {
     ...domData[val.uuid],
@@ -142,15 +143,23 @@ const propertyTable = ref({
 });
 // 选中元素
 const selectDom = (val) => {
+  console.log("val", val);
   selectUUID.value = val;
   if (val && val.length == 1) {
+    console.log("domData~~", domData);
     let itemData = domData[val[0]];
+    console.log("itemData", itemData);
     propertyData.value = {
       ...getConfigData(itemData.mark, itemData),
     };
+
+    console.log("propertyData~~", propertyData);
+
     propertyTable.value = {
       ...getConfig(itemData.mark),
     };
+
+    console.log("propertyTable~~", propertyTable);
   } else {
     propertyData.value = {
       attribute: {},
@@ -210,6 +219,7 @@ let canvasUpdata = [
   "lockMovementY",
   "lockMovementX",
 ];
+
 let domUpdata = [
   "mbl",
   "mbr",
@@ -222,6 +232,7 @@ let domUpdata = [
   "alignH",
   "alignW",
 ];
+
 const updataRight = (label, value, uuid, type) => {
   if (type == "style" && canvasUpdata.includes(label)) {
     EditorMiddleRef.value.updataFiles(label, value, uuid);
@@ -235,7 +246,6 @@ const updataRight = (label, value, uuid, type) => {
 };
 
 const draggableLeft = (val) => {
-  console.log("val~~~", val);
   draggable.value = val;
 };
 // 更新属性

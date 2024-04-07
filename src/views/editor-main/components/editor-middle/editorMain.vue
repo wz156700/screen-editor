@@ -73,6 +73,8 @@ const updataDomItem = (target) => {
   if (NotDom.includes(target.name)) {
     return;
   }
+  console.log("left~~,top~~~:", fixed(target.left), fixed(target.top));
+
   emit("updataDOM", {
     uuid: target.uuid,
     left: fixed(target.left),
@@ -168,7 +170,9 @@ const getInfo = () => {
 
   // 元素移动
   canvas.on("object:moving", function (event) {
+    console.log("event", event);
     let target = event.target; // 获取目标元素
+    console.log("target", target);
     if (event.target._objects) {
       updataDomItems(event.target);
     } else {
@@ -251,6 +255,7 @@ const getInfo = () => {
   });
   //当元素被选中时触发。
   canvas.on("object:selected", function (event) {
+    alert("123");
     let target = event.target; // 获取目标元素
     if (NotDom.includes(target.name)) {
       return;
@@ -311,6 +316,7 @@ const getInfo = () => {
 
   // 平移
   canvas.on("mouse:down", (opt) => {
+    console.log("opt~~", opt);
     // 鼠标按下时触发
     let evt = opt.e;
     if (props.canvasInfo.moveing) {

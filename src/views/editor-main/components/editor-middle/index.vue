@@ -4,7 +4,6 @@
 -->
 <template>
   <div class="ap-editor">
-    "draggable="{{ draggable && JSON.stringify(draggable) }}
     <!-- 标尺 -->
     <div class="ap-editor-rod">
       <EditorRod :positionInfo="positionInfo"></EditorRod>
