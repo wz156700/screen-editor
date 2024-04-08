@@ -146,7 +146,7 @@
             </el-scrollbar>
           </el-tab-pane>
           <el-tab-pane label="数据" name="data">
-            <!-- <ItemData></ItemData> -->
+            <ItemData @updataDOM="updataDOM"></ItemData>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -164,6 +164,12 @@ import { ElMessage, ElMessageBox } from "element-plus";
 
 const attributeActive = ref(["A"]);
 const styleActive = ref(["A"]);
+
+const emit = defineEmits(["updataDOM"]);
+
+const updataDOM = (val) => {
+  emit("updataDOM", val);
+};
 
 const props = defineProps({
   propertyTable: {

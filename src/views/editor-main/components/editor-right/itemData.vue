@@ -27,52 +27,82 @@
     </el-form>
     <div class="itemDataItemName">静态数据</div>
     <div class="itemDataItemCode">
-      <Codemirror
-        class="bodyItemCode"
-        :value="formPublic.resBody"
-        :options="cmOptions"
-        placeholder="请使用标准的JSON语法"
-        :height="450"
-        @change="change"
-      ></Codemirror>
+      <div style="border: 1px solid #ccc">
+        <!-- <Toolbar
+          style="border-bottom: 1px solid #ccc"
+          :editor="editorRef"
+          :defaultConfig="toolbarConfig"
+          :mode="mode"
+        /> -->
+        <Editor
+          style="height: 500px; overflow-y: hidden"
+          v-model="valueHtml"
+          :defaultConfig="editorConfig"
+          :mode="mode"
+          @onCreated="handleCreated"
+          @onChange="handleChange"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import Codemirror from "codemirror-editor-vue3";
-// placeholder
-import "codemirror/addon/display/placeholder.js";
+//引入wangEditor相关内容
+import "@wangeditor/editor/dist/css/style.css"; // 引入 css
+import { onBeforeUnmount, ref, shallowRef, onMounted, reactive } from "vue";
+import { Editor } from "@wangeditor/editor-for-vue";
 
-// language
-import "codemirror/mode/javascript/javascript.js";
-// placeholder
-import "codemirror/addon/display/placeholder.js";
-// theme
-import "codemirror/theme/dracula.css";
+import { useCounterStore } from "@/store/editor";
 
-import { reactive } from "vue";
+const dataStore = useCounterStore();
+const emit = defineEmits(["updataDOM"]);
+
 const options = [
   { label: "静态数据", value: 1 },
   { label: "接口数据", value: 2 },
 ];
-const cmOptions = {
-  mode: "text/javascript", // Language mode
-  theme: "neo", // Theme
-  lineNumbers: true, // Show line number
-  smartIndent: true, // Smart indent
-  indentUnit: 0, // The smart indent unit is 2 spaces in length
-  foldGutter: true, // Code folding
-  styleActiveLine: true, // Display the style of the selected row
-  tabSize: 4,
-  autofocus: true,
-  showCursorWhenSelecting: true,
-};
+
 const formPublic = reactive({
   dataType: 1,
   resBody: "",
 });
-const change = () => {};
+
+const mode = "default";
+
+// 编辑器实例，必须用 shallowRef
+const editorRef = shallowRef();
+
+// 内容 HTML
+const valueHtml = ref("<p>hello</p>");
+
+// 模拟 ajax 异步获取内容
+onMounted(() => {});
+//快速排序
+
+const toolbarConfig = {};
+const editorConfig = { placeholder: "请输入内容..." };
+
+// 组件销毁时，也及时销毁编辑器
+onBeforeUnmount(() => {
+  const editor = editorRef.value;
+  if (editor == null) return;
+  editor.destroy();
+});
+
+const handleCreated = (editor) => {
+  editorRef.value = editor; // 记录 editor 实例，重要！
+};
+
+const handleChange = () => {
+  const editor = editorRef.value;
+  const text = editor.getText();
+  console.log("text~~~");
+  emit("updataDOM", {
+    uuid: dataStore.element.selectedUUid,
+    data: text,
+  });
+};
 </script>
 
 <style scoped lang="scss">

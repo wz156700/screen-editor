@@ -37,7 +37,7 @@ import EditorRod from "./editorRods.vue";
 import EditorMain from "./editorMain.vue";
 import editorWhiteboard from "./editorWhiteboard.vue";
 
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, reactive, ref } from "vue";
 
 const EditorMainRef = ref(null);
 const editorMain = ref(null);

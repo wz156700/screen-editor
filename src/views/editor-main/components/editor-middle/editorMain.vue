@@ -17,6 +17,9 @@
 import { fabric } from "fabric";
 import { onMounted, ref, watch } from "vue";
 import { v4 as uuidv4 } from "uuid";
+import { useCounterStore } from "@/store/editor";
+
+const dataStore = useCounterStore();
 
 // 不需要渲染到画布上的
 let NotDom = ["referenceLine", "datunBox"];
@@ -73,7 +76,6 @@ const updataDomItem = (target) => {
   if (NotDom.includes(target.name)) {
     return;
   }
-  console.log("left~~,top~~~:", fixed(target.left), fixed(target.top));
 
   emit("updataDOM", {
     uuid: target.uuid,
@@ -255,7 +257,6 @@ const getInfo = () => {
   });
   //当元素被选中时触发。
   canvas.on("object:selected", function (event) {
-    alert("123");
     let target = event.target; // 获取目标元素
     if (NotDom.includes(target.name)) {
       return;
@@ -278,6 +279,9 @@ const getInfo = () => {
     var selectedObjects = e.selected.filter(
       (item) => !NotDom.includes(item.name)
     );
+    if (selectedObjects.length == 1) {
+      dataStore.element.selectedUUid = selectedObjects[0].uuid;
+    }
 
     FabricSelect.value = selectedObjects;
   });
@@ -316,7 +320,6 @@ const getInfo = () => {
 
   // 平移
   canvas.on("mouse:down", (opt) => {
-    console.log("opt~~", opt);
     // 鼠标按下时触发
     let evt = opt.e;
     if (props.canvasInfo.moveing) {

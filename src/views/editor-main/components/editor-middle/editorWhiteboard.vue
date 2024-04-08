@@ -43,6 +43,7 @@
             class="ap-editor-whiteboard-box-item-com"
             :key="item.uuid"
             v-bind="item.attribute"
+            :data="item.data"
           ></component>
         </div>
       </template>
@@ -85,7 +86,9 @@ const props = defineProps({
   },
 });
 
-const domDataPage = computed(() => Object.values(props.domData));
+const domDataPage = computed(() => {
+  return Object.values(props.domData);
+});
 
 const whiteboardBox = reactive({
   left: 5000,

@@ -4,32 +4,30 @@
 -->
 <template>
   <div class="line1" ref="line1"></div>
+  {{ props.data }}
 </template>
 
 <script setup>
 import * as echarts from "echarts";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 defineOptions({ name: "LineChart1" });
 
 const props = defineProps({
   data: {
-    type: Object,
-    default: {
-      x: {
-        data: ["1月", "2月", "3月", "4月", "5月", "6月"],
-      },
-      y: [
-        {
-          name: "温度",
-          data: [1, 2, 3, 4, 5, 6],
-        },
-        {
-          name: "湿度",
-          data: [5, 7, 2, 1, 8, 4],
-        },
-      ],
-    },
+    type: String,
+    require: true,
   },
+});
+
+//监听Porps.data的变化
+watch(
+  () => props.data,
+  (val) => {
+    console.log("data改变了~~", val);
+  }
+);
+onMounted(() => {
+  console.log("props.data~~", props.data);
 });
 
 const line1 = ref(null);

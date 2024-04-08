@@ -45,6 +45,7 @@
           :selectId="selectUUID"
           :domData="domData"
           :canvasInfo="canvasState"
+          @updataDOM="updataDOM"
         ></EditorRight>
       </div>
     </div>
@@ -111,6 +112,8 @@ const updataDOM = (val) => {
     ...domData[val.uuid],
     ...val,
   };
+
+  console.log("domData[val.uuid]~~", domData[val.uuid]);
 };
 // 批量移动元素
 const updataDOMArray = (vals) => {
