@@ -3,7 +3,7 @@
 组件名称: 
 -->
 <template>
-  <div class="itemData">
+  <div class="itemData_1712648946598">
     <el-form
       :model="formPublic"
       label-width="100px"
@@ -25,7 +25,9 @@
         </el-select>
       </el-form-item>
     </el-form>
-    <div class="itemDataItemName">静态数据</div>
+    <div class="itemDataItemName">
+      静态数据 <button @click="handleChange">提交</button>
+    </div>
     <div class="itemDataItemCode">
       <div style="border: 1px solid #ccc">
         <!-- <Toolbar
@@ -40,7 +42,6 @@
           :defaultConfig="editorConfig"
           :mode="mode"
           @onCreated="handleCreated"
-          @onChange="handleChange"
         />
       </div>
     </div>
@@ -51,11 +52,12 @@
 //引入wangEditor相关内容
 import "@wangeditor/editor/dist/css/style.css"; // 引入 css
 import { onBeforeUnmount, ref, shallowRef, onMounted, reactive } from "vue";
-import { Editor } from "@wangeditor/editor-for-vue";
+import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 
 import { useCounterStore } from "@/store/editor";
 
 const dataStore = useCounterStore();
+
 const emit = defineEmits(["updataDOM"]);
 
 const options = [
@@ -97,48 +99,51 @@ const handleCreated = (editor) => {
 const handleChange = () => {
   const editor = editorRef.value;
   const text = editor.getText();
-  console.log("text~~~");
+  console.log("text~~~", text);
   emit("updataDOM", {
     uuid: dataStore.element.selectedUUid,
-    data: text,
+    data: JSON.parse(text),
   });
 };
 </script>
 
-<style scoped lang="scss">
-.itemData {
+<style lang="scss">
+.itemData_1712648946598 {
   width: 100%;
   height: 100%;
-}
-
-.itemDataItemName {
-  width: 120px;
-  height: 35px;
-  line-height: 35px;
-  text-align: right;
-  font-size: 14px;
-  color: #606266;
-  text-align: center;
-}
-
-.itemDataItemCode {
-  width: 100%;
-  height: 400px;
-  border-top: 1px solid #040404;
-  border-bottom: 1px solid #040404;
-
-  &:deep(.CodeMirror) {
-    background: transparent !important;
-    color: #999;
+  .w-e-text-container {
+    background-color: rgb(54, 131, 231);
+    color: white !important;
+  }
+  .itemDataItemName {
+    width: 120px;
+    height: 35px;
+    line-height: 35px;
+    text-align: right;
+    font-size: 14px;
+    color: white;
+    text-align: center;
   }
 
-  &:deep(.CodeMirror-cursor) {
-    border-left-color: #999;
-  }
+  .itemDataItemCode {
+    width: 100%;
+    height: 400px;
+    border-top: 1px solid #040404;
+    border-bottom: 1px solid #040404;
 
-  &:deep(.CodeMirror-gutters) {
-    border-right: 1px solid transparent;
-    background-color: transparent;
+    &:deep(.CodeMirror) {
+      background: transparent !important;
+      color: #999;
+    }
+
+    &:deep(.CodeMirror-cursor) {
+      border-left-color: #999;
+    }
+
+    &:deep(.CodeMirror-gutters) {
+      border-right: 1px solid transparent;
+      background-color: transparent;
+    }
   }
 }
 </style>

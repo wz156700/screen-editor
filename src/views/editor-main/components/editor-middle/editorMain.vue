@@ -279,9 +279,6 @@ const getInfo = () => {
     var selectedObjects = e.selected.filter(
       (item) => !NotDom.includes(item.name)
     );
-    if (selectedObjects.length == 1) {
-      dataStore.element.selectedUUid = selectedObjects[0].uuid;
-    }
 
     FabricSelect.value = selectedObjects;
   });
@@ -290,6 +287,7 @@ const getInfo = () => {
     var selectedObjects = e.selected.filter(
       (item) => !NotDom.includes(item.name)
     );
+    console.log("选项改变了~~", selectedObjects);
 
     FabricSelect.value = selectedObjects;
   });

@@ -4,12 +4,11 @@
 -->
 <template>
   <div class="line1" ref="line1"></div>
-  {{ props.data }}
 </template>
 
 <script setup>
 import * as echarts from "echarts";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, reactive } from "vue";
 defineOptions({ name: "LineChart1" });
 
 const props = defineProps({
@@ -19,41 +18,11 @@ const props = defineProps({
   },
 });
 
-//监听Porps.data的变化
-watch(
-  () => props.data,
-  (val) => {
-    console.log("data改变了~~", val);
-  }
-);
-onMounted(() => {
-  console.log("props.data~~", props.data);
-});
-
+let myChart;
 const line1 = ref(null);
 
-// 格式化数据
-const formatData = (val) => {
-  let data = {
-    xAxis: {
-      type: "category",
-      data: val.x.data,
-    },
-    series: [],
-  };
-  for (let i = 0; i < val.y.length; i++) {
-    data.series.push({
-      data: val.y[i].data,
-      type: "line",
-    });
-  }
-  return data;
-};
-
-let option;
-onMounted(() => {
-  let myChart = echarts.init(line1.value);
-  option = {
+const state = reactive({
+  option: {
     grid: {
       containLabel: true,
       bottom: "5%",
@@ -174,8 +143,41 @@ onMounted(() => {
         data: [102, 130, 75, 99, 120, 75, 90],
       },
     ],
-  };
-  option && myChart.setOption(option);
+  },
+});
+
+function setOption(option) {
+  if (!myChart) {
+    console.warn("myChart is not yet initialized");
+    return;
+  }
+  myChart.setOption(option);
+}
+
+//替换数据
+watch(
+  () => props.data,
+  (newVal) => {
+    if (!newVal) {
+      return;
+    }
+    if (newVal) {
+      console.log("newVal~~~", newVal);
+      state.option = newVal;
+      console.log("state.option~~~", typeof state.option);
+      console.log("myChart~~~", myChart);
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+onMounted(() => {
+  myChart = echarts.init(line1.value);
+  myChart.setOption(state.option);
 });
 </script>
 

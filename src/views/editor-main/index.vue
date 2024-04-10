@@ -77,6 +77,10 @@ const { indexDBUpdata, indexDBSearch } =
   getCurrentInstance().appContext.config.globalProperties;
 const EditorMiddleRef = ref(null);
 
+//pinia仓库
+import { useCounterStore } from "@/store/editor";
+const dataStore = useCounterStore();
+
 // 当前拖拽的元素
 const draggable = ref(null);
 
@@ -106,14 +110,13 @@ const addDOM = (val) => {
 };
 // 移动元素
 const updataDOM = (val) => {
-  console.log("val", val);
+  console.log("val~~~", val);
   if (!val.uuid) return;
   domData[val.uuid] = {
     ...domData[val.uuid],
     ...val,
   };
-
-  console.log("domData[val.uuid]~~", domData[val.uuid]);
+  console.log("domData[val.uuid]", domData[val.uuid]);
 };
 // 批量移动元素
 const updataDOMArray = (vals) => {
@@ -146,23 +149,19 @@ const propertyTable = ref({
 });
 // 选中元素
 const selectDom = (val) => {
-  console.log("val", val);
+  console.log("val~~~~", val);
   selectUUID.value = val;
+  dataStore.element.selectedUUid = selectUUID.value;
+
   if (val && val.length == 1) {
-    console.log("domData~~", domData);
     let itemData = domData[val[0]];
-    console.log("itemData", itemData);
     propertyData.value = {
       ...getConfigData(itemData.mark, itemData),
     };
 
-    console.log("propertyData~~", propertyData);
-
     propertyTable.value = {
       ...getConfig(itemData.mark),
     };
-
-    console.log("propertyTable~~", propertyTable);
   } else {
     propertyData.value = {
       attribute: {},
