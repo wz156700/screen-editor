@@ -8,11 +8,15 @@
 
 <script setup>
 import * as echarts from "echarts";
-import { onMounted, ref, watch, reactive } from "vue";
+import { onMounted, ref, watch, reactive, nextTick } from "vue";
 defineOptions({ name: "LineChart1" });
 
 const props = defineProps({
   data: {
+    type: String,
+    require: true,
+  },
+  key: {
     type: String,
     require: true,
   },
@@ -148,7 +152,9 @@ const state = reactive({
 
 function setOption(option) {
   if (!myChart) {
-    console.warn("myChart is not yet initialized");
+    nextTick(() => {
+      myChart.setOption(option);
+    });
     return;
   }
   myChart.setOption(option);
@@ -158,12 +164,17 @@ function setOption(option) {
 watch(
   () => props.data,
   (newVal) => {
+    console.log("newVal1~~~", newVal);
+    if (typeof newVal == "object") {
+      newVal = newVal.val;
+    }
+    console.log("newVal2~~~", newVal);
     if (!newVal) {
+      setOption(state.option);
       return;
     }
     if (newVal) {
-      console.log("newVal~~~", newVal);
-      state.option = newVal;
+      state.option = JSON.parse(newVal);
       console.log("state.option~~~", typeof state.option);
       console.log("myChart~~~", myChart);
       setOption(state.option);
@@ -172,6 +183,13 @@ watch(
   {
     immediate: true,
     deep: true,
+  }
+);
+
+watch(
+  () => props.key,
+  () => {
+    console.log("key", props.key);
   }
 );
 

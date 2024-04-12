@@ -149,7 +149,6 @@ const propertyTable = ref({
 });
 // 选中元素
 const selectDom = (val) => {
-  console.log("val~~~~", val);
   selectUUID.value = val;
   dataStore.element.selectedUUid = selectUUID.value;
 

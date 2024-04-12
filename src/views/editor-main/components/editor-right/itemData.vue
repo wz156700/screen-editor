@@ -42,6 +42,7 @@
           :defaultConfig="editorConfig"
           :mode="mode"
           @onCreated="handleCreated"
+          placeholder="123"
         />
       </div>
     </div>
@@ -62,12 +63,31 @@ const emit = defineEmits(["updataDOM"]);
 
 const options = [
   { label: "静态数据", value: 1 },
-  { label: "接口数据", value: 2 },
+  // { label: "接口数据", value: 2 },
 ];
 
 const formPublic = reactive({
   dataType: 1,
   resBody: "",
+  defaultJson: {
+    xAxis: {
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: "bar",
+        showBackground: true,
+        backgroundStyle: {
+          color: "rgba(180, 180, 180, 0.2)",
+        },
+      },
+    ],
+  },
 });
 
 const mode = "default";
@@ -76,14 +96,16 @@ const mode = "default";
 const editorRef = shallowRef();
 
 // 内容 HTML
-const valueHtml = ref("<p>hello</p>");
-
-// 模拟 ajax 异步获取内容
+const valueHtml = ref();
 onMounted(() => {});
-//快速排序
 
-const toolbarConfig = {};
-const editorConfig = { placeholder: "请输入内容..." };
+// 编辑器配置
+const editorConfig = {
+  placeholder:
+    "<p class='defaultMsg'>示例数据： " +
+    JSON.stringify(formPublic.defaultJson) +
+    "</p>",
+};
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
@@ -99,10 +121,10 @@ const handleCreated = (editor) => {
 const handleChange = () => {
   const editor = editorRef.value;
   const text = editor.getText();
-  console.log("text~~~", text);
+  console.log("text~~~", dataStore.element.selectedUUid);
   emit("updataDOM", {
     uuid: dataStore.element.selectedUUid,
-    data: JSON.parse(text),
+    data: text,
   });
 };
 </script>
@@ -144,6 +166,10 @@ const handleChange = () => {
       border-right: 1px solid transparent;
       background-color: transparent;
     }
+  }
+
+  .defaultMsg {
+    word-wrap: break-word;
   }
 }
 </style>

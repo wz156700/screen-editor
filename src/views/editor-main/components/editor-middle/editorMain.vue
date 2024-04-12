@@ -215,7 +215,6 @@ const getInfo = () => {
   // 当元素添加到画布上时触发。
   canvas.on("object:added", function (event) {
     let target = event.target; // 获取目标元素
-    console.log("target~~", target);
     if (NotDom.includes(target.name)) return;
     emit("addDOM", {
       name: target.name,

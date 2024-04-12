@@ -43,7 +43,7 @@
             class="ap-editor-whiteboard-box-item-com"
             :key="item.uuid"
             v-bind="item.attribute"
-            :data="item.data"
+            :data="item.data ? item.data : '初始化'"
           ></component>
         </div>
       </template>

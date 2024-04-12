@@ -45,6 +45,9 @@ export const useCounterStore = defineStore("editor", {
     propertyData: {},
     // 属性列表
     propertyTable: {},
+    dataSource: {
+      defaultData: {},
+    },
   }),
   getters: {},
   actions: {},
