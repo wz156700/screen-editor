@@ -1,6 +1,5 @@
 <!--
-
-组件名称: 折线图1 https://www.isqqw.com/viewer?id=39689
+柱状图-样式2
 -->
 <template>
   <div class="line2" ref="line2"></div>

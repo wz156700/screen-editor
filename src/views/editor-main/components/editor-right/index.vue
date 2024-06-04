@@ -6,8 +6,12 @@
   <div class="ap-editor-right">
     <!-- 头部 -->
     <div class="ap-editor-right-header">
-      <span>属性管理</span>
-      <EditorIcon name="right" size="16px"></EditorIcon>
+      <span v-if="state.isShowRightBar">属性管理</span>
+      <div style="cursor: pointer;">
+        <EditorIcon name="right" size="16px" @click="isShowRightBar" v-if="state.isShowRightBar"></EditorIcon>
+        <EditorIcon name="left" size="16px" @click="isShowRightBar" v-if="!state.isShowRightBar"></EditorIcon>
+      </div>
+
     </div>
     <div class="ap-editor-right-main">
       <div class="ap-editor-right-main-left">
@@ -17,82 +21,38 @@
 				<div class="ap-editor-right-main-left-item" title="重做" @click="redraw('redo')">
 					<EditorIcon name="next" size="18px"></EditorIcon>
 				</div> -->
-        <div
-          class="ap-editor-right-main-left-item"
-          :class="moveing ? 'is-active' : ''"
-          title="移动画布"
-          @click="updataMoveing"
-        >
-          <EditorIcon
-            name="direction-adjustment-three"
-            size="20px"
-          ></EditorIcon>
+        <div class="ap-editor-right-main-left-item" :class="moveing ? 'is-active' : ''" title="移动画布"
+          @click="updataMoveing">
+          <EditorIcon name="direction-adjustment-three" size="20px"></EditorIcon>
         </div>
-        <el-popconfirm
-          title="确定要清空画布嘛?"
-          width="200"
-          confirm-button-text="清空"
-          cancel-button-text="取消"
-          @confirm="confirmDelete"
-        >
+        <el-popconfirm title="确定要清空画布嘛?" width="200" confirm-button-text="清空" cancel-button-text="取消"
+          @confirm="confirmDelete">
           <template #reference>
             <div class="ap-editor-right-main-left-item" title="清空画布">
               <EditorIcon name="clear" size="20px"></EditorIcon>
             </div>
           </template>
         </el-popconfirm>
-        <div
-          class="ap-editor-right-main-left-item"
-          title="横向参考线"
-          @click="reactLine('lineW')"
-        >
+        <div class="ap-editor-right-main-left-item" title="横向参考线" @click="reactLine('lineW')">
           <EditorIcon name="dividing-line" size="20px"></EditorIcon>
         </div>
-        <div
-          class="ap-editor-right-main-left-item"
-          title="纵向参考线"
-          @click="reactLine('lineH')"
-        >
-          <EditorIcon
-            name="dividing-line"
-            size="20px"
-            style="transform: rotate(90deg)"
-          ></EditorIcon>
+        <div class="ap-editor-right-main-left-item" title="纵向参考线" @click="reactLine('lineH')">
+          <EditorIcon name="dividing-line" size="20px" style="transform: rotate(90deg)"></EditorIcon>
         </div>
         <div class="ap-editor-right-main-left-line"></div>
-        <div
-          :class="classIconRadio"
-          title="图层上移"
-          @click="updataElement('topIndex')"
-        >
+        <div :class="classIconRadio" title="图层上移" @click="updataElement('topIndex')">
           <EditorIcon name="to-top" size="22px"></EditorIcon>
         </div>
-        <div
-          :class="classIconRadio"
-          title="图层下移"
-          @click="updataElement('bottomIndex')"
-        >
+        <div :class="classIconRadio" title="图层下移" @click="updataElement('bottomIndex')">
           <EditorIcon name="to-bottom" size="22px"></EditorIcon>
         </div>
-        <div
-          :class="classIconRadioLockL"
-          title="锁定左右"
-          @click="updataElement('auto-height-one')"
-        >
+        <div :class="classIconRadioLockL" title="锁定左右" @click="updataElement('auto-height-one')">
           <EditorIcon name="auto-height-one" size="20px"></EditorIcon>
         </div>
-        <div
-          :class="classIconRadioLockT"
-          title="锁定上下"
-          @click="updataElement('auto-width-one')"
-        >
+        <div :class="classIconRadioLockT" title="锁定上下" @click="updataElement('auto-width-one')">
           <EditorIcon name="auto-width-one" size="20px"></EditorIcon>
         </div>
-        <div
-          :class="classIcon"
-          title="图层删除"
-          @click="updataElement('delete')"
-        >
+        <div :class="classIcon" title="图层删除" @click="updataElement('delete')">
           <EditorIcon name="delete" size="20px"></EditorIcon>
         </div>
         <!-- <div :class="classIcon" title="图层复制" @click="updataElement('copy')">
@@ -107,22 +67,12 @@
         </div>
       </div>
       <div class="ap-editor-right-main-right" :key="selectId">
-        <el-tabs
-          v-model="activeName"
-          class="ap-editor-right-main-right-tabs"
-          @tab-click="handleClick"
-          :stretch="true"
-        >
+        <el-tabs v-model="activeName" class="ap-editor-right-main-right-tabs" @tab-click="handleClick" :stretch="true">
           <el-tab-pane label="属性" name="attribute">
             <el-scrollbar height="100%">
               <template v-if="propertyTable.attribute.length > 0">
-                <StyleItem
-                  :itemData="propertyData.attribute"
-                  :itemTable="propertyTable.attribute"
-                  :selectId="selectUUIDItem"
-                  :active="attributeActive"
-                  type="attribute"
-                ></StyleItem>
+                <StyleItem :itemData="propertyData.attribute" :itemTable="propertyTable.attribute"
+                  :selectId="selectUUIDItem" :active="attributeActive" type="attribute"></StyleItem>
               </template>
               <el-empty description=" " v-else>
                 <template #image>暂无数据</template>
@@ -132,13 +82,8 @@
           <el-tab-pane label="样式" name="style">
             <el-scrollbar height="100%">
               <template v-if="propertyTable.style.length > 0">
-                <StyleItem
-                  :itemData="propertyData.style"
-                  :itemTable="propertyTable.style"
-                  :active="styleActive"
-                  :selectId="selectUUIDItem"
-                  type="style"
-                ></StyleItem>
+                <StyleItem :itemData="propertyData.style" :itemTable="propertyTable.style" :active="styleActive"
+                  :selectId="selectUUIDItem" type="style"></StyleItem>
               </template>
               <el-empty description=" " v-else>
                 <template #image>暂无数据</template>
@@ -155,12 +100,16 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, inject } from "vue";
+import { computed, ref, watch, inject, reactive } from "vue";
 import StyleItem from "./styleItem.vue";
 import ItemData from "./itemData.vue";
 const provideFun = inject("updataRight", null);
 const provideFunIcon = inject("updataRightIcon", null);
 import { ElMessage, ElMessageBox } from "element-plus";
+
+//pinia仓库
+import { useCounterStore } from "@/store/editor";
+const dataStore = useCounterStore();
 
 const attributeActive = ref(["A"]);
 const styleActive = ref(["A"]);
@@ -170,6 +119,16 @@ const emit = defineEmits(["updataDOM"]);
 const updataDOM = (val) => {
   emit("updataDOM", val);
 };
+
+const state = reactive({
+  isShowRightBar: computed(() => dataStore.global.isShowRightBar)
+})
+
+
+//控制右侧边栏是否展开
+const isShowRightBar = () => {
+  dataStore.global.isShowRightBar = !dataStore.global.isShowRightBar;
+}
 
 const props = defineProps({
   propertyTable: {
@@ -335,7 +294,7 @@ const reactLine = (val) => {
         value,
       });
     })
-    .catch(() => {});
+    .catch(() => { });
 };
 </script>
 
@@ -346,6 +305,7 @@ const reactLine = (val) => {
   font-size: 12px;
   user-select: none;
 }
+
 .ap-editor-right-header {
   width: 100%;
   height: 36px;
@@ -355,17 +315,20 @@ const reactLine = (val) => {
   padding: 0 10px;
   box-sizing: border-box;
   border-bottom: 1px solid var(--ap-editor-border);
+
   i {
     font-size: 14px;
     cursor: pointer;
   }
 }
+
 .ap-editor-right-main {
   width: 100%;
   height: calc(100% - 36px);
   display: flex;
+
   .ap-editor-right-main-left {
-    width: 40px;
+    width: 2.5rem;
     height: 100%;
     border-right: 1px solid var(--ap-editor-border);
     box-sizing: border-box;
@@ -376,47 +339,56 @@ const reactLine = (val) => {
     flex-direction: column;
     padding-top: 15px;
     box-sizing: border-box;
+
     .ap-editor-right-main-left-item {
-      width: 30px;
-      height: 30px;
+      width: 1.875rem;
+      height: 1.875rem;
       // background: yellowgreen;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 1.25rem;
       cursor: pointer;
+
       &.is-active {
         background: var(--ap-editor-left-nav-bg);
         color: var(--ap-editor-left-nav-text);
       }
+
       &.is-disabled {
         color: var(--ap-editor-disabled-text);
         cursor: not-allowed;
         pointer-events: none;
       }
     }
+
     .ap-editor-right-main-left-line {
-      width: 30px;
+      width: 1.875rem;
       height: 1px;
       background: var(--ap-editor-left-nav-bg);
-      margin-bottom: 20px;
+      margin-bottom: 1.25rem;
     }
   }
+
   .ap-editor-right-main-right {
-    width: calc(100% - 40px);
+    width: calc(100% - 2.5rem);
     height: 100%;
+
     .ap-editor-right-main-right-tabs {
       width: 100%;
       height: 100%;
     }
+
     &:deep(.el-tabs__content) {
       width: 100%;
       height: calc(100% - 55px);
     }
+
     &:deep(.el-tab-pane) {
       width: 100%;
       height: 100%;
     }
+
     .ap-editor-right-main-right-tabs-item {
       width: 100%;
       // height: calc(100% - 40px);

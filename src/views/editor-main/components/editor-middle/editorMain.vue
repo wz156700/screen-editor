@@ -3,19 +3,15 @@
 组件名称: 可视化编辑器主内容区
 -->
 <template>
-  <div
-    class="ap-editor-main-box"
-    ref="apEditorMain"
-    @mousewheel.prevent="canvasMouseWheel"
-    @mousemove="canvasMouseMove"
-  >
-    <canvas ref="apEditorCanvas" width="100%" height="100%"></canvas>
+  <div class="ap-editor-main-box" ref="apEditorMain" @mousewheel.prevent="canvasMouseWheel"
+    @mousemove="canvasMouseMove">
+    <canvas ref="apEditorCanvas"></canvas>
   </div>
 </template>
 
 <script setup>
 import { fabric } from "fabric";
-import { onMounted, ref, watch } from "vue";
+import { nextTick, onMounted, ref, watch } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { useCounterStore } from "@/store/editor";
 
@@ -101,13 +97,13 @@ const updataDomItems = (target) => {
       uuid: targetsItem.uuid,
       left: fixed(
         targetsItem.left * target.scaleX +
-          target.left +
-          (target.width * target.scaleX) / 2
+        target.left +
+        (target.width * target.scaleX) / 2
       ),
       top: fixed(
         targetsItem.top * target.scaleY +
-          target.top +
-          (target.height * target.scaleY) / 2
+        target.top +
+        (target.height * target.scaleY) / 2
       ),
       width: fixed(targetsItem.width * targetsItem.scaleX * target.scaleX),
       height: fixed(targetsItem.height * targetsItem.scaleY * target.scaleY),
@@ -266,7 +262,7 @@ const getInfo = () => {
     let target = event.target; // 获取目标元素
   });
   // 当画布平移时触发。
-  canvas.on("after:render", function (event) {});
+  canvas.on("after:render", function (event) { });
 
   canvas.on("object:removed", function (event) {
     var removedElement = event.target;
@@ -388,21 +384,36 @@ const getInfo = () => {
 };
 
 const resizeInfo = () => {
+  console.log('apEditorMain.value', apEditorMain.value)
   if (!apEditorMain.value) return;
-  w = apEditorMain.value.offsetWidth;
-  h = apEditorMain.value.offsetHeight;
-  apEditorCanvas.value.setAttribute("width", w);
-  apEditorCanvas.value.setAttribute("height", h);
-  canvas.setWidth(w);
-  canvas.setHeight(h);
-  canvas.renderAll();
-  getPosition();
+  setTimeout(() => {
+    w = apEditorMain.value.clientWidth;
+    h = apEditorMain.value.clientHeight;
+    console.log('w,h', apEditorMain.value.clientWidth, h)
+    apEditorCanvas.value.setAttribute("width", w);
+    apEditorCanvas.value.setAttribute("height", h);
+    canvas.setWidth(w);
+    canvas.setHeight(h);
+    canvas.renderAll();
+    getPosition();
+  }, 0)
+
 };
+
 
 onMounted(() => {
   getInfo();
   window.addEventListener("resize", resizeInfo, false);
 });
+
+//监听左侧边栏和右侧边栏是否收起
+watch(() => dataStore.global.isShowLeftBar, () => {
+  resizeInfo()
+})
+
+watch(() => dataStore.global.isShowRightBar, () => {
+  resizeInfo()
+})
 
 // 缩放
 const canvasMouseWheel = (e) => {
@@ -664,7 +675,7 @@ const creatLine = (type, val) => {
     // 将分组添加到画布
     canvas.add(group);
 
-    group.on("click", (e) => {});
+    group.on("click", (e) => { });
     let groupRect = group.item(1);
     // 给分组添加拖动事件
     group.on("mousedown", function (e) {

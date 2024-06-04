@@ -7,41 +7,34 @@
     <!-- 名称 -->
     <div class="ap-editorLeft-name">
       <span>组件管理</span>
-      <EditorIcon name="left" size="16px"></EditorIcon>
+      <div style="cursor: pointer">
+        <EditorIcon name="left" size="16px" @click="closeLeftBar" v-if="state.isShowLeftBar">
+        </EditorIcon>
+        <EditorIcon name="right" size="16px" @click="closeLeftBar" v-if="!state.isShowLeftBar"></EditorIcon>
+      </div>
+
     </div>
     <!-- 内容 -->
     <div class="ap-editorLeft-content">
       <!-- 左侧 -->
       <div class="ap-editorLeft-content-left">
-        <div
-          class="ap-editorLeft-content-left-item"
-          :class="active === 'history' ? 'is-active' : ''"
-          @click="updataActive('history')"
-        >
+        <div class="ap-editorLeft-content-left-item" :class="active === 'history' ? 'is-active' : ''"
+          @click="updataActive('history')">
           <EditorIcon name="history" size="16px"></EditorIcon>
           <span>最近</span>
         </div>
-        <div
-          class="ap-editorLeft-content-left-item"
-          :class="active === 'analysis' ? 'is-active' : ''"
-          @click="updataActive('analysis')"
-        >
+        <div class="ap-editorLeft-content-left-item" :class="active === 'analysis' ? 'is-active' : ''"
+          @click="updataActive('analysis')">
           <EditorIcon name="analysis" size="16px"></EditorIcon>
           <span>图表</span>
         </div>
-        <div
-          class="ap-editorLeft-content-left-item"
-          :class="active === 'components' ? 'is-active' : ''"
-          @click="updataActive('components')"
-        >
+        <div class="ap-editorLeft-content-left-item" :class="active === 'components' ? 'is-active' : ''"
+          @click="updataActive('components')">
           <EditorIcon name="components" size="16px"></EditorIcon>
           <span>小组件</span>
         </div>
-        <div
-          class="ap-editorLeft-content-left-item"
-          :class="active === 'map' ? 'is-active' : ''"
-          @click="updataActive('map')"
-        >
+        <div class="ap-editorLeft-content-left-item" :class="active === 'map' ? 'is-active' : ''"
+          @click="updataActive('map')">
           <EditorIcon name="history" size="16px"></EditorIcon>
           <span>地图</span>
         </div>
@@ -50,29 +43,13 @@
       <div class="ap-editorLeft-content-right">
         <el-scrollbar height="100%">
           <div class="ap-editorLeft-content-right-box">
-            <historyList
-              :domData="domData"
-              v-if="active === 'history'"
-              @selectItem="selectItem"
-              :selectId="selectId"
-            ></historyList>
+            <historyList :domData="domData" v-if="active === 'history'" @selectItem="selectItem" :selectId="selectId">
+            </historyList>
             <rightCom :menuList="mapData" v-if="active === 'map'"></rightCom>
-            <rightCom
-              :menuList="analysisData"
-              v-if="active === 'analysis'"
-            ></rightCom>
-            <rightCom
-              :menuList="componentsData"
-              v-if="active === 'components'"
-            ></rightCom>
-            <rightCom
-              :menuList="hTitleData"
-              v-if="active === 'hTitle'"
-            ></rightCom>
-            <rightCom
-              :menuList="materialData"
-              v-if="active === 'material'"
-            ></rightCom>
+            <rightCom :menuList="analysisData" v-if="active === 'analysis'"></rightCom>
+            <rightCom :menuList="componentsData" v-if="active === 'components'"></rightCom>
+            <rightCom :menuList="hTitleData" v-if="active === 'hTitle'"></rightCom>
+            <rightCom :menuList="materialData" v-if="active === 'material'"></rightCom>
           </div>
         </el-scrollbar>
       </div>
@@ -81,7 +58,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, reactive, computed } from "vue";
 import rightCom from "./rightCom.vue";
 import historyList from "./historyList.vue";
 import analysisData from "@/assets/componentList/analysis.js";
@@ -89,11 +66,17 @@ import componentsData from "@/assets/componentList/components.js";
 import mapData from "@/assets/componentList/map.js";
 import hTitleData from "@/assets/componentList/hTitle.js";
 import materialData from "@/assets/componentList/material.js";
+import { useCounterStore } from '@/store/editor'
 const emit = defineEmits(["selectItem"]);
 const active = ref("analysis");
 const updataActive = (val) => {
   active.value = val;
 };
+const userStore = useCounterStore()
+
+const state = reactive({
+  isShowLeftBar: computed(() => userStore.global.isShowLeftBar)
+})
 
 const props = defineProps({
   domData: {
@@ -109,6 +92,10 @@ const props = defineProps({
 const selectItem = (item) => {
   emit("selectItem", item);
 };
+
+const closeLeftBar = () => {
+  userStore.global.isShowLeftBar = !userStore.global.isShowLeftBar
+}
 </script>
 
 <style lang="scss" scoped>
@@ -117,6 +104,9 @@ const selectItem = (item) => {
   height: 100%;
   font-size: 12px;
   user-select: none;
+  overflow: hidden;
+
+
   .ap-editorLeft-name {
     width: 100%;
     height: 36px;
@@ -138,9 +128,9 @@ const selectItem = (item) => {
     display: flex;
 
     .ap-editorLeft-content-left {
-      width: 60px;
+      width: 3.75rem;
       height: 100%;
-      padding: 5px;
+      padding: .3125rem;
       box-sizing: border-box;
       background: var(--ap-editor-left-nav-one);
 

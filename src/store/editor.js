@@ -19,6 +19,8 @@ export const useCounterStore = defineStore("editor", {
       referX: false,
       // 纵向参考线
       referY: false,
+      isShowLeftBar: true,
+      isShowRightBar: true,
     },
     element: {
       select: false,

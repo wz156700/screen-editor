@@ -1,52 +1,30 @@
 <!--
 
-组件名称: 编辑器主页面
+组件名称:主页面
 -->
 <template>
   <div class="ap-editorMain">
     <!-- 上 -->
     <div class="ap-editorMain-topBox">
-      <EditorTop
-        @saveItem="saveItem"
-        @previewItem="previewItem"
-        :domInfo="domInfo"
-      ></EditorTop>
+      <EditorTop @saveItem="saveItem" @previewItem="previewItem" :domInfo="domInfo"></EditorTop>
     </div>
     <!-- 中心 -->
     <div class="ap-editorMain-main">
       <!-- 左侧 -->
-      <div class="ap-editorMain-main-left">
-        <EditorLeft
-          :domData="domData"
-          @selectItem="selectItem"
-          :selectId="selectUUID"
-        ></EditorLeft>
+      <div class="ap-editorMain-main-left" :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }">
+        <EditorLeft :domData="domData" @selectItem="selectItem" :selectId="selectUUID"></EditorLeft>
       </div>
       <!-- 中间 -->
-      <div class="ap-editorMain-main-middle">
-        <EditorMiddle
-          :domData="domData"
-          @addDOM="addDOM"
-          @updataDOM="updataDOM"
-          @updataDOMArray="updataDOMArray"
-          @removeDOM="removeDOM"
-          @selectDom="selectDom"
-          :draggable="draggable"
-          ref="EditorMiddleRef"
-          :canvasInfo="canvasState"
-          :domInfo="domInfo"
-        ></EditorMiddle>
+
+      <div class="ap-editorMain-main-middle" ref="mainMiddle">
+        <EditorMiddle :domData="domData" @addDOM="addDOM" @updataDOM="updataDOM" @updataDOMArray="updataDOMArray"
+          @removeDOM="removeDOM" @selectDom="selectDom" :draggable="draggable" ref="EditorMiddleRef"
+          :canvasInfo="canvasState" :domInfo="domInfo"></EditorMiddle>
       </div>
       <!-- 右侧 -->
-      <div class="ap-editorMain-main-right">
-        <EditorRight
-          :propertyData="propertyData"
-          :propertyTable="propertyTable"
-          :selectId="selectUUID"
-          :domData="domData"
-          :canvasInfo="canvasState"
-          @updataDOM="updataDOM"
-        ></EditorRight>
+      <div class="ap-editorMain-main-right" :style="{ width: state.isShowRightBar ? '22.5rem' : '2.5rem' }">
+        <EditorRight :propertyData="propertyData" :propertyTable="propertyTable" :selectId="selectUUID"
+          :domData="domData" :canvasInfo="canvasState" @updataDOM="updataDOM"></EditorRight>
       </div>
     </div>
   </div>
@@ -67,7 +45,7 @@ import {
   watch,
   toRaw,
   getCurrentInstance,
-  onMounted,
+  onMounted
 } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
@@ -80,6 +58,33 @@ const EditorMiddleRef = ref(null);
 //pinia仓库
 import { useCounterStore } from "@/store/editor";
 const dataStore = useCounterStore();
+const mainMiddle = ref(null);
+
+const state = reactive({
+  isShowLeftBar: computed(() => dataStore.global.isShowLeftBar),
+  isShowRightBar: computed(() => dataStore.global.isShowRightBar)
+})
+
+//监听左侧边栏更改中间编辑区域的宽度
+watch(() => dataStore.global.isShowLeftBar, (newVal) => {
+  console.log('mainMiddle', mainMiddle)
+  if (newVal) {
+    //如果两边都展开的话
+    mainMiddle.value.style.width = dataStore.global.isShowRightBar ? '100% - 41.25rem' : '100% - 21.25rem';
+  } else {
+    mainMiddle.value.style.width = dataStore.global.isShowRightBar ? '100% - 26.25rem' : '100% - 6.25rem';
+  }
+})
+
+//监听右侧边栏更改中间编辑区域的宽度
+watch(() => dataStore.global.isShowRightBar, (newVal) => {
+  if (newVal) {
+    //如果两边都展开的话
+    mainMiddle.value.style.width = dataStore.global.isShowLeftBar ? '100% - 41.25rem' : '100% - 26.5rem';
+  } else {
+    mainMiddle.value.style.width = dataStore.global.isShowLeftBar ? '100% - 21.25rem' : '100% - 6.25rem';
+  }
+})
 
 // 当前拖拽的元素
 const draggable = ref(null);
@@ -334,31 +339,39 @@ onMounted(() => {
   height: 100%;
   background: var(--ap-editor-bg);
   color: var(--ap-editor-color);
+
+
   .ap-editorMain-topBox {
     width: 100%;
     height: 45px;
     border-bottom: 1px solid var(--ap-editor-border);
     box-sizing: border-box;
   }
+
   .ap-editorMain-main {
     width: 100%;
     height: calc(100% - 45px);
     display: flex;
+
     .ap-editorMain-main-left {
-      width: 300px;
+      width: 18.75rem;
       height: 100%;
       border-right: 1px solid var(--ap-editor-border);
       box-sizing: border-box;
+      // transition: all 1s ease;
     }
+
     .ap-editorMain-main-middle {
-      width: calc(100% - 660px);
+      width: calc(100% - 41.25rem);
       height: 100%;
     }
+
     .ap-editorMain-main-right {
-      width: 360px;
+      width: 22.5rem;
       height: 100%;
       border-left: 1px solid var(--ap-editor-border);
       box-sizing: border-box;
+      overflow: hidden;
     }
   }
 }

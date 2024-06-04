@@ -1,6 +1,5 @@
 <!--
-
-组件名称: 图片预览
+组件名称:canvas预览
 -->
 <template>
   <div class="image-preview" :draggable="true" @dragstart="onDragstartItem">
@@ -37,7 +36,7 @@ const onDragstartItem = () => {
 <style scoped>
 .image-preview {
   width: 100%;
-  height: 100%;
+  height: 450px;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -63,6 +62,7 @@ const onDragstartItem = () => {
   justify-content: center;
   align-items: center;
 }
+
 .image-preview img {
   width: 80%;
   max-height: 100%;
