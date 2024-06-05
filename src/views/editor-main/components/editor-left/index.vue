@@ -6,7 +6,7 @@
   <div class="ap-editorLeft">
     <!-- 名称 -->
     <div class="ap-editorLeft-name">
-      <span>组件管理</span>
+      <span v-if="state.isShowLeftBar">组件管理</span>
       <div style="cursor: pointer">
         <EditorIcon name="left" size="16px" @click="closeLeftBar" v-if="state.isShowLeftBar">
         </EditorIcon>

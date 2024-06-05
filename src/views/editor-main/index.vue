@@ -67,12 +67,12 @@ const state = reactive({
 
 //监听左侧边栏更改中间编辑区域的宽度
 watch(() => dataStore.global.isShowLeftBar, (newVal) => {
-  console.log('mainMiddle', mainMiddle)
+  console.log('mainMiddle', mainMiddle.value.style, newVal)
   if (newVal) {
     //如果两边都展开的话
-    mainMiddle.value.style.width = dataStore.global.isShowRightBar ? '100% - 41.25rem' : '100% - 21.25rem';
+    mainMiddle.value.style.width = dataStore.global.isShowRightBar ? 'calc(100% - 41.25rem)' : 'calc(100% - 21.25rem)';
   } else {
-    mainMiddle.value.style.width = dataStore.global.isShowRightBar ? '100% - 26.25rem' : '100% - 6.25rem';
+    mainMiddle.value.style.width = dataStore.global.isShowRightBar ? 'calc(100% - 26.25rem)' : 'calc(100% - 6.25rem)';
   }
 })
 
@@ -80,9 +80,9 @@ watch(() => dataStore.global.isShowLeftBar, (newVal) => {
 watch(() => dataStore.global.isShowRightBar, (newVal) => {
   if (newVal) {
     //如果两边都展开的话
-    mainMiddle.value.style.width = dataStore.global.isShowLeftBar ? '100% - 41.25rem' : '100% - 26.5rem';
+    mainMiddle.value.style.width = dataStore.global.isShowLeftBar ? 'calc(100% - 41.25rem)' : 'calc(100% - 26.5rem)';
   } else {
-    mainMiddle.value.style.width = dataStore.global.isShowLeftBar ? '100% - 21.25rem' : '100% - 6.25rem';
+    mainMiddle.value.style.width = dataStore.global.isShowLeftBar ? 'calc(100% - 21.25rem)' : 'calc(100% - 6.25rem)';
   }
 })
 

@@ -1,7 +1,4 @@
-<!--
-
-组件名称: 比例尺
--->
+<!-- 组件名称: 比例尺 -->
 <template>
   <div class="ap-editor-rod-main" ref="apEditorRod"></div>
 </template>
@@ -36,21 +33,15 @@ const getRodInfo = () => {
   }
   drawRod(apEditorRod.value.offsetHeight, apEditorRod.value.offsetWidth);
 };
+
 // 绘制比例尺
 const drawRod = (h, w) => {
   var svg = d3
-    .select(".ap-editor-rod-main")
+    .select(apEditorRod.value)
     .append("svg")
     .attr("width", w)
     .attr("height", h)
     .style("background-color", "#1F1F1F");
-  // const g = svg
-  // 	.append('g')
-  // 	.attr('width', w)
-  // 	.attr('height', h)
-  // 	.attr('id', 'mainGroup')
-  // 	.attr('transform', `translate(${0}, ${0})`)
-  // 	.style('color', '#e7ebed')
   // X轴比例尺
   const xScall = d3
     .scaleLinear()
@@ -59,6 +50,7 @@ const drawRod = (h, w) => {
       props.positionInfo.w - props.positionInfo.left,
     ])
     .range([0, w - 40]); // 数据空间 实际空间d3.max([w, h])
+
   // Y轴比例尺
   const yScall = d3
     .scaleLinear()
@@ -67,16 +59,15 @@ const drawRod = (h, w) => {
       props.positionInfo.h - props.positionInfo.top,
     ])
     .range([0, h - 40]);
+
   // 添加X坐标轴
   const xAxis = d3.axisTop(xScall).ticks(getLineNumber(w));
   // 添加Y坐标轴  // .tickSize(-innerWidth) 添加轴线
   const yAxis = d3.axisLeft(yScall).ticks(getLineNumber(h)); //.tickSize(-w)
 
   // 添加X坐标轴
-  svg.append("g").call(xAxis).attr("transform", `translate(${40}, ${40})`);
-  svg.append("g").call(yAxis).attr("transform", `translate(${40}, ${40})`);
-  //   svg.append("g").call(xAxis).attr("transform", `translate(${40}, ${40})`);
-  //   svg.append("g").call(yAxis).attr("transform", `translate(${40}, ${40})`);
+  const xAxisG = svg.append("g").call(xAxis).attr("transform", `translate(${40}, ${40})`);
+  const yAxisG = svg.append("g").call(yAxis).attr("transform", `translate(${40}, ${40})`);
 };
 
 onMounted(() => {

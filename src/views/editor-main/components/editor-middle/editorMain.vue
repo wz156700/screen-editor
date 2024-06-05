@@ -417,6 +417,7 @@ watch(() => dataStore.global.isShowRightBar, () => {
 
 // 缩放
 const canvasMouseWheel = (e) => {
+  alert("123")
   // 相对于文档的原点
   let layerX = e.layerX;
   let layerY = e.layerY;

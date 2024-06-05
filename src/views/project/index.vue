@@ -6,105 +6,60 @@
   <div class="projectPage">
     <div class="projectPageLeft">
       <div class="projectPageLeftList">
-        <div class="projectPageLeftListNav">全部项目</div>
-      </div>
-      <div class="projectPageLeftAdd">
-        <el-button
-          type="primary"
-          :icon="Plus"
-          style="width: 100px"
-          @click="addItem"
-          >新建</el-button
-        >
+        <div class="projectPageLeftListNav">个人空间</div>
       </div>
     </div>
     <div class="projectPageContent">
+      <p class="itemTitle">精选模板</p>
+      <div class="templateList">
+        <div class="addItem" @click="addItem(true)">+</div>
+      </div>
+      <p class="itemTitle">最近打开</p>
       <div class="projectPageContentList">
-        <el-row :gutter="20">
-          <el-col
-            :xs="24"
-            :sm="12"
-            :lg="12"
-            :xl="6"
-            v-for="item in projectList"
-            :key="item.uuid"
-          >
-            <div class="projectPageContentListItem">
-              <div class="projectPageContentListItemTitle">
-                {{ item.name }}
-                <el-icon class="projectPageContentListItemTitleIcon" :size="12">
-                  <FullScreen />
-                </el-icon>
-              </div>
-              <div class="projectPageContentListItemImage"></div>
-              <div class="projectPageContentListItemFooter">
-                <span
-                  class="projectPageContentListItemFooterIcon1"
-                  :class="
-                    item.state
-                      ? 'projectPageContentListItemFooterIcon1Active'
-                      : ''
-                  "
-                ></span>
-                <span>{{ item.state ? "已发布" : "未发布" }}</span>
-                <span title="项目编辑"
-                  ><el-button :icon="EditPen" @click="goItem(item.uuid)"
-                /></span>
-                <el-dropdown @command="handleCommand">
-                  <el-button
-                    :icon="MoreFilled"
-                    class="el-dropdown-link"
-                    style="margin-left: 10px"
-                  />
-                  <template #dropdown>
-                    <el-dropdown-menu style="width: 100px">
-                      <el-dropdown-item :command="'preview-----' + item.uuid"
-                        ><el-icon> <Monitor /> </el-icon>预览</el-dropdown-item
-                      >
-                      <el-dropdown-item :command="'editor-----' + item.uuid"
-                        ><el-icon> <Monitor /> </el-icon>设置</el-dropdown-item
-                      >
-                      <el-dropdown-item
-                        :disabled="item.state == 1"
-                        :command="'release-----' + item.uuid"
-                        ><el-icon> <Position /> </el-icon>发布</el-dropdown-item
-                      >
-                      <el-dropdown-item
-                        divided
-                        :command="'delete-----' + item.uuid"
-                        ><el-icon> <Delete /> </el-icon>删除</el-dropdown-item
-                      >
-                    </el-dropdown-menu>
-                  </template>
-                </el-dropdown>
-              </div>
+        <div class="projectPageContentListItem" v-for="item in projectList" :key="item.uuid">
+          <div class="projectPageContentListItemTitle">
+            <div>
+              {{ item.name }}
             </div>
-          </el-col>
-        </el-row>
+            <div style="text-align: right;">
+              <span :class="item.state ? 'circle activeCircle' : 'circle'"></span>
+              <span>{{ item.state ? "已发布" : "未发布" }}</span>
+            </div>
+          </div>
+          <div class="projectPageContentListItemImage"></div>
+          <div class="projectPageContentListItemFooter">
+            <span title="项目编辑"><el-button :icon="EditPen" @click="goItem(item.uuid)" /></span>
+            <el-dropdown @command="handleCommand">
+              <el-button :icon="MoreFilled" class="el-dropdown-link" style="margin-left: 10px" />
+              <template #dropdown>
+                <el-dropdown-menu style="width: 100px">
+                  <el-dropdown-item :command="'preview-----' + item.uuid"><el-icon>
+                      <Monitor />
+                    </el-icon>预览</el-dropdown-item>
+                  <el-dropdown-item :command="'editor-----' + item.uuid"><el-icon>
+                      <Monitor />
+                    </el-icon>设置</el-dropdown-item>
+                  <el-dropdown-item :disabled="item.state == 1" :command="'release-----' + item.uuid"><el-icon>
+                      <Position />
+                    </el-icon>发布</el-dropdown-item>
+                  <el-dropdown-item divided :command="'delete-----' + item.uuid"><el-icon>
+                      <Delete />
+                    </el-icon>删除</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </div>
+        </div>
       </div>
     </div>
-    <el-dialog v-model="addShwo" title="添加项目" width="30%">
-      <el-form
-        :model="form"
-        label-width="100px"
-        :rules="rules"
-        ref="ruleFormRef"
-      >
+    <el-dialog v-model="addShwo" :title="state.isAdd ? '新建项目' : '设置项目'" width="30%">
+      <el-form :model="form" label-width="100px" :rules="rules" ref="ruleFormRef">
         <el-form-item label="项目名称" prop="name">
           <el-input v-model="form.name" />
         </el-form-item>
         <el-form-item label="分辨率" prop="ratio">
-          <el-select
-            v-model="form.ratio"
-            placeholder="请选择分辨率"
-            style="width: 100%"
-          >
-            <el-option
-              v-for="item in ratioOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
+          <el-select v-model="form.ratio" placeholder="请选择分辨率" style="width: 100%">
+            <el-option v-for="item in ratioOptions" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="背景色" prop="backgroundColor">
@@ -159,6 +114,12 @@ const rules = {
   ],
   ratio: [{ required: true, message: "请选择分辨率", trigger: "blur" }],
 };
+
+//页面状态
+const state = reactive({
+  isAdd: false
+})
+
 const addShwo = ref(false);
 const form = reactive({
   name: null,
@@ -166,8 +127,11 @@ const form = reactive({
   uuid: null,
   backgroundColor: null,
 });
-const addItem = () => {
+
+
+const addItem = (isadd) => {
   addShwo.value = true;
+  state.isAdd = isadd
 };
 
 const projectList = ref([]);
@@ -242,6 +206,8 @@ const deleteProject = (val) => {
     getProjectAll();
   });
 };
+
+//设置项目
 const editroItem = (val) => {
   indexDBSearch("project", val).then((res) => {
     form.name = res.name;
@@ -250,7 +216,10 @@ const editroItem = (val) => {
     form.backgroundColor = res.backgroundColor;
   });
   addShwo.value = true;
+  state.isAdd = false;
 };
+
+//预览项目
 const previewItem = (val) => {
   userRouter.push({
     name: "preview",
@@ -259,6 +228,8 @@ const previewItem = (val) => {
     },
   });
 };
+
+//发布项目——目前只是改一个状态而已，发布的流程未定，后续需要接入服务器相关内容。
 const releaseItem = (val) => {
   ElMessageBox.confirm("确定要发布?", "重要提示", {
     confirmButtonText: "确定",
@@ -285,27 +256,29 @@ const releaseItem = (val) => {
           });
         });
     })
-    .catch(() => {});
+    .catch(() => { });
 };
+
+//处理dropdown的command事件
 const handleCommand = (command) => {
   let comVal = command.split("-----");
   switch (comVal[0]) {
     case "preview":
-      console.log("预览");
-      previewItem(comVal[1]);
+      previewItem(comVal[1]); //预览
       break;
     case "release":
-      releaseItem(comVal[1]);
+      releaseItem(comVal[1]); //发布
       break;
     case "editor":
-      editroItem(comVal[1]);
+      editroItem(comVal[1]); //设置
       break;
     case "delete":
-      deleteProject(comVal[1]);
+      deleteProject(comVal[1]); // 删除
       break;
   }
 };
 
+//跳转到编辑页并通过id参数查询数据库中数据
 const goItem = (val) => {
   // 跳转
   userRouter.push({
@@ -319,9 +292,11 @@ const goItem = (val) => {
 
 <style scoped lang="scss">
 .projectPage {
-  background: var(--ap-editor-bg);
+  //background: var(--ap-editor-bg);
   width: 100%;
   height: 100%;
+  background: url("/public/img/bg.png");
+  background-size: 100% 100%;
 
   .projectPageLeft {
     width: calc(100% - 40px);
@@ -348,13 +323,14 @@ const goItem = (val) => {
 
       .projectPageLeftListNav {
         width: 100%;
-        height: 35px;
-        line-height: 35px;
-        font-size: 14px;
-        padding: 0 15px;
+        height: 2.1875rem;
+        line-height: 2.1875rem;
+        font-size: 1.25rem;
+        padding: 0 .9375rem;
         box-sizing: border-box;
         color: var(--ap-editor-left-nav-text);
         cursor: pointer;
+        font-weight: bold;
       }
     }
 
@@ -390,39 +366,101 @@ const goItem = (val) => {
       box-sizing: border-box;
     }
 
+    .itemTitle {
+      width: 96%;
+      color: #fff;
+      font-size: 0.85rem;
+      line-height: 2rem;
+      margin: 1rem auto;
+      letter-spacing: 1px;
+      font-weight: bolder;
+
+    }
+
+    .templateList {
+      width: 96%;
+      margin: 1rem auto;
+
+      .addItem {
+        width: 8.75rem;
+        height: 8.75rem;
+        border-radius: .3125rem;
+        cursor: pointer;
+        border: 1px solid rgb(59, 130, 246);
+        background: var(--ap-editor-project-item-bg);
+        color: rgb(59, 130, 246);
+        font-size: 2.5rem;
+        text-align: center;
+        line-height: 8.75rem;
+      }
+    }
+
+
     .projectPageContentList {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+      /* 自动填充列，每列最小宽度100px，最大宽度为1份可用空间 */
+      gap: 1.5rem;
+      /* 设置行间距和列间距为24px */
       width: 100%;
-      height: calc(100% - 60px);
+      height: calc(100% - 3.75rem);
       overflow-y: auto;
       overflow-x: hidden;
-      padding: 20px;
+      padding: 1rem;
       box-sizing: border-box;
 
+
+
       .projectPageContentListItem {
-        background: var(--ap-editor-project-item-bg);
-        width: 100%;
-        height: 300px;
-        border-radius: 5px;
+        position: relative;
+        width: 20.75rem;
+        height: 14.75rem;
+        border-radius: .3125rem;
         border: 1px solid var(--ap-editor-border);
         overflow: hidden;
+        background: var(--ap-editor-project-item-bg);
+        cursor: pointer;
+        transition: all ease 0.5s;
 
         .projectPageContentListItemTitle {
-          width: 100%;
-          height: 30px;
-          padding-right: 10px;
+          display: flex;
+          width: 90%;
+          height: 1.875rem;
+          padding-right: .625rem;
           box-sizing: border-box;
           text-align: center;
           color: #fff;
-          font-size: 12px;
-          line-height: 30px;
+          font-size: .75rem;
+          line-height: 1.875rem;
           position: relative;
+          text-align: left;
+          margin: 0 auto;
+
+          div {
+            display: flex;
+            width: 50%;
+            height: 100%;
+
+            .circle {
+              display: inline-block;
+              width: 0.5rem;
+              height: 0.5rem;
+              border-radius: 50%;
+              background-color: #ffffff62;
+              margin: 8% 5% 0 60%;
+            }
+
+            .activeCircle {
+              background-color: rgb(59, 130, 246);
+            }
+          }
 
           .projectPageContentListItemTitleIcon {
             position: absolute;
-            right: 10px;
-            top: 7px;
-            width: 16px;
-            height: 16px;
+            right: .625rem;
+            top: .4375rem;
+            width: 1rem;
+            height: 1rem;
             border-radius: 50%;
             cursor: pointer;
             color: #fff;
@@ -434,28 +472,30 @@ const goItem = (val) => {
         }
 
         .projectPageContentListItemImage {
-          width: 100%;
-          height: calc(100% - 80px);
+          width: 90%;
+          height: calc(100% - 5rem);
+          background: url('/public/img/default_screen.png');
+          background-size: 80% 80%;
+          margin: 0 auto;
+          background-position: center;
         }
+
+
 
         .projectPageContentListItemFooter {
           width: 100%;
-          height: 50px;
+          height: 3.125rem;
           background: var(--ap-editor-project-item-footer);
           color: var(--ap-editor-text);
           display: flex;
           justify-content: flex-end;
           align-items: center;
-          padding-right: 10px;
+          padding-right: .625rem;
           box-sizing: border-box;
 
-          span {
-            margin-right: 10px;
-          }
-
           .projectPageContentListItemFooterIcon1 {
-            width: 12px;
-            height: 12px;
+            width: .75rem;
+            height: .75rem;
             display: inline-block;
             border-radius: 50%;
             background: var(--ap-editor-project-item-unrelease);
@@ -465,6 +505,49 @@ const goItem = (val) => {
             background: var(--ap-editor-project-item-release);
           }
         }
+      }
+
+      .projectPageContentListItem:hover {
+        transform: translateY(-6px);
+      }
+
+      .projectPageContentListItem::before,
+      .projectPageContentListItem::after {
+        box-sizing: inherit;
+        position: absolute;
+        content: '';
+        border: 2px solid transparent;
+        width: 0;
+        height: 0;
+      }
+
+      .projectPageContentListItem::after {
+        bottom: 0;
+        right: 0;
+      }
+
+      .projectPageContentListItem::before {
+        top: 0;
+        left: 0;
+      }
+
+      .projectPageContentListItem:hover::before,
+      .projectPageContentListItem:hover::after {
+        width: 98.9%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .projectPageContentListItem:hover::before {
+        border-top-color: rgb(59, 130, 246);
+        border-right-color: rgb(59, 130, 246);
+        transition: width 0.1s ease-out, height 0.1s ease-out 0.1s;
+      }
+
+      .projectPageContentListItem:hover::after {
+        border-bottom-color: rgb(59, 130, 246);
+        border-left-color: rgb(59, 130, 246);
+        transition: border-color 0s ease-out 0.2s, width 0.1s ease-out 0.2s, height 0.1s ease-out 0.3s;
       }
     }
   }
