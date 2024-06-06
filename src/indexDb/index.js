@@ -3,7 +3,7 @@
 // 数据库版本
 let inndexDBVaesion = 1;
 // 数据库名称
-let indexDBName = "ap-views";
+let indexDBName = "td-views";
 // 项目表
 let storeNameTag = "project";
 

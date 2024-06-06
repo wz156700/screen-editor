@@ -3,9 +3,9 @@
 组件名称: 组件管理
 -->
 <template>
-  <div class="ap-editorLeft">
+  <div class="td-editorLeft">
     <!-- 名称 -->
-    <div class="ap-editorLeft-name">
+    <div class="td-editorLeft-name">
       <span v-if="state.isShowLeftBar">组件管理</span>
       <div style="cursor: pointer">
         <EditorIcon name="left" size="16px" @click="closeLeftBar" v-if="state.isShowLeftBar">
@@ -15,34 +15,34 @@
 
     </div>
     <!-- 内容 -->
-    <div class="ap-editorLeft-content">
+    <div class="td-editorLeft-content">
       <!-- 左侧 -->
-      <div class="ap-editorLeft-content-left">
-        <div class="ap-editorLeft-content-left-item" :class="active === 'history' ? 'is-active' : ''"
+      <div class="td-editorLeft-content-left">
+        <div class="td-editorLeft-content-left-item" :class="active === 'history' ? 'is-active' : ''"
           @click="updataActive('history')">
           <EditorIcon name="history" size="16px"></EditorIcon>
           <span>最近</span>
         </div>
-        <div class="ap-editorLeft-content-left-item" :class="active === 'analysis' ? 'is-active' : ''"
+        <div class="td-editorLeft-content-left-item" :class="active === 'analysis' ? 'is-active' : ''"
           @click="updataActive('analysis')">
           <EditorIcon name="analysis" size="16px"></EditorIcon>
           <span>图表</span>
         </div>
-        <div class="ap-editorLeft-content-left-item" :class="active === 'components' ? 'is-active' : ''"
+        <div class="td-editorLeft-content-left-item" :class="active === 'components' ? 'is-active' : ''"
           @click="updataActive('components')">
           <EditorIcon name="components" size="16px"></EditorIcon>
           <span>小组件</span>
         </div>
-        <div class="ap-editorLeft-content-left-item" :class="active === 'map' ? 'is-active' : ''"
+        <div class="td-editorLeft-content-left-item" :class="active === 'map' ? 'is-active' : ''"
           @click="updataActive('map')">
           <EditorIcon name="history" size="16px"></EditorIcon>
           <span>地图</span>
         </div>
       </div>
       <!-- 右侧 -->
-      <div class="ap-editorLeft-content-right">
+      <div class="td-editorLeft-content-right">
         <el-scrollbar height="100%">
-          <div class="ap-editorLeft-content-right-box">
+          <div class="td-editorLeft-content-right-box">
             <historyList :domData="domData" v-if="active === 'history'" @selectItem="selectItem" :selectId="selectId">
             </historyList>
             <rightCom :menuList="mapData" v-if="active === 'map'"></rightCom>
@@ -99,7 +99,7 @@ const closeLeftBar = () => {
 </script>
 
 <style lang="scss" scoped>
-.ap-editorLeft {
+.td-editorLeft {
   width: 100%;
   height: 100%;
   font-size: 12px;
@@ -107,7 +107,7 @@ const closeLeftBar = () => {
   overflow: hidden;
 
 
-  .ap-editorLeft-name {
+  .td-editorLeft-name {
     width: 100%;
     height: 36px;
     display: flex;
@@ -115,26 +115,26 @@ const closeLeftBar = () => {
     justify-content: space-between;
     padding: 0 10px;
     box-sizing: border-box;
-    border-bottom: 1px solid var(--ap-editor-border);
+    border-bottom: 1px solid var(--td-editor-border);
 
     i {
       font-size: 14px;
     }
   }
 
-  .ap-editorLeft-content {
+  .td-editorLeft-content {
     width: 100%;
     height: calc(100% - 36px);
     display: flex;
 
-    .ap-editorLeft-content-left {
+    .td-editorLeft-content-left {
       width: 3.75rem;
       height: 100%;
       padding: .3125rem;
       box-sizing: border-box;
-      background: var(--ap-editor-left-nav-one);
+      background: var(--td-editor-left-nav-one);
 
-      .ap-editorLeft-content-left-item {
+      .td-editorLeft-content-left-item {
         width: 100%;
         height: 60px;
         display: flex;
@@ -155,7 +155,7 @@ const closeLeftBar = () => {
       }
     }
 
-    .ap-editorLeft-content-right {
+    .td-editorLeft-content-right {
       width: calc(100% - 60px);
       height: 100%;
       padding-top: 5px;
@@ -163,7 +163,7 @@ const closeLeftBar = () => {
       padding-right: 5px;
       box-sizing: border-box;
 
-      .ap-editorLeft-content-right-box {
+      .td-editorLeft-content-right-box {
         width: 100%;
         height: 100%;
 
@@ -186,8 +186,8 @@ const closeLeftBar = () => {
   }
 
   .is-active {
-    background: var(--ap-editor-left-nav-bg);
-    color: var(--ap-editor-left-nav-text);
+    background: var(--td-editor-left-nav-bg);
+    color: var(--td-editor-left-nav-text);
   }
 }
 </style>

@@ -4,7 +4,7 @@
 -->
 <template>
   <!--  @mousewheel.prevent="canvasMouseWheel" -->
-  <div class="ap-editor-main-box" ref="apEditorMain" @mousemove="canvasMouseMove">
+  <div class="td-editor-main-box" ref="apEditorMain" @mousemove="canvasMouseMove">
     <canvas ref="apEditorCanvas"></canvas>
   </div>
 </template>
@@ -887,7 +887,7 @@ defineExpose({
 </script>
 
 <style>
-.ap-editor-main-box {
+.td-editor-main-box {
   width: 100%;
   height: 100%;
   background: transparent;

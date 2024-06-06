@@ -56,4 +56,29 @@ onMounted(() => {
 ::-webkit-scrollbar-thumb:active {
 	background: rgb(9, 82, 176);
 }
+
+@font-face {
+	font-family: 'Alibaba_PuHuiTi';
+	src:
+		url('./assets/font/Alibaba_PuHuiTi_2.0_45_Thin_45_Thin.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+.el-input__wrapper {
+	background: transparent !important;
+	border: 1px solid #0067DD !important;
+}
+
+.el-select__wrapper {
+	background: transparent !important;
+	border: 1px solid #0067DD !important;
+}
+
+.el-select__wrapper {
+	background: transparent !important;
+	border: 1px solid #0067DD !important;
+	color: #fff !important;
+}
 </style>

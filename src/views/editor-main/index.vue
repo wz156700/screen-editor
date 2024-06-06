@@ -3,26 +3,26 @@
 组件名称:主页面
 -->
 <template>
-  <div class="ap-editorMain">
+  <div class="td-editorMain">
     <!-- 上 -->
-    <div class="ap-editorMain-topBox">
+    <div class="td-editorMain-topBox">
       <EditorTop @saveItem="saveItem" @previewItem="previewItem" :domInfo="domInfo"></EditorTop>
     </div>
     <!-- 中心 -->
-    <div class="ap-editorMain-main">
+    <div class="td-editorMain-main">
       <!-- 左侧 -->
-      <div class="ap-editorMain-main-left" :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }">
+      <div class="td-editorMain-main-left" :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }">
         <EditorLeft :domData="domData" @selectItem="selectItem" :selectId="selectUUID"></EditorLeft>
       </div>
       <!-- 中间 -->
 
-      <div class="ap-editorMain-main-middle" ref="mainMiddle">
+      <div class="td-editorMain-main-middle" ref="mainMiddle">
         <EditorMiddle :domData="domData" @addDOM="addDOM" @updataDOM="updataDOM" @updataDOMArray="updataDOMArray"
           @removeDOM="removeDOM" @selectDom="selectDom" :draggable="draggable" ref="EditorMiddleRef"
           :canvasInfo="canvasState" :domInfo="domInfo"></EditorMiddle>
       </div>
       <!-- 右侧 -->
-      <div class="ap-editorMain-main-right" :style="{ width: state.isShowRightBar ? '22.5rem' : '2.5rem' }">
+      <div class="td-editorMain-main-right" :style="{ width: state.isShowRightBar ? '22.5rem' : '2.5rem' }">
         <EditorRight :propertyData="propertyData" :propertyTable="propertyTable" :selectId="selectUUID"
           :domData="domData" :canvasInfo="canvasState" @updataDOM="updataDOM"></EditorRight>
       </div>
@@ -105,7 +105,7 @@ const canvasState = ref({
   lineW: false,
 });
 
-defineOptions({ name: "ap-editor" });
+defineOptions({ name: "td-editor" });
 
 // 添加元素
 const addDOM = (val) => {
@@ -334,45 +334,45 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.ap-editorMain {
+.td-editorMain {
   width: 100%;
   height: 100%;
-  // background: var(--ap-editor-bg);
+  // background: var(--td-editor-bg);
   background: url("/public/img/bg.png");
   background-size: 100% 100%;
-  color: var(--ap-editor-color);
+  color: var(--td-editor-color);
 
 
-  .ap-editorMain-topBox {
+  .td-editorMain-topBox {
     width: 100%;
     height: 45px;
-    border-bottom: 1px solid var(--ap-editor-border);
+    border-bottom: 1px solid var(--td-editor-border);
     box-sizing: border-box;
   }
 
-  .ap-editorMain-main {
+  .td-editorMain-main {
     width: 100%;
     height: calc(100% - 45px);
     display: flex;
 
-    .ap-editorMain-main-left {
+    .td-editorMain-main-left {
       width: 18.75rem;
       height: 100%;
-      border-right: 1px solid var(--ap-editor-border);
+      border-right: 1px solid var(--td-editor-border);
       box-sizing: border-box;
       // transition: all 1s ease;
     }
 
-    .ap-editorMain-main-middle {
+    .td-editorMain-main-middle {
       width: calc(100% - 41.25rem);
       height: 100%;
       overflow-y: auto;
     }
 
-    .ap-editorMain-main-right {
+    .td-editorMain-main-right {
       width: 22.5rem;
       height: 100%;
-      border-left: 1px solid var(--ap-editor-border);
+      border-left: 1px solid var(--td-editor-border);
       box-sizing: border-box;
       overflow: hidden;
     }

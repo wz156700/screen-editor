@@ -1,31 +1,33 @@
 html.dark {
     /* 编辑器背景 */
-    --ap-editor-text: #fff;
-    --ap-editor-bg: #3b565e;
+    --td-editor-text: #fff;
+    --td-editor-bg: #3b565e;
 
     /* 模块的边线颜色 */
-    --ap-editor-border: #000000;
+    --td-editor-border: #0067DD;
 
     /* 主要文字颜色 */
-    --ap-editor-color: #a4b6c0;
+    --td-editor-color: #a4b6c0;
 
     /* 左侧一级导航 */
-    --ap-editor-left-nav-one: #232324;
+    --td-editor-left-nav-one: rgba(33, 51, 124, 0.5);
 
     /* 导航激活状态 */
-    --ap-editor-left-nav-bg: rgba(69, 69, 66, 0.7);
-    --ap-editor-left-nav-text: #e7ebed;
+    --td-editor-left-nav-bg: #0067DD ;
+    --td-editor-left-nav-text: #fff;
 
     /* 导航激活状态 */
-    --ap-editor-disabled-bg: #262727;
-    --ap-editor-disabled-text: #5f5f61;
+    --td-editor-disabled-bg: #262727;
+    --td-editor-disabled-text: #5f5f61;
     /* 项目 */
-    --ap-editor-project-item-bg: #18181c;
-    --ap-editor-project-bg: #101014;
-    --ap-editor-project-item-footer: #262629;
-    --ap-editor-project-item-release: #2df34f;
-    --ap-editor-project-item-unrelease: #eaf029;
+    --td-editor-project-item-bg: #18181c;
+    --td-editor-project-bg: #101014;
+    --td-editor-project-item-footer: #262629;
+    --td-editor-project-item-release: #2df34f;
+    --td-editor-project-item-unrelease: #eaf029;
     /* 编辑器 每个图例 */
-    --ap-editor-echarts-titlebg: #2A2A2B;
-    --ap-editor-echarts-bg: #232324;
+    --td-editor-echarts-titlebg: #2A2A2B;
+    --td-editor-echarts-bg: rgba(33, 51, 124, 0.5);
+
+    --el-collapse-header-bg-color:#0067DD;
 }

@@ -4,13 +4,8 @@
 -->
 <template>
   <div class="history">
-    <div
-      class="history-list"
-      v-for="item in historyListData"
-      :key="item.uuid"
-      @click="clickItem(item)"
-      :class="selectData.includes(item.uuid) ? 'history-list-active' : ''"
-    >
+    <div class="history-list" v-for="item in historyListData" :key="item.uuid" @click="clickItem(item)"
+      :class="selectData.includes(item.uuid) ? 'history-list-active' : ''">
       <div class="history-list-image" :title="item.name">
         <img v-if="item.image" :src="item.image" />
       </div>
@@ -90,6 +85,7 @@ const clickItem = (item) => {
   width: 100%;
   height: auto;
 }
+
 .history-list {
   width: 100%;
   height: 50px;
@@ -97,21 +93,24 @@ const clickItem = (item) => {
   margin-bottom: 5px;
   padding: 5px;
   box-sizing: border-box;
-  background: var(--ap-editor-echarts-bg);
+  background: var(--td-editor-echarts-bg);
   display: flex;
   justify-content: space-between;
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 5px;
 }
+
 .history-list-image {
   width: 60px;
   height: 40px;
 }
+
 .history-list-image img {
   width: 100%;
   height: 100%;
 }
+
 .history-list-name {
   width: calc(100% - 70px);
   height: 100%;

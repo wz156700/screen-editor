@@ -5,15 +5,11 @@
 <template>
   <el-collapse v-model="value">
     <template v-for="(item, index) in menuList" :key="index">
-      <el-collapse-item :title="item.name" :name="item.value">
-        <!-- <TextItem v-for="(items, indexs) in item.children" :key="indexs" :itemData="items"></TextItem> -->
-        <ImageItem
-          v-for="(items, indexs) in item.children"
-          :key="indexs"
-          :itemData="items"
-          style="width: 100%; height: 220px"
-        ></ImageItem>
-      </el-collapse-item>
+      <!-- <el-collapse-item :title="item.name" :name="item.value"> -->
+      <!-- <TextItem v-for="(items, indexs) in item.children" :key="indexs" :itemData="items"></TextItem> -->
+      <ImageItem v-for="(items, indexs) in item.children" :key="indexs" :itemData="items"
+        style="width: 100%; height: 220px"></ImageItem>
+      <!-- </el-collapse-item> -->
     </template>
   </el-collapse>
 </template>

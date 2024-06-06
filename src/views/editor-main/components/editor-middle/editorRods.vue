@@ -1,6 +1,6 @@
 <!-- 组件名称: 比例尺 -->
 <template>
-  <div class="ap-editor-rod-main" ref="apEditorRod"></div>
+  <div class="td-editor-rod-main" ref="apEditorRod"></div>
 </template>
 
 <script setup>
@@ -86,7 +86,7 @@ watch(
 </script>
 
 <style scoped>
-.ap-editor-rod-main {
+.td-editor-rod-main {
   width: 100%;
   height: 100%;
   overflow: hidden;

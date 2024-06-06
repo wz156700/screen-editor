@@ -1,7 +1,7 @@
 // 图表
 const analysis = [
     {
-        name: '示例组件',
+        name: '',
         value: 1,
         children: [
             {
@@ -11,7 +11,8 @@ const analysis = [
                 width: 450, // 初始化大小
                 height: 150, // 
                 name: '图表示例1',
-                uuid: 'A1'
+                uuid: 'A1',
+                image: "/public/img/smalltitle.png"
             },
             {
                 type: 'LineChart2', // 组件名

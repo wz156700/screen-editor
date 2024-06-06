@@ -3,24 +3,24 @@
 组件名称: 编辑器顶部工具链
 -->
 <template>
-  <div class="ap-editorMain-top">
+  <div class="td-editorMain-top">
     <!-- 左侧 -->
-    <div class="ap-editorMain-top-left" @click="goHome">
+    <div class="td-editorMain-top-left" @click="goHome">
       <EditorIcon name="left" size="1rem" class="backIcon">
       </EditorIcon>
-      <div class="ap-editorMain-top-left-name">动态面板</div>
+      <div class="td-editorMain-top-left-name">动态面板</div>
     </div>
     <!-- 中间 -->
-    <div class="ap-editorMain-top-middle">
+    <div class="td-editorMain-top-middle">
       {{ domInfo.name }}
     </div>
     <!-- 右侧 -->
-    <div class="ap-editorMain-top-right">
-      <div class="ap-editorMain-top-right-item" @click="saveItem">
+    <div class="td-editorMain-top-right">
+      <div class="td-editorMain-top-right-item" @click="saveItem">
         <EditorIcon name="save"></EditorIcon>
         <span>保存</span>
       </div>
-      <div class="ap-editorMain-top-right-item" @click="previewItem">
+      <div class="td-editorMain-top-right-item" @click="previewItem">
         <EditorIcon name="share"></EditorIcon>
         <span>预览</span>
       </div>
@@ -47,14 +47,14 @@ const goHome = () => {
 </script>
 
 <style lang="scss">
-.ap-editorMain-top {
+.td-editorMain-top {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   display: flex;
   user-select: none;
 
-  .ap-editorMain-top-left {
+  .td-editorMain-top-left {
     width: 18.75rem;
     height: 100%;
     display: flex;
@@ -76,7 +76,7 @@ const goHome = () => {
       margin: 0 .625rem;
     }
 
-    .ap-editorMain-top-left-name {
+    .td-editorMain-top-left-name {
       width: auto;
       height: 2.1875rem;
       line-height: 2.1875rem;
@@ -84,14 +84,14 @@ const goHome = () => {
     }
   }
 
-  .ap-editorMain-top-middle {
+  .td-editorMain-top-middle {
     width: calc(100% - 41.25rem);
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .ap-editorMain-top-middle-item {
+    .td-editorMain-top-middle-item {
       width: 3.125rem;
       // background: red;
       text-align: center;
@@ -106,14 +106,14 @@ const goHome = () => {
     }
   }
 
-  .ap-editorMain-top-right {
+  .td-editorMain-top-right {
     width: 22.5rem;
     height: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 
-    .ap-editorMain-top-right-item {
+    .td-editorMain-top-right-item {
       width: 3.125rem;
       // background: red;
       text-align: center;

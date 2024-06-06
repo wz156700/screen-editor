@@ -1,5 +1,5 @@
 // 自定义小部件
-import apWviewText1 from './text/ap-view-span.vue'
+import apWviewText1 from './text/td-view-span.vue'
 
 const components = [
     apWviewText1

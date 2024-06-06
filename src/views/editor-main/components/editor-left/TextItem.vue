@@ -3,7 +3,7 @@
 组件名称: 文本组件
 -->
 <template>
-  <div class="ap-TextItem" :draggable="true" @dragstart="onDragstartItem">
+  <div class="td-TextItem" :draggable="true" @dragstart="onDragstartItem">
     {{ itemData.name }}
   </div>
 </template>
@@ -23,7 +23,7 @@ const onDragstartItem = () => {
 </script>
 
 <style scoped lang="scss">
-.ap-TextItem {
+.td-TextItem {
   width: 100%;
   height: 35px;
   cursor: pointer;
@@ -31,9 +31,10 @@ const onDragstartItem = () => {
   padding: 0 10px;
   box-sizing: border-box;
   user-select: none;
+
   &:hover {
-    // background: var(--ap-editor-left-nav-bg);
-    color: var(--ap-editor-left-nav-text);
+    // background: var(--td-editor-left-nav-bg);
+    color: var(--td-editor-left-nav-text);
   }
 }
 </style>

@@ -5,7 +5,9 @@
   <div class="image-preview" :draggable="true" @dragstart="onDragstartItem">
     <div class="image-preview-list">
       <div class="image-preview-list-title">
-        {{ props.itemData.name }}
+        <div class="image-preview-list-title-text">
+          {{ props.itemData.name }}
+        </div>
       </div>
       <div class="image-preview-list-image">
         <template v-if="!props.itemData.image">
@@ -36,25 +38,41 @@ const onDragstartItem = () => {
 <style scoped>
 .image-preview {
   width: 100%;
-  height: 450px;
-  padding: 10px;
+  height: 28.125rem;
+  padding: .625rem;
   box-sizing: border-box;
 }
+
 .image-preview-list {
-  background: var(--ap-editor-echarts-bg);
+  background: var(--td-editor-echarts-bg);
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: .3125rem;
 }
+
 .image-preview-list-title {
+  font-family: 'Alibaba_PuHuiTi';
   width: 100%;
-  height: 35px;
-  line-height: 35px;
-  background: var(--ap-editor-echarts-titlebg);
-  padding-left: 10px;
+  height: 2.1875rem;
+  line-height: 2.1875rem;
+  /* background: var(--td-editor-echarts-titlebg); */
+  background: url("/public/img/smalltitle.png");
+  background-size: 100% 100%;
+  padding-left: 1rem;
   box-sizing: border-box;
+  font-weight: bolder;
 }
+
+.image-preview-list-title-text {
+  background: linear-gradient(to top, #87DAFF, #FFFFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-size: 1rem;
+}
+
 .image-preview-list-image {
   width: 100%;
   height: calc(100% - 35px);

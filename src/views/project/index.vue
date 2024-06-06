@@ -292,7 +292,7 @@ const goItem = (val) => {
 
 <style scoped lang="scss">
 .projectPage {
-  //background: var(--ap-editor-bg);
+  //background: var(--td-editor-bg);
   width: 100%;
   height: 100%;
   background: url("/public/img/bg.png");
@@ -300,14 +300,14 @@ const goItem = (val) => {
 
   .projectPageLeft {
     width: calc(100% - 40px);
-    border-right: 1px solid var(--ap-editor-border);
+    border-right: 1px solid var(--td-editor-border);
     box-sizing: border-box;
     display: flex;
     margin: 0 auto;
 
     .projectPageLeftAdd {
       width: 20%;
-      border-bottom: 1px solid var(--ap-editor-border);
+      border-bottom: 1px solid var(--td-editor-border);
       box-sizing: border-box;
       display: flex;
       justify-content: right;
@@ -328,7 +328,7 @@ const goItem = (val) => {
         font-size: 1.25rem;
         padding: 0 .9375rem;
         box-sizing: border-box;
-        color: var(--ap-editor-left-nav-text);
+        color: var(--td-editor-left-nav-text);
         cursor: pointer;
         font-weight: bold;
       }
@@ -344,7 +344,7 @@ const goItem = (val) => {
         line-height: 30px;
 
         a {
-          color: var(--ap-editor-text);
+          color: var(--td-editor-text);
           font-size: 14px;
         }
       }
@@ -358,7 +358,7 @@ const goItem = (val) => {
     .projectPageContentHeader {
       width: 100%;
       height: 60px;
-      border-bottom: 1px solid var(--ap-editor-border);
+      border-bottom: 1px solid var(--td-editor-border);
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -387,7 +387,7 @@ const goItem = (val) => {
         border-radius: .3125rem;
         cursor: pointer;
         border: 1px solid rgb(59, 130, 246);
-        background: var(--ap-editor-project-item-bg);
+        background: var(--td-editor-project-item-bg);
         color: rgb(59, 130, 246);
         font-size: 2.5rem;
         text-align: center;
@@ -416,9 +416,9 @@ const goItem = (val) => {
         width: 20.75rem;
         height: 14.75rem;
         border-radius: .3125rem;
-        border: 1px solid var(--ap-editor-border);
+        border: 1px solid var(--td-editor-border);
         overflow: hidden;
-        background: var(--ap-editor-project-item-bg);
+        background: var(--td-editor-project-item-bg);
         cursor: pointer;
         transition: all ease 0.5s;
 
@@ -485,8 +485,8 @@ const goItem = (val) => {
         .projectPageContentListItemFooter {
           width: 100%;
           height: 3.125rem;
-          background: var(--ap-editor-project-item-footer);
-          color: var(--ap-editor-text);
+          background: var(--td-editor-project-item-footer);
+          color: var(--td-editor-text);
           display: flex;
           justify-content: flex-end;
           align-items: center;
@@ -498,11 +498,11 @@ const goItem = (val) => {
             height: .75rem;
             display: inline-block;
             border-radius: 50%;
-            background: var(--ap-editor-project-item-unrelease);
+            background: var(--td-editor-project-item-unrelease);
           }
 
           .projectPageContentListItemFooterIcon1Active {
-            background: var(--ap-editor-project-item-release);
+            background: var(--td-editor-project-item-release);
           }
         }
       }

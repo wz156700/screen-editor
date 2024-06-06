@@ -2,18 +2,18 @@
 组件名称: 可视化编辑器
 -->
 <template>
-  <div class="ap-editor">
+  <div class="td-editor">
     <!-- 标尺 -->
-    <div class="ap-editor-rod">
+    <div class="td-editor-rod">
       <EditorRod :positionInfo="positionInfo"></EditorRod>
     </div>
     <!-- 内容区 -->
-    <div class="ap-editor-main" ref="editorMain">
+    <div class="td-editor-main" ref="editorMain">
       <EditorMain @updataSize="updataSize" @addDOM="addDOM" @updataDOM="updataDOM" @updataDOMArray="updataDOMArray"
         @removeDOM="removeDOM" @selectDom="selectDom" @updataIndex="updataIndex" :draggable="draggable"
         :canvasInfo="canvasInfo" ref="EditorMainRef"></EditorMain>
       <editorWhiteboard :editorMainInfo="editorMainInfo" :positionInfo="positionInfo" :domData="domData"
-        class="ap-editor-mainBoard" :domInfo="domInfo"></editorWhiteboard>
+        class="td-editor-mainBoard" :domInfo="domInfo"></editorWhiteboard>
     </div>
   </div>
 </template>
@@ -154,7 +154,7 @@ defineExpose({
 </script>
 
 <style scoped>
-.ap-editor {
+.td-editor {
   width: 100%;
   height: 200%;
   padding: 40px 0 0 40px;
@@ -162,7 +162,7 @@ defineExpose({
   position: relative;
 }
 
-.ap-editor-main {
+.td-editor-main {
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -170,7 +170,7 @@ defineExpose({
   overflow: hidden;
 }
 
-.ap-editor-rod {
+.td-editor-rod {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -184,7 +184,7 @@ svg {
   padding: 0;
 }
 
-.ap-editor-mainBoard {
+.td-editor-mainBoard {
   position: absolute;
   left: 0;
   top: 0;

@@ -3,14 +3,9 @@
 组件名称: 画布白板
 -->
 <template>
-  <div
-    class="ap-editor-whiteboard"
-    :style="{ height: editorMainInfo.h + 'px', width: editorMainInfo.w + 'px' }"
-  >
-    <div class="ap-editor-whiteboard-box" :style="styleBox">
-      <template
-        v-for="item in domDataPage"
-        :key="
+  <div class="td-editor-whiteboard" :style="{ height: editorMainInfo.h + 'px', width: editorMainInfo.w + 'px' }">
+    <div class="td-editor-whiteboard-box" :style="styleBox">
+      <template v-for="item in domDataPage" :key="
           item.uuid +
           item.width +
           item.height +
@@ -18,48 +13,35 @@
           item.mtr +
           item.mbr +
           item.mbl
-        "
-      >
-        <div
-          class="ap-editor-whiteboard-box-item"
-          :style="{
-            left:
-              whiteboardBox.left + props.positionInfo.left + item.left + 'px',
-            top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
-            width: item.width + 'px',
-            height: item.height + 'px',
-            transform: `rotate(${item.angle}deg)`,
-            transformOrigin: `${item.angleX}px ${item.angleY}px`,
-            zIndex: item.zIndex,
-            borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
-            padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
-            alignItems: `${item.alignW}`,
-            justifyContent: `${item.alignH}`,
-          }"
-          :set-key="item.uuid"
-        >
-          <component
-            :is="item.type"
-            class="ap-editor-whiteboard-box-item-com"
-            :key="item.uuid"
-            v-bind="item.attribute"
-            :data="item.data ? item.data : '初始化'"
-          ></component>
+        ">
+        <div class="td-editor-whiteboard-box-item" :style="{
+    left:
+      whiteboardBox.left + props.positionInfo.left + item.left + 'px',
+    top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
+    width: item.width + 'px',
+    height: item.height + 'px',
+    transform: `rotate(${item.angle}deg)`,
+    transformOrigin: `${item.angleX}px ${item.angleY}px`,
+    zIndex: item.zIndex,
+    borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
+    padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
+    alignItems: `${item.alignW}`,
+    justifyContent: `${item.alignH}`,
+  }" :set-key="item.uuid">
+          <component :is="item.type" class="td-editor-whiteboard-box-item-com" :key="item.uuid" v-bind="item.attribute"
+            :data="item.data ? item.data : '初始化'"></component>
         </div>
       </template>
       <h1>{{ domInfo.backgroundColor }}</h1>
-      <div
-        class="ap-editor-whiteboard-border"
-        :style="{
-          left: whiteboardBox.left + props.positionInfo.left + 'px',
-          top: whiteboardBox.top + props.positionInfo.top + 'px',
-          width: domInfo.width,
-          height: domInfo.height,
-          backgroundColor: domInfo.backgroundColor
-            ? domInfo.backgroundColor
-            : 'transparent',
-        }"
-      ></div>
+      <div class="td-editor-whiteboard-border" :style="{
+    left: whiteboardBox.left + props.positionInfo.left + 'px',
+    top: whiteboardBox.top + props.positionInfo.top + 'px',
+    width: domInfo.width,
+    height: domInfo.height,
+    backgroundColor: domInfo.backgroundColor
+      ? domInfo.backgroundColor
+      : 'transparent',
+  }"></div>
     </div>
   </div>
 </template>
@@ -110,15 +92,16 @@ const styleBox = computed(() => {
 </script>
 
 <style scoped lang="scss">
-.ap-editor-whiteboard {
+.td-editor-whiteboard {
   position: relative;
 
-  .ap-editor-whiteboard-box {
+  .td-editor-whiteboard-box {
     width: 20000px;
     height: 20000px;
     position: absolute;
     transform: translateZ(0);
-    .ap-editor-whiteboard-box-item {
+
+    .td-editor-whiteboard-box-item {
       position: absolute;
       overflow: hidden;
       display: flex;
@@ -127,12 +110,14 @@ const styleBox = computed(() => {
       justify-content: flex-start;
       align-items: flex-start;
       pointer-events: none;
-      .ap-editor-whiteboard-box-item-com {
+
+      .td-editor-whiteboard-box-item-com {
         flex-shrink: 0;
       }
     }
   }
-  .ap-editor-whiteboard-border {
+
+  .td-editor-whiteboard-border {
     z-index: -1;
     // background: yellowgreen;
     position: absolute;

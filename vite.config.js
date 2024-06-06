@@ -4,7 +4,7 @@ import path from "path";
 import DefineOptions from "unplugin-vue-define-options/vite";
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: process.env.NODE_ENV === "production" ? "/ap-visual-editor/" : "",
+    base: process.env.NODE_ENV === "production" ? "/td-visual-editor/" : "",
     plugins: [
         vue({
             template: {

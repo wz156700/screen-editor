@@ -3,9 +3,9 @@
 组件名称: 编辑器右侧
 -->
 <template>
-  <div class="ap-editor-right">
+  <div class="td-editor-right">
     <!-- 头部 -->
-    <div class="ap-editor-right-header">
+    <div class="td-editor-right-header">
       <span v-if="state.isShowRightBar">属性管理</span>
       <div style="cursor: pointer;">
         <EditorIcon name="right" size="16px" @click="isShowRightBar" v-if="state.isShowRightBar"></EditorIcon>
@@ -13,33 +13,33 @@
       </div>
 
     </div>
-    <div class="ap-editor-right-main">
-      <div class="ap-editor-right-main-left">
-        <!-- <div class="ap-editor-right-main-left-item" title="撤回" @click="redraw('undo')">
+    <div class="td-editor-right-main">
+      <div class="td-editor-right-main-left">
+        <!-- <div class="td-editor-right-main-left-item" title="撤回" @click="redraw('undo')">
 					<EditorIcon name="back" size="18px"></EditorIcon>
 				</div>
-				<div class="ap-editor-right-main-left-item" title="重做" @click="redraw('redo')">
+				<div class="td-editor-right-main-left-item" title="重做" @click="redraw('redo')">
 					<EditorIcon name="next" size="18px"></EditorIcon>
 				</div> -->
-        <div class="ap-editor-right-main-left-item" :class="moveing ? 'is-active' : ''" title="移动画布"
+        <div class="td-editor-right-main-left-item" :class="moveing ? 'is-active' : ''" title="移动画布"
           @click="updataMoveing">
           <EditorIcon name="direction-adjustment-three" size="20px"></EditorIcon>
         </div>
         <el-popconfirm title="确定要清空画布嘛?" width="200" confirm-button-text="清空" cancel-button-text="取消"
           @confirm="confirmDelete">
           <template #reference>
-            <div class="ap-editor-right-main-left-item" title="清空画布">
+            <div class="td-editor-right-main-left-item" title="清空画布">
               <EditorIcon name="clear" size="20px"></EditorIcon>
             </div>
           </template>
         </el-popconfirm>
-        <div class="ap-editor-right-main-left-item" title="横向参考线" @click="reactLine('lineW')">
+        <div class="td-editor-right-main-left-item" title="横向参考线" @click="reactLine('lineW')">
           <EditorIcon name="dividing-line" size="20px"></EditorIcon>
         </div>
-        <div class="ap-editor-right-main-left-item" title="纵向参考线" @click="reactLine('lineH')">
+        <div class="td-editor-right-main-left-item" title="纵向参考线" @click="reactLine('lineH')">
           <EditorIcon name="dividing-line" size="20px" style="transform: rotate(90deg)"></EditorIcon>
         </div>
-        <div class="ap-editor-right-main-left-line"></div>
+        <div class="td-editor-right-main-left-line"></div>
         <div :class="classIconRadio" title="图层上移" @click="updataElement('topIndex')">
           <EditorIcon name="to-top" size="22px"></EditorIcon>
         </div>
@@ -58,16 +58,16 @@
         <!-- <div :class="classIcon" title="图层复制" @click="updataElement('copy')">
 					<EditorIcon name="copy" size="20px"></EditorIcon>
 				</div> -->
-        <div class="ap-editor-right-main-left-line"></div>
-        <div class="ap-editor-right-main-left-item" title="页面换肤">
+        <div class="td-editor-right-main-left-line"></div>
+        <div class="td-editor-right-main-left-item" title="页面换肤">
           <EditorIcon name="theme" size="20px"></EditorIcon>
         </div>
-        <div class="ap-editor-right-main-left-item" title="页面设置">
+        <div class="td-editor-right-main-left-item" title="页面设置">
           <EditorIcon name="setting-one" size="20px"></EditorIcon>
         </div>
       </div>
-      <div class="ap-editor-right-main-right" :key="selectId">
-        <el-tabs v-model="activeName" class="ap-editor-right-main-right-tabs" @tab-click="handleClick" :stretch="true">
+      <div class="td-editor-right-main-right" :key="selectId">
+        <el-tabs v-model="activeName" class="td-editor-right-main-right-tabs" @tab-click="handleClick" :stretch="true">
           <el-tab-pane label="属性" name="attribute">
             <el-scrollbar height="100%">
               <template v-if="propertyTable.attribute.length > 0">
@@ -195,22 +195,22 @@ const updataMoveing = () => {
 };
 
 const classIcon = computed(() => [
-  "ap-editor-right-main-left-item",
+  "td-editor-right-main-left-item",
   props.selectId && props.selectId.length > 0 ? "" : "is-disabled",
 ]);
 
 const classIconRadio = computed(() => [
-  "ap-editor-right-main-left-item",
+  "td-editor-right-main-left-item",
   selectUUIDItem.value ? "" : "is-disabled",
 ]);
 
 const classIconRadioLockL = computed(() => [
-  "ap-editor-right-main-left-item",
+  "td-editor-right-main-left-item",
   selectUUIDItem.value ? "" : "is-disabled",
   selectUUIDItem.value && lockMovementX.value ? "is-active" : "",
 ]);
 const classIconRadioLockT = computed(() => [
-  "ap-editor-right-main-left-item",
+  "td-editor-right-main-left-item",
   selectUUIDItem.value ? "" : "is-disabled",
   selectUUIDItem.value && lockMovementY.value ? "is-active" : "",
 ]);
@@ -299,14 +299,14 @@ const reactLine = (val) => {
 </script>
 
 <style scoped lang="scss">
-.ap-editor-right {
+.td-editor-right {
   width: 100%;
   height: 100%;
   font-size: 12px;
   user-select: none;
 }
 
-.ap-editor-right-header {
+.td-editor-right-header {
   width: 100%;
   height: 36px;
   display: flex;
@@ -314,7 +314,7 @@ const reactLine = (val) => {
   justify-content: space-between;
   padding: 0 10px;
   box-sizing: border-box;
-  border-bottom: 1px solid var(--ap-editor-border);
+  border-bottom: 1px solid var(--td-editor-border);
 
   i {
     font-size: 14px;
@@ -322,15 +322,15 @@ const reactLine = (val) => {
   }
 }
 
-.ap-editor-right-main {
+.td-editor-right-main {
   width: 100%;
   height: calc(100% - 36px);
   display: flex;
 
-  .ap-editor-right-main-left {
+  .td-editor-right-main-left {
     width: 2.5rem;
     height: 100%;
-    border-right: 1px solid var(--ap-editor-border);
+    border-right: 1px solid var(--td-editor-border);
     box-sizing: border-box;
     display: flex;
     justify-content: flex-start;
@@ -340,7 +340,7 @@ const reactLine = (val) => {
     padding-top: 15px;
     box-sizing: border-box;
 
-    .ap-editor-right-main-left-item {
+    .td-editor-right-main-left-item {
       width: 1.875rem;
       height: 1.875rem;
       // background: yellowgreen;
@@ -351,30 +351,31 @@ const reactLine = (val) => {
       cursor: pointer;
 
       &.is-active {
-        background: var(--ap-editor-left-nav-bg);
-        color: var(--ap-editor-left-nav-text);
+        background: var(--td-editor-left-nav-bg);
+        color: var(--td-editor-left-nav-text);
       }
 
       &.is-disabled {
-        color: var(--ap-editor-disabled-text);
+        color: var(--td-editor-disabled-text);
         cursor: not-allowed;
         pointer-events: none;
       }
     }
 
-    .ap-editor-right-main-left-line {
+    .td-editor-right-main-left-line {
       width: 1.875rem;
       height: 1px;
-      background: var(--ap-editor-left-nav-bg);
+      background: var(--td-editor-left-nav-bg);
       margin-bottom: 1.25rem;
     }
   }
 
-  .ap-editor-right-main-right {
+  .td-editor-right-main-right {
     width: calc(100% - 2.5rem);
     height: 100%;
+    background-color: rgba(33, 51, 124, 0.5);
 
-    .ap-editor-right-main-right-tabs {
+    .td-editor-right-main-right-tabs {
       width: 100%;
       height: 100%;
     }
@@ -389,7 +390,7 @@ const reactLine = (val) => {
       height: 100%;
     }
 
-    .ap-editor-right-main-right-tabs-item {
+    .td-editor-right-main-right-tabs-item {
       width: 100%;
       // height: calc(100% - 40px);
       // background: yellow;
