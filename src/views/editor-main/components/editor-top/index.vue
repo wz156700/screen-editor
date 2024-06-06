@@ -6,8 +6,9 @@
   <div class="ap-editorMain-top">
     <!-- 左侧 -->
     <div class="ap-editorMain-top-left" @click="goHome">
-      <img src="../../../../assets/image/logo.png" />
-      <div class="ap-editorMain-top-left-name">AP-Editor 可视化编辑器</div>
+      <EditorIcon name="left" size="1rem" class="backIcon">
+      </EditorIcon>
+      <div class="ap-editorMain-top-left-name">动态面板</div>
     </div>
     <!-- 中间 -->
     <div class="ap-editorMain-top-middle">
@@ -52,59 +53,77 @@ const goHome = () => {
   box-sizing: border-box;
   display: flex;
   user-select: none;
+
   .ap-editorMain-top-left {
-    width: 300px;
+    width: 18.75rem;
     height: 100%;
     display: flex;
     align-items: center;
     box-sizing: border-box;
     cursor: pointer;
-    img {
-      width: 35px;
-      height: 35px;
-      margin: 0 10px;
+    font-weight: bolder;
+    color: #fff;
+
+    .backIcon {
+      margin: 0 10% 0 10%;
+      font-weight: bold;
+      color: #fff;
     }
+
+    img {
+      width: 2.1875rem;
+      height: 2.1875rem;
+      margin: 0 .625rem;
+    }
+
     .ap-editorMain-top-left-name {
       width: auto;
-      height: 35px;
-      line-height: 35px;
+      height: 2.1875rem;
+      line-height: 2.1875rem;
+
     }
   }
+
   .ap-editorMain-top-middle {
-    width: calc(100% - 660px);
+    width: calc(100% - 41.25rem);
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+
     .ap-editorMain-top-middle-item {
-      width: 50px;
+      width: 3.125rem;
       // background: red;
       text-align: center;
-      height: 35px;
-      font-size: 14px;
+      height: 2.1875rem;
+      font-size: .875rem;
       cursor: pointer;
+
       span {
         display: block;
-        font-size: 12px;
+        font-size: .75rem;
       }
     }
   }
+
   .ap-editorMain-top-right {
-    width: 360px;
+    width: 22.5rem;
     height: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
     .ap-editorMain-top-right-item {
-      width: 50px;
+      width: 3.125rem;
       // background: red;
       text-align: center;
-      height: 35px;
-      font-size: 14px;
+      height: 2.1875rem;
+      font-size: .875rem;
       cursor: pointer;
+
       span {
         display: block;
-        font-size: 12px;
+        font-size: .75rem;
       }
     }
   }

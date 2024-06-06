@@ -337,7 +337,9 @@ onMounted(() => {
 .ap-editorMain {
   width: 100%;
   height: 100%;
-  background: var(--ap-editor-bg);
+  // background: var(--ap-editor-bg);
+  background: url("/public/img/bg.png");
+  background-size: 100% 100%;
   color: var(--ap-editor-color);
 
 
@@ -364,6 +366,7 @@ onMounted(() => {
     .ap-editorMain-main-middle {
       width: calc(100% - 41.25rem);
       height: 100%;
+      overflow-y: auto;
     }
 
     .ap-editorMain-main-right {

@@ -3,8 +3,8 @@
 组件名称: 可视化编辑器主内容区
 -->
 <template>
-  <div class="ap-editor-main-box" ref="apEditorMain" @mousewheel.prevent="canvasMouseWheel"
-    @mousemove="canvasMouseMove">
+  <!--  @mousewheel.prevent="canvasMouseWheel" -->
+  <div class="ap-editor-main-box" ref="apEditorMain" @mousemove="canvasMouseMove">
     <canvas ref="apEditorCanvas"></canvas>
   </div>
 </template>
@@ -152,6 +152,7 @@ const getInfo = () => {
   });
   canvas.setWidth(w);
   canvas.setHeight(h);
+  canvas.setZoom(0.635)
 
   // 位置参考
   refer = new fabric.Rect({
@@ -179,6 +180,7 @@ const getInfo = () => {
   });
   // 元素缩放
   canvas.on("object:scaling", function (event) {
+    console.log("元素缩放了~~~")
     let target = event.target; // 获取目标元素
     if (event.target._objects) {
       updataDomItems(event.target);
@@ -252,6 +254,7 @@ const getInfo = () => {
   });
   //当元素被选中时触发。
   canvas.on("object:selected", function (event) {
+    console.log('event~~', event);
     let target = event.target; // 获取目标元素
     if (NotDom.includes(target.name)) {
       return;
@@ -354,6 +357,7 @@ const getInfo = () => {
 
   // 拖拽
   canvas.on("drop", function (opt) {
+
     // 画布元素距离浏览器左侧和顶部的距离
     let offset = {
       left: canvas.getSelectionElement().getBoundingClientRect().left,
@@ -407,17 +411,27 @@ onMounted(() => {
 });
 
 //监听左侧边栏和右侧边栏是否收起
-watch(() => dataStore.global.isShowLeftBar, () => {
+watch(() => dataStore.global.isShowLeftBar, (newVal) => {
   resizeInfo()
+  if (!newVal) {
+    dataStore.global.isShowRightBar ? canvas.setZoom(0.76) : canvas.setZoom(0.92)
+  } else {
+    dataStore.global.isShowRightBar ? canvas.setZoom(0.635) : canvas.setZoom(0.76)
+  }
 })
 
-watch(() => dataStore.global.isShowRightBar, () => {
+watch(() => dataStore.global.isShowRightBar, (newVal) => {
   resizeInfo()
+  if (!newVal) {
+    dataStore.global.isShowLeftBar ? canvas.setZoom(0.8) : canvas.setZoom(0.92)
+  } else {
+    dataStore.global.isShowLeftBar ? canvas.setZoom(0.635) : canvas.setZoom(0.76)
+  }
 })
 
 // 缩放
 const canvasMouseWheel = (e) => {
-  alert("123")
+  console.log('e', e, e.layerX, e.layerY)
   // 相对于文档的原点
   let layerX = e.layerX;
   let layerY = e.layerY;
@@ -434,7 +448,6 @@ const canvasMouseWheel = (e) => {
       canvas.getZoom() + Scaling
     );
   }
-
   getPosition("referenceLine");
 };
 
@@ -878,6 +891,7 @@ defineExpose({
   width: 100%;
   height: 100%;
   background: transparent;
+
 }
 
 .elBT {

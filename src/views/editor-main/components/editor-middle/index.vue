@@ -9,25 +9,11 @@
     </div>
     <!-- 内容区 -->
     <div class="ap-editor-main" ref="editorMain">
-      <EditorMain
-        @updataSize="updataSize"
-        @addDOM="addDOM"
-        @updataDOM="updataDOM"
-        @updataDOMArray="updataDOMArray"
-        @removeDOM="removeDOM"
-        @selectDom="selectDom"
-        @updataIndex="updataIndex"
-        :draggable="draggable"
-        :canvasInfo="canvasInfo"
-        ref="EditorMainRef"
-      ></EditorMain>
-      <editorWhiteboard
-        :editorMainInfo="editorMainInfo"
-        :positionInfo="positionInfo"
-        :domData="domData"
-        class="ap-editor-mainBoard"
-        :domInfo="domInfo"
-      ></editorWhiteboard>
+      <EditorMain @updataSize="updataSize" @addDOM="addDOM" @updataDOM="updataDOM" @updataDOMArray="updataDOMArray"
+        @removeDOM="removeDOM" @selectDom="selectDom" @updataIndex="updataIndex" :draggable="draggable"
+        :canvasInfo="canvasInfo" ref="EditorMainRef"></EditorMain>
+      <editorWhiteboard :editorMainInfo="editorMainInfo" :positionInfo="positionInfo" :domData="domData"
+        class="ap-editor-mainBoard" :domInfo="domInfo"></editorWhiteboard>
     </div>
   </div>
 </template>
@@ -170,11 +156,12 @@ defineExpose({
 <style scoped>
 .ap-editor {
   width: 100%;
-  height: 100%;
+  height: 200%;
   padding: 40px 0 0 40px;
   box-sizing: border-box;
   position: relative;
 }
+
 .ap-editor-main {
   width: 100%;
   height: 100%;
@@ -182,6 +169,7 @@ defineExpose({
   position: relative;
   overflow: hidden;
 }
+
 .ap-editor-rod {
   width: 100%;
   height: 100%;
@@ -190,10 +178,12 @@ defineExpose({
   top: 0;
   z-index: 0;
 }
+
 svg {
   margin: 0;
   padding: 0;
 }
+
 .ap-editor-mainBoard {
   position: absolute;
   left: 0;
