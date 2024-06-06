@@ -294,12 +294,14 @@ const saveItem = async () => {
 // 预览
 const previewItem = () => {
   // 跳转
-  userRouter.push({
+  let url = userRouter.resolve({
     name: "preview",
     params: {
       id: route.params.id,
     },
-  });
+  }).href;
+
+  window.open(url, '_blank');
 };
 // 查询数据
 const getItem = () => {

@@ -8,11 +8,11 @@
     <div class="td-editorMain-top-left" @click="goHome">
       <EditorIcon name="left" size="1rem" class="backIcon">
       </EditorIcon>
-      <div class="td-editorMain-top-left-name">动态面板</div>
+      <div class="td-editorMain-top-left-name"> {{ domInfo.name }}</div>
     </div>
     <!-- 中间 -->
     <div class="td-editorMain-top-middle">
-      {{ domInfo.name }}
+
     </div>
     <!-- 右侧 -->
     <div class="td-editorMain-top-right">
@@ -65,7 +65,7 @@ const goHome = () => {
     color: #fff;
 
     .backIcon {
-      margin: 0 10% 0 10%;
+      margin: 0 5% 0 10%;
       font-weight: bold;
       color: #fff;
     }
@@ -115,15 +115,17 @@ const goHome = () => {
 
     .td-editorMain-top-right-item {
       width: 3.125rem;
-      // background: red;
       text-align: center;
       height: 2.1875rem;
       font-size: .875rem;
       cursor: pointer;
+      color: #fff;
+
 
       span {
         display: block;
-        font-size: .75rem;
+        font-size: 0.85rem;
+        font-weight: bold;
       }
     }
   }
