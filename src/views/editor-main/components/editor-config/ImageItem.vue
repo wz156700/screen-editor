@@ -4,11 +4,6 @@
 <template>
   <div class="image-preview" :draggable="true" @dragstart="onDragstartItem">
     <div class="image-preview-list">
-      <div class="image-preview-list-title">
-        <div class="image-preview-list-title-text">
-          {{ props.itemData.name }}
-        </div>
-      </div>
       <div class="image-preview-list-image">
         <template v-if="!props.itemData.image">
           <component :is="props.itemData.type" />
@@ -16,6 +11,9 @@
         <template v-if="props.itemData.image">
           <img :src="props.itemData.image" :title="props.itemData.name" />
         </template>
+      </div>
+      <div class="image-preview-list-title">
+        {{ props.itemData.name }}
       </div>
     </div>
   </div>
@@ -37,10 +35,19 @@ const onDragstartItem = () => {
 
 <style scoped>
 .image-preview {
-  width: 100%;
-  height: 28.125rem;
+  width: 50% !important;
+  height: 9.375rem !important;
   padding: .625rem;
   box-sizing: border-box;
+  cursor: pointer;
+}
+
+.image-preview-list:hover .image-preview-list-image {
+  border: 1px solid #409eff;
+}
+
+.image-preview-list:hover .image-preview-list-title {
+  color: #fff;
 }
 
 .image-preview-list {
@@ -56,29 +63,18 @@ const onDragstartItem = () => {
   width: 100%;
   height: 2.1875rem;
   line-height: 2.1875rem;
-  /* background: var(--td-editor-echarts-titlebg); */
-  background: url("/public/img/smalltitle.png");
-  background-size: 100% 100%;
   padding-left: 1rem;
   box-sizing: border-box;
   font-weight: bolder;
-}
-
-.image-preview-list-title-text {
-  background: linear-gradient(to top, #87DAFF, #FFFFFF);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  font-size: 1rem;
+  font-size: 0.75rem;
+  text-align: center;
 }
 
 .image-preview-list-image {
-  width: 100%;
-  height: calc(100% - 35px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 90%;
+  height: calc(100% - 2.1875rem);
+  margin: 0 auto;
+  border: 1px solid #000;
 }
 
 .image-preview img {

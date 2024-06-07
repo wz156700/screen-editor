@@ -12,7 +12,7 @@
     </div>
     <!-- 中间 -->
     <div class="td-editorMain-top-middle">
-
+      <EditorLeft @selectItem="selectItem" :selectId="selectUUID"></EditorLeft>
     </div>
     <!-- 右侧 -->
     <div class="td-editorMain-top-right">
@@ -30,7 +30,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-
+import EditorLeft from "../editor-config/index.vue";
 const router = useRouter();
 const props = defineProps(["domInfo"]);
 const emit = defineEmits(["saveItem", "previewItem"]);

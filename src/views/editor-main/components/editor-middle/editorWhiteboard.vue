@@ -28,8 +28,9 @@
     alignItems: `${item.alignW}`,
     justifyContent: `${item.alignH}`,
   }" :set-key="item.uuid">
+          {{ item.content }}
           <component :is="item.type" class="td-editor-whiteboard-box-item-com" :key="item.uuid" v-bind="item.attribute"
-            :data="item.data ? item.data : '初始化'"></component>
+            :data="item.data ? item.data : '初始化'" :content="item.content"></component>
         </div>
       </template>
       <h1>{{ domInfo.backgroundColor }}</h1>
@@ -69,6 +70,7 @@ const props = defineProps({
 });
 
 const domDataPage = computed(() => {
+  console.log('Object.values(props.domData)~~~', Object.values(props.domData))
   return Object.values(props.domData);
 });
 

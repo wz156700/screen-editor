@@ -378,7 +378,7 @@ const getInfo = () => {
       new Error("目标元素为空");
       return;
     }
-    console.log("currentType.fabricType~~~", currentType.fabricType);
+    console.log("currentType.fabricType~~~", currentType);
     switch (currentType.fabricType) {
       case "rect":
         createRect(pointerVpt.y, pointerVpt.x, currentType);
@@ -818,8 +818,7 @@ const creatLine = (type, val) => {
   }
 };
 
-// 重绘参考xian
-
+// 重绘参考线
 const updataLine = () => {
   // 获取画布内的所有元素
   let t = canvas.getObjects();

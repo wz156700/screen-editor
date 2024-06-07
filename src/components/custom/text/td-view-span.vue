@@ -5,7 +5,7 @@
 <template>
   <div class="td-wviews-span" :style="{
     color: color,
-    fontSize: fontSize + 'px',
+    fontSize: fontSize + 'rem',
     fontStyle: fontStyle,
     fontWeight: fontWeight,
     justifyContent: justifyContent,
@@ -31,7 +31,7 @@ const props = defineProps({
   // 文字大小
   fontSize: {
     type: Number,
-    default: 14,
+    default: 1,
   },
   // 字体类型
   fontStyle: {

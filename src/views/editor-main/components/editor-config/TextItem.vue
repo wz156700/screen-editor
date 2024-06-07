@@ -31,6 +31,7 @@ const onDragstartItem = () => {
   padding: 0 10px;
   box-sizing: border-box;
   user-select: none;
+  color: #fff;
 
   &:hover {
     // background: var(--td-editor-left-nav-bg);

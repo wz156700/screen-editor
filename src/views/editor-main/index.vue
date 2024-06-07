@@ -12,10 +12,9 @@
     <div class="td-editorMain-main">
       <!-- 左侧 -->
       <div class="td-editorMain-main-left" :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }">
-        <EditorLeft :domData="domData" @selectItem="selectItem" :selectId="selectUUID"></EditorLeft>
+        <EditorLeft @selectItem="selectItem" :selectId="selectUUID"></EditorLeft>
       </div>
       <!-- 中间 -->
-
       <div class="td-editorMain-main-middle" ref="mainMiddle">
         <EditorMiddle :domData="domData" @addDOM="addDOM" @updataDOM="updataDOM" @updataDOMArray="updataDOMArray"
           @removeDOM="removeDOM" @selectDom="selectDom" :draggable="draggable" ref="EditorMiddleRef"
@@ -339,8 +338,8 @@ onMounted(() => {
 .td-editorMain {
   width: 100%;
   height: 100%;
-  // background: var(--td-editor-bg);
-  background: url("/public/img/bg.png");
+  background: var(--td-editor-bg);
+  //background: url("/public/img/bg.png");
   background-size: 100% 100%;
   color: var(--td-editor-color);
 
@@ -354,7 +353,7 @@ onMounted(() => {
 
   .td-editorMain-main {
     width: 100%;
-    height: calc(100% - 45px);
+    height: calc(100% - 2.8125rem);
     display: flex;
 
     .td-editorMain-main-left {

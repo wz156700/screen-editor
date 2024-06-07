@@ -292,10 +292,10 @@ const goItem = (val) => {
 
 <style scoped lang="scss">
 .projectPage {
-  //background: var(--td-editor-bg);
+  background: var(--td-editor-bg);
   width: 100%;
   height: 100%;
-  background: url("/public/img/bg.png");
+  //background: url("/public/img/bg.png");
   background-size: 100% 100%;
 
   .projectPageLeft {

@@ -1,10 +1,10 @@
 html.dark {
     /* 编辑器背景 */
     --td-editor-text: #fff;
-    --td-editor-bg: #3b565e;
+    --td-editor-bg: #000000;
 
     /* 模块的边线颜色 */
-    --td-editor-border: #0067DD;
+    --td-editor-border: #000000;
 
     /* 主要文字颜色 */
     --td-editor-color: #a4b6c0;
