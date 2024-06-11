@@ -70,7 +70,7 @@ const props = defineProps({
 });
 
 const domDataPage = computed(() => {
-  console.log('Object.values(props.domData)~~~', Object.values(props.domData))
+  console.log("Object.values(props.domData)~~~", Object.values(props.domData));
   return Object.values(props.domData);
 });
 

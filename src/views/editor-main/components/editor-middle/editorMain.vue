@@ -3,8 +3,9 @@
 组件名称: 可视化编辑器主内容区
 -->
 <template>
-  <!--  @mousewheel.prevent="canvasMouseWheel" -->
-  <div class="td-editor-main-box" ref="apEditorMain" @mousemove="canvasMouseMove">
+
+  <div class="td-editor-main-box" ref="apEditorMain" @mousemove="canvasMouseMove"
+    @mousewheel.prevent="canvasMouseWheel">
     <canvas ref="apEditorCanvas"></canvas>
   </div>
 </template>
@@ -180,7 +181,6 @@ const getInfo = () => {
   });
   // 元素缩放
   canvas.on("object:scaling", function (event) {
-    console.log("元素缩放了~~~")
     let target = event.target; // 获取目标元素
     if (event.target._objects) {
       updataDomItems(event.target);

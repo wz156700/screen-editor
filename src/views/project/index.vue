@@ -26,7 +26,9 @@
               <span>{{ item.state ? "已发布" : "未发布" }}</span>
             </div>
           </div>
-          <div class="projectPageContentListItemImage"></div>
+          <div class="projectPageContentListItemImage">
+            <img :src="item.cover" alt="cover" v-if="item.cover" />
+          </div>
           <div class="projectPageContentListItemFooter">
             <span title="项目编辑"><el-button :icon="EditPen" @click="goItem(item.uuid)" /></span>
             <el-dropdown @command="handleCommand">
@@ -51,28 +53,46 @@
           </div>
         </div>
       </div>
+      <el-dialog v-model="addShwo" :title="state.isAdd ? '新建项目' : '设置项目'" width="30%">
+        <el-form :model="form" label-width="100px" :rules="rules" ref="ruleFormRef">
+          <el-form-item label="项目名称" prop="name">
+            <el-input v-model="form.name" />
+          </el-form-item>
+          <el-form-item label="分辨率" prop="ratio">
+            <el-select v-model="form.ratio" placeholder="请选择分辨率" style="width: 100%">
+              <el-option v-for="item in ratioOptions" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="封面" prop="Cover">
+            <el-upload class="avatar-uploader" action="" :show-file-list="false" :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload" :http-request="handleUploadOfCover">
+              <img v-if="imageData || form.cover" :src="imageData || form.cover" class="avatar" />
+              <el-icon v-else class="avatar-uploader-icon">
+                <Plus />
+              </el-icon>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="背景色" prop="backgroundColor">
+            <el-color-picker v-model="form.backgroundColor" />
+          </el-form-item>
+          <el-form-item label="背景图片" prop="backgroundImg">
+            <el-upload class="avatar-uploader" action="" :show-file-list="false" :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload" :http-request="handleUploadOfBg">
+              <img v-if="bgData || form.backgroundImg" :src="bgData || form.backgroundImg" class="avatar" />
+              <el-icon v-else class="avatar-uploader-icon">
+                <Plus />
+              </el-icon>
+            </el-upload>
+          </el-form-item>
+        </el-form>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="addShwo = false">取消</el-button>
+            <el-button type="primary" @click="okButton"> 确定 </el-button>
+          </span>
+        </template>
+      </el-dialog>
     </div>
-    <el-dialog v-model="addShwo" :title="state.isAdd ? '新建项目' : '设置项目'" width="30%">
-      <el-form :model="form" label-width="100px" :rules="rules" ref="ruleFormRef">
-        <el-form-item label="项目名称" prop="name">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item label="分辨率" prop="ratio">
-          <el-select v-model="form.ratio" placeholder="请选择分辨率" style="width: 100%">
-            <el-option v-for="item in ratioOptions" :key="item.value" :label="item.label" :value="item.value" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="背景色" prop="backgroundColor">
-          <el-color-picker v-model="form.backgroundColor" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="addShwo = false">取消</el-button>
-          <el-button type="primary" @click="okButton"> 确定 </el-button>
-        </span>
-      </template>
-    </el-dialog>
   </div>
 </template>
 
@@ -89,7 +109,7 @@ import {
   Delete,
   Monitor,
 } from "@element-plus/icons-vue";
-import { onMounted, reactive, ref, getCurrentInstance } from "vue";
+import { onMounted, reactive, ref, getCurrentInstance, watch } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "vue-router";
@@ -103,9 +123,10 @@ const {
 } = getCurrentInstance().appContext.config.globalProperties;
 const ruleFormRef = ref(null);
 const ratioOptions = [
-  { label: "2560*1440", value: "2560*1440" },
-  { label: "1920*1440", value: "1920*1440" },
+  { label: "1440*900", value: "1440*900" },
+  { label: "1920*1200", value: "1920*1200" },
   { label: "1920*1080", value: "1920*1080" },
+  { label: "1280*800", value: "1280*800" },
 ];
 const rules = {
   name: [
@@ -126,6 +147,8 @@ const form = reactive({
   ratio: null,
   uuid: null,
   backgroundColor: null,
+  cover: null,
+  backgroundImg: null
 });
 
 
@@ -139,14 +162,16 @@ const projectList = ref([]);
 const okButton = async () => {
   await ruleFormRef.value.validate(async (valid, fields) => {
     if (valid) {
+      console.log("form~~~~", form)
       if (form.uuid) {
         let result = await indexDBSearch("project", form.uuid);
-        console.log("result~~~", result);
         indexDBUpdata("project", {
           ...result,
           name: form.name,
           ratio: form.ratio,
           backgroundColor: form.backgroundColor,
+          cover: imageData.value,
+          backgroundImg: bgData.value
         })
           .then((res) => {
             ElMessage({
@@ -168,6 +193,7 @@ const okButton = async () => {
           name: form.name,
           ratio: form.ratio,
           state: 0,
+          cover: imageData
         })
           .then((res) => {
             ElMessage({
@@ -188,15 +214,59 @@ const okButton = async () => {
       console.log("error submit!", fields);
     }
   });
+
+
 };
+
+//封面上传
+const imageData = ref('')
+
+// 上传前的校验
+const beforeAvatarUpload = (rawFile) => {
+  if (rawFile.type !== 'image/jpeg') {
+    ElMessage.error('Avatar picture must be JPG format!')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    ElMessage.error('Avatar picture size can not exceed 2MB!')
+    return false
+  }
+  return true
+}
+
+//处理上传函数
+const handleUploadOfCover = (options) => {
+  const file = options.file;
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const imgData = event.target.result;
+    imageData.value = imgData;
+  };
+  reader.readAsDataURL(file);
+}
+
+//背景图片上传
+let bgData = ref('')
+const handleUploadOfBg = (options) => {
+  const file = options.file;
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const imgData = event.target.result;
+    bgData.value = imgData;
+  };
+  reader.readAsDataURL(file);
+}
+
 onMounted(() => {
   getProjectAll();
 });
+
 const getProjectAll = () => {
   indexDBSearchAll("project").then((res) => {
     projectList.value = res;
+    console.log('projectList~~~', projectList)
   });
 };
+
 const deleteProject = (val) => {
   indexDBRemove("project", val).then(() => {
     ElMessage({
@@ -214,6 +284,10 @@ const editroItem = (val) => {
     form.ratio = res.ratio;
     form.uuid = res.uuid;
     form.backgroundColor = res.backgroundColor;
+    form.cover = res.cover;
+    imageData.value = res.cover
+    form.backgroundImg = res.backgroundImg
+    bgData.value = res.backgroundImg
   });
   addShwo.value = true;
   state.isAdd = false;
@@ -288,6 +362,17 @@ const goItem = (val) => {
     },
   });
 };
+
+watch(() => state.isAdd, (newVal) => {
+  if (newVal) {
+    form.name = null;
+    form.ratio = null;
+    form.uuid = null;
+    form.backgroundColor = null;
+    form.cover = null;
+    imageData.value = '';
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -299,7 +384,7 @@ const goItem = (val) => {
   background-size: 100% 100%;
 
   .projectPageLeft {
-    width: calc(100% - 40px);
+    width: calc(100% - 2.5rem);
     border-right: 1px solid var(--td-editor-border);
     box-sizing: border-box;
     display: flex;
@@ -316,9 +401,9 @@ const goItem = (val) => {
 
     .projectPageLeftList {
       width: 80%;
-      height: calc(100% - 200px);
+      height: calc(100% - 12.5rem);
       overflow-y: auto;
-      padding-top: 20px;
+      padding-top: 1.25rem;
       box-sizing: border-box;
 
       .projectPageLeftListNav {
@@ -336,16 +421,16 @@ const goItem = (val) => {
 
     .projectPageLeftFooter {
       width: 100%;
-      height: 80px;
+      height: 5rem;
 
       .projectPageLeftFooterGitee {
-        width: 120px;
-        height: 30px;
-        line-height: 30px;
+        width: 7.5rem;
+        height: 1.875rem;
+        line-height: 1.875rem;
 
         a {
           color: var(--td-editor-text);
-          font-size: 14px;
+          font-size: .875rem;
         }
       }
     }
@@ -357,12 +442,12 @@ const goItem = (val) => {
 
     .projectPageContentHeader {
       width: 100%;
-      height: 60px;
+      height: 3.75rem;
       border-bottom: 1px solid var(--td-editor-border);
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      padding-right: 30px;
+      padding-right: 1.875rem;
       box-sizing: border-box;
     }
 
@@ -478,6 +563,12 @@ const goItem = (val) => {
           background-size: 80% 80%;
           margin: 0 auto;
           background-position: center;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         }
 
 
@@ -551,5 +642,34 @@ const goItem = (val) => {
       }
     }
   }
+}
+
+.avatar-uploader .avatar {
+  width: 7.5rem;
+  height: 7.5rem;
+  display: block;
+}
+</style>
+
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: .375rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 1.75rem;
+  color: #8c939d;
+  width: 7.5rem;
+  height: 7.5rem;
+  text-align: center;
 }
 </style>

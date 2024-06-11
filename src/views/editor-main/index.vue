@@ -302,6 +302,7 @@ const previewItem = () => {
 
   window.open(url, '_blank');
 };
+
 // 查询数据
 const getItem = () => {
   indexDBSearch("project", route.params.id).then((res) => {
@@ -361,7 +362,6 @@ onMounted(() => {
       height: 100%;
       border-right: 1px solid var(--td-editor-border);
       box-sizing: border-box;
-      // transition: all 1s ease;
     }
 
     .td-editorMain-main-middle {
