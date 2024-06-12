@@ -44,6 +44,7 @@
             <Plus />
           </el-icon>
         </el-upload>
+        <el-button @click="captureAndDownload">截图</el-button>
       </el-form-item>
       <el-form-item label="背景色" prop="backgroundColor">
         <el-color-picker v-model="form.backgroundColor" />
@@ -92,6 +93,7 @@ import { useRoute } from 'vue-router';
 const props = defineProps(["domInfo"]);
 const emit = defineEmits(["saveItem", "previewItem"]);
 import { ElMessage } from "element-plus";
+import html2canvas from 'html2canvas';
 const {
   indexDBSearch,
   indexDBUpdata,
@@ -171,6 +173,25 @@ const handleAvatarSuccess = (
   console.log('uploadFile', uploadFile)
 }
 
+//截图
+const captureAndDownload = async () => {
+  const targetElement = document.getElementById('td-editor-whiteboard'); // 你要截图的 DOM 元素的 ID
+  if (!targetElement) return;
+
+  try {
+    const canvas = await html2canvas(targetElement, {
+      allowTaint: true,
+      useCORS: true, // 如果图片跨域，需要设置此选项以允许 CORS
+    });
+    // 将 canvas 转换为 data URL
+    const imgData = canvas.toDataURL('image/png');
+    imageData.value = imgData
+
+  } catch (error) {
+    console.error('Error while capturing screenshot:', error);
+  }
+}
+
 //背景图片上传
 let bgData = ref('')
 const handleUploadOfBg = (options) => {
@@ -186,8 +207,9 @@ const handleUploadOfBg = (options) => {
 
 // 上传前的校验
 const beforeAvatarUpload = (rawFile) => {
-  if (rawFile.type !== 'image/jpeg') {
-    ElMessage.error('Avatar picture must be JPG format!')
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
+  if (!allowedTypes.includes(rawFile.type)) {
+    ElMessage.error('只能上传图片！')
     return false
   } else if (rawFile.size / 1024 / 1024 > 2) {
     ElMessage.error('Avatar picture size can not exceed 2MB!')
@@ -213,8 +235,8 @@ watch(() => props.domInfo, (newval) => {
   form.backgroundColor = newval.backgroundColor;
   form.cover = newval.cover;
   imageData.value = newval.cover;
-  form.backgroundImg = res.backgroundImg
-  bgData.value = res.backgroundImg
+  form.backgroundImg = newval.backgroundImg
+  bgData.value = newval.backgroundImg
 })
 
 onMounted(() => {

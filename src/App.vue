@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted } from 'vue'
+
 //做自适应
 const setRem = () => {
 	const htmlWidth =

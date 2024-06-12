@@ -9,6 +9,10 @@
     background: pageInfo.backgroundColor
       ? pageInfo.backgroundColor
       : 'transparent',
+    background: 'url(data:' + pageInfo.backgroundImg + ')',
+    backgroundSize: '100% 100%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center'
   }">
     <template v-for="item in domDataPage" :key="
         item.uuid +
@@ -112,5 +116,14 @@ onMounted(() => {
   .td-editor-whiteboard-box-item-com {
     flex-shrink: 0;
   }
+}
+
+.screenshot {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  width: 10rem;
+  height: 10rem;
+  outline: 1px solid red;
 }
 </style>

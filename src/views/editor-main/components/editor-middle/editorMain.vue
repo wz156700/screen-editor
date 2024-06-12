@@ -4,8 +4,8 @@
 -->
 <template>
 
-  <div class="td-editor-main-box" ref="apEditorMain" @mousemove="canvasMouseMove"
-    @mousewheel.prevent="canvasMouseWheel">
+
+  <div class="td-editor-main-box" ref="apEditorMain" @mousemove="canvasMouseMove" @mousewheel="canvasMouseWheel">
     <canvas ref="apEditorCanvas"></canvas>
   </div>
 </template>
@@ -431,24 +431,31 @@ watch(() => dataStore.global.isShowRightBar, (newVal) => {
 
 // 缩放
 const canvasMouseWheel = (e) => {
-  console.log('e', e, e.layerX, e.layerY)
-  // 相对于文档的原点
-  let layerX = e.layerX;
-  let layerY = e.layerY;
-  if (e.wheelDelta > 0) {
-    if (canvas.getZoom() < 0.5) return;
-    canvas.zoomToPoint(
-      new fabric.Point(layerX, layerY),
-      canvas.getZoom() - Scaling
-    );
+  const delta = e.deltaY;
+  let zoom = canvas.getZoom();
+
+  if (e.ctrlKey) {
+    let layerX = e.layerX;
+    let layerY = e.layerY;
+    if (e.wheelDelta > 0) {
+      // if (canvas.getZoom() < 0.5) return;
+      canvas.zoomToPoint(
+        new fabric.Point(layerX, layerY),
+        canvas.getZoom() - Scaling
+      );
+    } else {
+      // if (canvas.getZoom() > 3.5) return;
+      canvas.zoomToPoint(
+        new fabric.Point(layerX, layerY),
+        canvas.getZoom() + Scaling
+      );
+    }
+    getPosition("referenceLine");
+    e.preventDefault();
+    e.stopPropagation();
   } else {
-    if (canvas.getZoom() > 3.5) return;
-    canvas.zoomToPoint(
-      new fabric.Point(layerX, layerY),
-      canvas.getZoom() + Scaling
-    );
+    console.log('没按住ctrl!!!')
   }
-  getPosition("referenceLine");
 };
 
 // 移动

@@ -3,7 +3,8 @@
 组件名称: 画布白板
 -->
 <template>
-  <div class="td-editor-whiteboard" :style="{ height: editorMainInfo.h + 'px', width: editorMainInfo.w + 'px' }">
+  <div class="td-editor-whiteboard" id="td-editor-whiteboard"
+    :style="{ height: editorMainInfo.h + 'px', width: editorMainInfo.w + 'px' }">
     <div class="td-editor-whiteboard-box" :style="styleBox">
       <template v-for="item in domDataPage" :key="
           item.uuid +
@@ -15,34 +16,38 @@
           item.mbl
         ">
         <div class="td-editor-whiteboard-box-item" :style="{
-    left:
-      whiteboardBox.left + props.positionInfo.left + item.left + 'px',
-    top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
-    width: item.width + 'px',
-    height: item.height + 'px',
-    transform: `rotate(${item.angle}deg)`,
-    transformOrigin: `${item.angleX}px ${item.angleY}px`,
-    zIndex: item.zIndex,
-    borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
-    padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
-    alignItems: `${item.alignW}`,
-    justifyContent: `${item.alignH}`,
-  }" :set-key="item.uuid">
+      left:
+        whiteboardBox.left + props.positionInfo.left + item.left + 'px',
+      top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
+      width: item.width + 'px',
+      height: item.height + 'px',
+      transform: `rotate(${item.angle}deg)`,
+      transformOrigin: `${item.angleX}px ${item.angleY}px`,
+      zIndex: item.zIndex,
+      borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
+      padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
+      alignItems: `${item.alignW}`,
+      justifyContent: `${item.alignH}`,
+    }" :set-key="item.uuid">
           {{ item.content }}
           <component :is="item.type" class="td-editor-whiteboard-box-item-com" :key="item.uuid" v-bind="item.attribute"
             :data="item.data ? item.data : '初始化'" :content="item.content"></component>
         </div>
       </template>
       <h1>{{ domInfo.backgroundColor }}</h1>
-      <div class="td-editor-whiteboard-border" :style="{
-    left: whiteboardBox.left + props.positionInfo.left + 'px',
-    top: whiteboardBox.top + props.positionInfo.top + 'px',
-    width: domInfo.width,
-    height: domInfo.height,
-    backgroundColor: domInfo.backgroundColor
-      ? domInfo.backgroundColor
-      : 'transparent',
-  }"></div>
+      <div class="td-editor-whiteboard-border" id="td-editor-whiteboard-border" :style="{
+      left: whiteboardBox.left + props.positionInfo.left + 'px',
+      top: whiteboardBox.top + props.positionInfo.top + 'px',
+      width: domInfo.width,
+      height: domInfo.height,
+      backgroundColor: domInfo.backgroundColor
+        ? domInfo.backgroundColor
+        : 'transparent',
+      background: 'url(data:' + domInfo.backgroundImg + ')',
+      backgroundSize: '100% 100%',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center center'
+    }"></div>
     </div>
   </div>
 </template>

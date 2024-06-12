@@ -223,8 +223,9 @@ const imageData = ref('')
 
 // 上传前的校验
 const beforeAvatarUpload = (rawFile) => {
-  if (rawFile.type !== 'image/jpeg') {
-    ElMessage.error('Avatar picture must be JPG format!')
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
+  if (!allowedTypes.includes(rawFile.type)) {
+    ElMessage.error('只能上传图片！')
     return false
   } else if (rawFile.size / 1024 / 1024 > 2) {
     ElMessage.error('Avatar picture size can not exceed 2MB!')
@@ -624,7 +625,7 @@ watch(() => state.isAdd, (newVal) => {
 
       .projectPageContentListItem:hover::before,
       .projectPageContentListItem:hover::after {
-        width: 98.9%;
+        width: 98%;
         height: 100%;
         pointer-events: none;
       }
