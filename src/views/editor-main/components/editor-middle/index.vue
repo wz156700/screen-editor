@@ -11,7 +11,7 @@
     <div class="td-editor-main" ref="editorMain">
       <EditorMain @updataSize="updataSize" @addDOM="addDOM" @updataDOM="updataDOM" @updataDOMArray="updataDOMArray"
         @removeDOM="removeDOM" @selectDom="selectDom" @updataIndex="updataIndex" :draggable="draggable"
-        :canvasInfo="canvasInfo" ref="EditorMainRef"></EditorMain>
+        :canvasInfo="canvasInfo" ref="EditorMainRef" :domInfo="domInfo"></EditorMain>
       <editorWhiteboard :editorMainInfo="editorMainInfo" :positionInfo="positionInfo" :domData="domData"
         class="td-editor-mainBoard" :domInfo="domInfo"></editorWhiteboard>
     </div>

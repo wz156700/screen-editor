@@ -52,11 +52,12 @@
       <el-form-item label="背景图片" prop="backgroundImg">
         <el-upload class="avatar-uploader" action="" :show-file-list="false" :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload" :http-request="handleUploadOfBg">
-          <img v-if="bgData || form.backgroundImg" :src="bgData || form.backgroundImg" class="avatar" />
+          <img v-if="bgData" :src="bgData" class="avatar" />
           <el-icon v-else class="avatar-uploader-icon">
             <Plus />
           </el-icon>
         </el-upload>
+        <el-button @click="clearBg">清除</el-button>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -94,6 +95,9 @@ const props = defineProps(["domInfo"]);
 const emit = defineEmits(["saveItem", "previewItem"]);
 import { ElMessage } from "element-plus";
 import html2canvas from 'html2canvas';
+//pinia仓库
+import { useCounterStore } from "@/store/editor";
+const dataStore = useCounterStore();
 const {
   indexDBSearch,
   indexDBUpdata,
@@ -132,10 +136,14 @@ const form = reactive({
   backgroundImg: null
 });
 
+//清除背景图片
+const clearBg = () => {
+  bgData.value = ''
+}
+
 const okButton = async () => {
   await ruleFormRef.value.validate(async (valid, fields) => {
     if (valid) {
-      console.log('form~~~', form)
       let result = await indexDBSearch("project", form.uuid);
       indexDBUpdata("project", {
         ...result,
@@ -151,6 +159,9 @@ const okButton = async () => {
             type: "success",
           });
           showShwo.value = false;
+          dataStore.ratio = form.ratio
+          dataStore.backgroundColor = form.backgroundColor
+          dataStore.backgroundImg = bgData.value
         })
         .catch(() => {
           ElMessage({

@@ -14,9 +14,10 @@
 import { fabric } from "fabric";
 import { nextTick, onMounted, ref, watch } from "vue";
 import { v4 as uuidv4 } from "uuid";
+//pinia仓库
 import { useCounterStore } from "@/store/editor";
-
 const dataStore = useCounterStore();
+
 
 // 不需要渲染到画布上的
 let NotDom = ["referenceLine", "datunBox"];
@@ -40,7 +41,17 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  domInfo: {
+    type: Object,
+    required: true,
+  }
 });
+
+watch(() => props.domInfo, (newVal) => {
+  console.log('domInfo~~~', newVal)
+}, {
+  deep: true
+})
 
 // 操作历史记录数组
 var history = [];
@@ -153,7 +164,7 @@ const getInfo = () => {
   });
   canvas.setWidth(w);
   canvas.setHeight(h);
-  canvas.setZoom(0.635)
+
 
   // 位置参考
   refer = new fabric.Rect({
@@ -416,7 +427,7 @@ watch(() => dataStore.global.isShowLeftBar, (newVal) => {
   if (!newVal) {
     dataStore.global.isShowRightBar ? canvas.setZoom(0.76) : canvas.setZoom(0.92)
   } else {
-    dataStore.global.isShowRightBar ? canvas.setZoom(0.635) : canvas.setZoom(0.76)
+    dataStore.global.isShowRightBar ? canvas.setZoom(0.565) : canvas.setZoom(0.76)
   }
 })
 
@@ -425,7 +436,18 @@ watch(() => dataStore.global.isShowRightBar, (newVal) => {
   if (!newVal) {
     dataStore.global.isShowLeftBar ? canvas.setZoom(0.8) : canvas.setZoom(0.92)
   } else {
-    dataStore.global.isShowLeftBar ? canvas.setZoom(0.635) : canvas.setZoom(0.76)
+    dataStore.global.isShowLeftBar ? canvas.setZoom(0.565) : canvas.setZoom(0.76)
+  }
+})
+
+watch(() => dataStore.ratio, (newVal) => {
+  let obj = newVal.split("*");
+  if (obj[0] == '1920') {
+    canvas.setZoom(0.565)
+  } else if (obj[0] == '1440') {
+    canvas.setZoom(0.565)
+  } else {
+    canvas.setZoom(0.565)
   }
 })
 

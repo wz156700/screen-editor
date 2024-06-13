@@ -78,11 +78,12 @@
           <el-form-item label="背景图片" prop="backgroundImg">
             <el-upload class="avatar-uploader" action="" :show-file-list="false" :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload" :http-request="handleUploadOfBg">
-              <img v-if="bgData || form.backgroundImg" :src="bgData || form.backgroundImg" class="avatar" />
+              <img v-if="bgData" :src="bgData" class="avatar" />
               <el-icon v-else class="avatar-uploader-icon">
                 <Plus />
               </el-icon>
             </el-upload>
+            <el-button @click="clearBg">清除</el-button>
           </el-form-item>
         </el-form>
         <template #footer>
@@ -136,6 +137,10 @@ const rules = {
   ratio: [{ required: true, message: "请选择分辨率", trigger: "blur" }],
 };
 
+//pinia仓库
+import { useCounterStore } from "@/store/editor";
+const dataStore = useCounterStore();
+
 //页面状态
 const state = reactive({
   isAdd: false
@@ -158,6 +163,10 @@ const addItem = (isadd) => {
 };
 
 const projectList = ref([]);
+//清除背景图片
+const clearBg = () => {
+  bgData.value = ''
+}
 
 const okButton = async () => {
   await ruleFormRef.value.validate(async (valid, fields) => {
@@ -179,6 +188,10 @@ const okButton = async () => {
               type: "success",
             });
             addShwo.value = false;
+            dataStore.ratio = form.ratio
+            dataStore.backgroundColor = form.backgroundColor
+            dataStore.backgroundImg = bgData.value
+
             getProjectAll();
           })
           .catch(() => {

@@ -38,12 +38,12 @@
       <div class="td-editor-whiteboard-border" id="td-editor-whiteboard-border" :style="{
       left: whiteboardBox.left + props.positionInfo.left + 'px',
       top: whiteboardBox.top + props.positionInfo.top + 'px',
-      width: domInfo.width,
-      height: domInfo.height,
-      backgroundColor: domInfo.backgroundColor
-        ? domInfo.backgroundColor
+      width: state.width + 'px',
+      height: state.height + 'px',
+      backgroundColor: state.backgroundColor
+        ? state.backgroundColor
         : 'transparent',
-      background: 'url(data:' + domInfo.backgroundImg + ')',
+      background: 'url(data:' + state.backgroundImg + ')',
       backgroundSize: '100% 100%',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center center'
@@ -54,6 +54,9 @@
 
 <script setup>
 import { computed, onMounted, reactive, watch } from "vue";
+//pinia仓库
+import { useCounterStore } from "@/store/editor";
+const dataStore = useCounterStore();
 
 const props = defineProps({
   editorMainInfo: {
@@ -73,6 +76,26 @@ const props = defineProps({
     default: {},
   },
 });
+
+const state = reactive({
+  width: '', height: '', backgroundColor: '', backgroundImg: ''
+})
+
+watch(() => dataStore.ratio, (newVal) => {
+  let obj = newVal.split("*")
+  state.width = obj[0]
+  state.height = obj[1]
+})
+
+watch(() => dataStore.backgroundColor, (newVal) => {
+  state.backgroundColor = newVal
+})
+
+watch(() => dataStore.backgroundImg, (newVal) => {
+  console.log("背景改变了~~", newVal)
+  state.backgroundImg = newVal
+})
+
 
 const domDataPage = computed(() => {
   console.log("Object.values(props.domData)~~~", Object.values(props.domData));
