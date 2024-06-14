@@ -16,44 +16,6 @@
         </div>
         <!-- 内容 -->
         <div class="td-editorLeft-content">
-            <!-- 左侧 -->
-            <div class="td-editorLeft-content-left">
-                <div class="td-editorLeft-content-left-item" :class="active === 'history' ? 'is-active' : ''"
-                    @click="updataActive('history')">
-                    <EditorIcon name="history" size="16px"></EditorIcon>
-                    <span>最近</span>
-                </div>
-                <div class="td-editorLeft-content-left-item" :class="active === 'analysis' ? 'is-active' : ''"
-                    @click="updataActive('analysis')">
-                    <EditorIcon name="analysis" size="16px"></EditorIcon>
-                    <span>图表</span>
-                </div>
-                <div class="td-editorLeft-content-left-item" :class="active === 'components' ? 'is-active' : ''"
-                    @click="updataActive('components')">
-                    <EditorIcon name="components" size="16px"></EditorIcon>
-                    <span>小组件</span>
-                </div>
-                <div class="td-editorLeft-content-left-item" :class="active === 'map' ? 'is-active' : ''"
-                    @click="updataActive('map')">
-                    <EditorIcon name="history" size="16px"></EditorIcon>
-                    <span>地图</span>
-                </div>
-            </div>
-            <!-- 右侧 -->
-            <div class="td-editorLeft-content-right">
-                <el-scrollbar height="100%">
-                    <div class="td-editorLeft-content-right-box">
-                        <historyList :domData="domData" v-if="active === 'history'" @selectItem="selectItem"
-                            :selectId="selectId">
-                        </historyList>
-                        <rightCom :menuList="mapData" v-if="active === 'map'"></rightCom>
-                        <rightCom :menuList="analysisData" v-if="active === 'analysis'"></rightCom>
-                        <rightCom :menuList="componentsData" v-if="active === 'components'"></rightCom>
-                        <rightCom :menuList="hTitleData" v-if="active === 'hTitle'"></rightCom>
-                        <rightCom :menuList="materialData" v-if="active === 'material'"></rightCom>
-                    </div>
-                </el-scrollbar>
-            </div>
         </div>
     </div>
 </template>
@@ -62,11 +24,6 @@
 import { ref, watch, reactive, computed } from "vue";
 
 import { useCounterStore } from '@/store/editor'
-const emit = defineEmits(["selectItem"]);
-const active = ref("analysis");
-const updataActive = (val) => {
-    active.value = val;
-};
 const userStore = useCounterStore()
 
 const state = reactive({
@@ -84,9 +41,6 @@ const props = defineProps({
     },
 });
 
-const selectItem = (item) => {
-    emit("selectItem", item);
-};
 
 const closeLeftBar = () => {
     userStore.global.isShowLeftBar = !userStore.global.isShowLeftBar

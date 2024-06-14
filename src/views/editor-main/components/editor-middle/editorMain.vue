@@ -12,7 +12,7 @@
 
 <script setup>
 import { fabric } from "fabric";
-import { nextTick, onMounted, ref, watch } from "vue";
+import { nextTick, onMounted, ref, watch, reactive, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
 //pinia仓库
 import { useCounterStore } from "@/store/editor";
@@ -47,11 +47,11 @@ const props = defineProps({
   }
 });
 
-watch(() => props.domInfo, (newVal) => {
-  console.log('domInfo~~~', newVal)
-}, {
-  deep: true
+
+const pageState = reactive({
+  domInfo: computed(() => props.domInfo)
 })
+
 
 // 操作历史记录数组
 var history = [];
@@ -164,7 +164,16 @@ const getInfo = () => {
   });
   canvas.setWidth(w);
   canvas.setHeight(h);
+  if (pageState.domInfo.ratio) {
+    let obj = pageState.domInfo.ratio.split("*");
+    let scale = w / obj[0]
+    console.log('缩放了~~', scale)
+    canvas.setZoom(scale)
 
+  }
+  //记录当前中间区域的宽高
+  dataStore.global.canvasContainnerWidth = w;
+  dataStore.global.canvasContainnerHeight = h;
 
   // 位置参考
   refer = new fabric.Rect({
@@ -176,8 +185,10 @@ const getInfo = () => {
     name: referName,
     selectable: false,
   });
+
   canvas.add(refer);
-  getPosition();
+  nextTick(() => { getPosition(); })
+
 
   // 元素移动
   canvas.on("object:moving", function (event) {
@@ -409,46 +420,43 @@ const resizeInfo = () => {
     apEditorCanvas.value.setAttribute("height", h);
     canvas.setWidth(w);
     canvas.setHeight(h);
+    //记录当前中间区域的宽高
+    dataStore.global.canvasContainnerMessage.width = w;
+    dataStore.global.canvasContainnerMessage.height = h;
+    if (pageState.domInfo.ratio) {
+      let obj = pageState.domInfo.ratio.split("*");
+      let scale = w / obj[0]
+      console.log('缩放了~~', scale)
+      canvas.setZoom(scale)
+    }
     canvas.renderAll();
-    getPosition();
+    getPosition("referenceLine");
   }, 0)
 
 };
 
 
 onMounted(() => {
+  console.log('heiheihie~~', props.domInfo)
   getInfo();
+  resizeInfo();
   window.addEventListener("resize", resizeInfo, false);
 });
+
+watch(() => props.domInfo, (newVal) => {
+  pageState.domInfo.value = newVal
+  getInfo()
+}, {
+  deep: true
+})
 
 //监听左侧边栏和右侧边栏是否收起
 watch(() => dataStore.global.isShowLeftBar, (newVal) => {
   resizeInfo()
-  if (!newVal) {
-    dataStore.global.isShowRightBar ? canvas.setZoom(0.76) : canvas.setZoom(0.92)
-  } else {
-    dataStore.global.isShowRightBar ? canvas.setZoom(0.565) : canvas.setZoom(0.76)
-  }
 })
 
 watch(() => dataStore.global.isShowRightBar, (newVal) => {
   resizeInfo()
-  if (!newVal) {
-    dataStore.global.isShowLeftBar ? canvas.setZoom(0.8) : canvas.setZoom(0.92)
-  } else {
-    dataStore.global.isShowLeftBar ? canvas.setZoom(0.565) : canvas.setZoom(0.76)
-  }
-})
-
-watch(() => dataStore.ratio, (newVal) => {
-  let obj = newVal.split("*");
-  if (obj[0] == '1920') {
-    canvas.setZoom(0.565)
-  } else if (obj[0] == '1440') {
-    canvas.setZoom(0.565)
-  } else {
-    canvas.setZoom(0.565)
-  }
 })
 
 // 缩放
@@ -490,10 +498,13 @@ const canvasMouseMove = (e) => {
 const getPosition = (val) => {
   // 获取画布内的所有元素
   let t = canvas.getObjects();
+  console.log("t~~", t)
   // 获取参考线的那个元素
   let referItem = t.filter((item) => item.name == referName)[0];
+  console.log('referItem~~', referItem)
   // 获取位置信息
   let referInfo = referItem.getBoundingRect();
+  console.log('referInfo', referInfo)
   // 实际位置
   const sizeInfo = {
     w: w / referInfo.width,
@@ -504,6 +515,8 @@ const getPosition = (val) => {
     y: (origin.y + referInfo.top) * referInfo.height,
     zoom: canvas.getZoom(),
   };
+
+  console.log('sizeInfo~~', sizeInfo)
   if (val === "referenceLine" && canvas) {
     updataLine();
   }

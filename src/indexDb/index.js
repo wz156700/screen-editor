@@ -77,6 +77,7 @@ export const indexDBSearchAll = (name) => {
 
 // 更新数据
 export const indexDBUpdata = (name, data) => {
+    console.log('data~~', data)
     return new Promise((resolve, reject) => {
         let request = db
             .transaction([name], "readwrite") // 事务对象，制定表格名称和操作模式

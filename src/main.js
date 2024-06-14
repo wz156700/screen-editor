@@ -21,8 +21,11 @@ import Customs from './components/custom/index';
 import DataV from "./components/datav/index";
 
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+
 const app = createApp(App);
 app.config.globalProperties = {
     indexDBAdd,

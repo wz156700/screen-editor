@@ -92,7 +92,7 @@ import {
 const router = useRouter();
 import { useRoute } from 'vue-router';
 const props = defineProps(["domInfo"]);
-const emit = defineEmits(["saveItem", "previewItem"]);
+const emit = defineEmits(["saveItem", "previewItem", 'updateDomInfo']);
 import { ElMessage } from "element-plus";
 import html2canvas from 'html2canvas';
 //pinia仓库
@@ -145,6 +145,7 @@ const okButton = async () => {
   await ruleFormRef.value.validate(async (valid, fields) => {
     if (valid) {
       let result = await indexDBSearch("project", form.uuid);
+      console.log('bgData.value~~', bgData.value)
       indexDBUpdata("project", {
         ...result,
         name: form.name,
@@ -159,9 +160,7 @@ const okButton = async () => {
             type: "success",
           });
           showShwo.value = false;
-          dataStore.ratio = form.ratio
-          dataStore.backgroundColor = form.backgroundColor
-          dataStore.backgroundImg = bgData.value
+          emit('updateDomInfo')
         })
         .catch(() => {
           ElMessage({
