@@ -135,6 +135,7 @@ const updataDomItems = (target) => {
 
 // 创建元素
 function createRect(top, left, item) {
+  console.log("2.为拖拽过来的文件生成一个相应大小的矩形框，然后添加到画布上")
   let rt = new fabric.Rect({
     top,
     left,
@@ -153,7 +154,7 @@ function createRect(top, left, item) {
 }
 
 // 初始化
-const getInfo = () => {
+const getInfo = async () => {
   w = apEditorMain.value.offsetWidth;
   h = apEditorMain.value.offsetHeight;
   apEditorCanvas.value.setAttribute("width", w);
@@ -167,7 +168,6 @@ const getInfo = () => {
   if (pageState.domInfo.ratio) {
     let obj = pageState.domInfo.ratio.split("*");
     let scale = w / obj[0]
-    console.log('缩放了~~', scale)
     canvas.setZoom(scale)
 
   }
@@ -190,11 +190,11 @@ const getInfo = () => {
   nextTick(() => { getPosition(); })
 
 
+
+
   // 元素移动
   canvas.on("object:moving", function (event) {
-    console.log("event", event);
     let target = event.target; // 获取目标元素
-    console.log("target", target);
     if (event.target._objects) {
       updataDomItems(event.target);
     } else {
@@ -234,8 +234,10 @@ const getInfo = () => {
   });
   // 当元素添加到画布上时触发。
   canvas.on("object:added", function (event) {
+    console.log('3.拖拽过来的文件已经被添加到画布上了~~')
     let target = event.target; // 获取目标元素
     if (NotDom.includes(target.name)) return;
+    // 同步数据到domData中
     emit("addDOM", {
       name: target.name,
       left: fixed(target.left),
@@ -274,28 +276,33 @@ const getInfo = () => {
   canvas.on("object:removed", function (event) {
     let target = event.target; // 获取目标元素
   });
-  //当元素被选中时触发。
-  canvas.on("object:selected", function (event) {
-    console.log('event~~', event);
-    let target = event.target; // 获取目标元素
-    if (NotDom.includes(target.name)) {
-      return;
-    }
-  });
-  // 当元素被取消选中时触发。
-  canvas.on("object:deselected", function (event) {
-    let target = event.target; // 获取目标元素
-  });
+
+  // //当元素被选中时触发。
+  // canvas.on("object:selected", function (event) {
+  //   console.log("2.1元素被选中了")
+  //   let target = event.target; // 获取目标元素
+  //   if (NotDom.includes(target.name)) {
+  //     return;
+  //   }
+  // });
+
+  // // 当元素被取消选中时触发。
+  // canvas.on("object:deselected", function (event) {
+  //   let target = event.target; // 获取目标元素
+  // });
+
   // 当画布平移时触发。
   canvas.on("after:render", function (event) { });
 
   canvas.on("object:removed", function (event) {
+    console.log('元素删除了！')
     var removedElement = event.target;
     emit("removeDOM", removedElement.uuid);
   });
 
   // 监听元素被选中的事件
   canvas.on("selection:created", function (e) {
+    console.log("2.1 元素被选中了")
     var selectedObjects = e.selected.filter(
       (item) => !NotDom.includes(item.name)
     );
@@ -307,8 +314,6 @@ const getInfo = () => {
     var selectedObjects = e.selected.filter(
       (item) => !NotDom.includes(item.name)
     );
-    console.log("选项改变了~~", selectedObjects);
-
     FabricSelect.value = selectedObjects;
   });
 
@@ -378,8 +383,9 @@ const getInfo = () => {
   });
 
   // 拖拽
+  //文件被拖拽到画布上时触发
   canvas.on("drop", function (opt) {
-
+    console.log('1. 拖拽的文件被丢过来了')
     // 画布元素距离浏览器左侧和顶部的距离
     let offset = {
       left: canvas.getSelectionElement().getBoundingClientRect().left,
@@ -400,7 +406,6 @@ const getInfo = () => {
       new Error("目标元素为空");
       return;
     }
-    console.log("currentType.fabricType~~~", currentType);
     switch (currentType.fabricType) {
       case "rect":
         createRect(pointerVpt.y, pointerVpt.x, currentType);
@@ -410,12 +415,10 @@ const getInfo = () => {
 };
 
 const resizeInfo = () => {
-  console.log('apEditorMain.value', apEditorMain.value)
   if (!apEditorMain.value) return;
   setTimeout(() => {
     w = apEditorMain.value.clientWidth;
     h = apEditorMain.value.clientHeight;
-    console.log('w,h', apEditorMain.value.clientWidth, h)
     apEditorCanvas.value.setAttribute("width", w);
     apEditorCanvas.value.setAttribute("height", h);
     canvas.setWidth(w);
@@ -426,7 +429,6 @@ const resizeInfo = () => {
     if (pageState.domInfo.ratio) {
       let obj = pageState.domInfo.ratio.split("*");
       let scale = w / obj[0]
-      console.log('缩放了~~', scale)
       canvas.setZoom(scale)
     }
     canvas.renderAll();
@@ -436,16 +438,16 @@ const resizeInfo = () => {
 };
 
 
-onMounted(() => {
-  console.log('heiheihie~~', props.domInfo)
-  getInfo();
+onMounted(async () => {
+  await getInfo();
   resizeInfo();
   window.addEventListener("resize", resizeInfo, false);
+  console.log('canvas的全部元素', canvas.getObjects())
 });
 
-watch(() => props.domInfo, (newVal) => {
+watch(() => props.domInfo, async (newVal) => {
   pageState.domInfo.value = newVal
-  getInfo()
+  await getInfo()
 }, {
   deep: true
 })
@@ -484,27 +486,23 @@ const canvasMouseWheel = (e) => {
     e.preventDefault();
     e.stopPropagation();
   } else {
-    console.log('没按住ctrl!!!')
   }
 };
 
 // 移动
 const canvasMouseMove = (e) => {
-  origin.x = e.layerX;
-  origin.y = e.layerY;
+  origin.x = e.layerX; //记录下鼠标相对于画布左上角的x坐标
+  origin.y = e.layerY;//记录下鼠标相对于画布左上角的y坐标
 };
 
 // 获取位置坐标
 const getPosition = (val) => {
   // 获取画布内的所有元素
   let t = canvas.getObjects();
-  console.log("t~~", t)
   // 获取参考线的那个元素
   let referItem = t.filter((item) => item.name == referName)[0];
-  console.log('referItem~~', referItem)
   // 获取位置信息
   let referInfo = referItem.getBoundingRect();
-  console.log('referInfo', referInfo)
   // 实际位置
   const sizeInfo = {
     w: w / referInfo.width,
@@ -516,7 +514,6 @@ const getPosition = (val) => {
     zoom: canvas.getZoom(),
   };
 
-  console.log('sizeInfo~~', sizeInfo)
   if (val === "referenceLine" && canvas) {
     updataLine();
   }
@@ -544,6 +541,7 @@ watch(
   () => FabricSelect.value,
   (news) => {
     if (news) {
+      console.log("news~~~", news)
       let selectUUID = news.map((item) => item.uuid);
       let selectLock = news.map((item) => {
         return {
@@ -621,8 +619,10 @@ const updataFiles = (label, value, uuid) => {
 // 删除元素
 const deleteItem = (val) => {
   if (val) {
+    console.log('canvas~~~', canvas.getObjects)
     FabricSelect.value = null;
     let canvasObj = canvas.getObjects();
+    console.log("canvasObj~~hehiehi", canvasObj)
     let target = canvasObj.filter((item) => val.includes(item.uuid));
 
     for (let i = 0; i < target.length; i++) {
@@ -683,6 +683,7 @@ const creatLine = (type, val) => {
   let referItem = t.filter((item) => item.name == referName)[0];
   // 获取位置信息
   let referInfo = referItem.getBoundingRect();
+  console.log('referInfo~~~', referInfo)
   // let move = {}
   if (type == "lineW") {
     // lineArr = [-(referInfo.left / referInfo.width), val.value, canvas.width, val.value]
@@ -892,18 +893,41 @@ const updataLine = () => {
 };
 
 // 创建元素
-function createInfoRect(item) {
+async function createInfoRect(item) {
   let rt = new fabric.Rect({
     ...item,
     fill: "transparent",
   });
   canvas.add(rt);
+
 }
 
-const setCanvas = (canvasData) => {
+const setCanvas = async (canvasData) => {
+  console.log('canvasData~~', canvasData)
   for (let item in canvasData) {
-    createInfoRect(canvasData[item]);
+    await createInfoRect(canvasData[item]);
   }
+  canvas.renderAll();
+  console.log('canvas.getObjects()', canvas.getObjects())
+  // 处理按键删除事件
+  document.addEventListener("keydown", (e) => {
+    console.log('canvas的全部元素', canvas.getObjects())
+    if (e.key === "Delete" || e.key === "Backspace") {
+      //获取选中元素
+      let target = FabricSelect.value;
+
+      console.log("目标元素", target)
+      if (target) {
+        for (let i = 0; i < target.length; i++) {
+          canvas.remove(target[i]);
+        }
+        canvas.discardActiveObject();
+        canvas.renderAll();
+        console.log("删除成功！")
+      }
+    }
+  });
+
 };
 
 // 选择元素

@@ -152,6 +152,7 @@ const propertyTable = ref({
   style: [],
   data: {},
 });
+
 // 选中元素
 const selectDom = (val) => {
   selectUUID.value = val;

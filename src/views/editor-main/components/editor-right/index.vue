@@ -15,12 +15,12 @@
     </div>
     <div class="td-editor-right-main">
       <div class="td-editor-right-main-left">
-        <!-- <div class="td-editor-right-main-left-item" title="撤回" @click="redraw('undo')">
-					<EditorIcon name="back" size="18px"></EditorIcon>
-				</div>
-				<div class="td-editor-right-main-left-item" title="重做" @click="redraw('redo')">
-					<EditorIcon name="next" size="18px"></EditorIcon>
-				</div> -->
+        <div class="td-editor-right-main-left-item" title="撤回" @click="redraw('undo')">
+          <EditorIcon name="back" size="18px"></EditorIcon>
+        </div>
+        <div class="td-editor-right-main-left-item" title="重做" @click="redraw('redo')">
+          <EditorIcon name="next" size="18px"></EditorIcon>
+        </div>
         <div class="td-editor-right-main-left-item" :class="moveing ? 'is-active' : ''" title="移动画布"
           @click="updataMoveing">
           <EditorIcon name="direction-adjustment-three" size="20px"></EditorIcon>

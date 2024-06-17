@@ -256,9 +256,10 @@ onMounted(() => {
 
 <style scoped>
 .avatar-uploader .avatar {
-  width: 178px;
-  height: 178px;
+  width: 6.25rem;
+  height: 6.25rem;
   display: block;
+  object-fit: contain;
 }
 </style>
 
