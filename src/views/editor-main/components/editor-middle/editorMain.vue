@@ -900,17 +900,10 @@ const setCanvas = async (canvasData) => {
     console.log('canvas的全部元素', canvas.getObjects())
     if (e.key === "Delete" || e.key === "Backspace") {
       //获取选中元素
-      let target = FabricSelect.value;
+      let targetIds = FabricSelect.value.map((item) => item.uuid);
+      deleteItem(targetIds)
+      console.log("目标元素~~", targetIds)
 
-      console.log("目标元素", target)
-      if (target) {
-        for (let i = 0; i < target.length; i++) {
-          canvas.remove(target[i]);
-        }
-        canvas.discardActiveObject();
-        canvas.renderAll();
-        console.log("删除成功！")
-      }
     }
   });
 
