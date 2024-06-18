@@ -174,7 +174,6 @@ const okButton = async () => {
       console.log("form~~~~", form)
       if (form.uuid) {
         let result = await indexDBSearch("project", form.uuid);
-        console.log('bgData.value~~', bgData.value)
         indexDBUpdata("project", {
           ...result,
           name: form.name,
@@ -189,6 +188,10 @@ const okButton = async () => {
               type: "success",
             });
             addShwo.value = false;
+            dataStore.ratio = form.ratio
+            dataStore.backgroundColor = form.backgroundColor
+            dataStore.backgroundImg = bgData.value
+
             getProjectAll();
           })
           .catch(() => {

@@ -21,7 +21,9 @@ export const useCounterStore = defineStore("editor", {
       referY: false,
       isShowLeftBar: true,
       isShowRightBar: true,
-      canvasContainnerMessage: { width: 0, height: 0 },
+      ratio: '', //分辨率
+      backgroundColor: '', //背景颜色
+      backgroundImg: '' //背景图片
     },
     element: {
       select: false,
@@ -54,14 +56,4 @@ export const useCounterStore = defineStore("editor", {
   }),
   getters: {},
   actions: {},
-  persist: {
-    enabled: true,
-    // 可以配置更多选项，例如存储的键、存储位置等
-    strategies: [
-      {
-        key: 'counter',
-        storage: localStorage,
-      },
-    ],
-  },
 });

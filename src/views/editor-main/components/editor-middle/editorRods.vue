@@ -36,7 +36,6 @@ const getRodInfo = () => {
 
 // 绘制比例尺
 const drawRod = (h, w) => {
-  console.log('props.positionInfo~~', props.positionInfo)
   var svg = d3
     .select(apEditorRod.value)
     .append("svg")

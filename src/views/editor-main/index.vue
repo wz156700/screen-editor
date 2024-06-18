@@ -6,8 +6,7 @@
   <div class="td-editorMain">
     <!-- 上 -->
     <div class="td-editorMain-topBox">
-      <EditorTop @saveItem="saveItem" @previewItem="previewItem" :domInfo="domInfo" @updateDomInfo="updateDomInfo">
-      </EditorTop>
+      <EditorTop @saveItem="saveItem" @previewItem="previewItem" :domInfo="domInfo"></EditorTop>
     </div>
     <!-- 中心 -->
     <div class="td-editorMain-main">
@@ -328,18 +327,12 @@ const getItem = () => {
   });
 };
 
-const updateDomInfo = () => {
-  getItem()
-}
-
 onMounted(() => {
   if (!route.params.id) {
     userRouter.replace("/");
     return;
   }
   getItem();
-  dataStore.global.isShowLeftBar = true
-  dataStore.global.isShowRightBar = true
 });
 </script>
 
@@ -351,7 +344,6 @@ onMounted(() => {
   //background: url("/public/img/bg.png");
   background-size: 100% 100%;
   color: var(--td-editor-color);
-  min-width: 1440px;
 
 
   .td-editorMain-topBox {

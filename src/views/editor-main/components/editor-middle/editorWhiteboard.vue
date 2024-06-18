@@ -45,7 +45,7 @@
     backgroundColor: state.backgroundColor
       ? state.backgroundColor
       : 'transparent',
-    background: 'url(' + state.backgroundImg + ')',
+    background: 'url(data:' + state.backgroundImg + ')',
     backgroundSize: '100% 100%',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center'
@@ -80,25 +80,23 @@ const props = defineProps({
 });
 
 const state = reactive({
-  width: '', height: '', backgroundColor: '', backgroundImg: '', targetWidth: '', targetHeight: ''
+  width: '', height: '', backgroundColor: '', backgroundImg: ''
 })
 
-watch(() => props.domInfo, (newVal) => {
-  console.log("hahahha", newVal)
-  let obj = newVal.ratio.split("*");
-  state.targetWidth = obj[0]
-  state.targetHeight = obj[1]
-  state.backgroundColor = newVal.backgroundColor
-  state.backgroundImg = newVal.backgroundImg
-  state.width = dataStore.global.canvasContainnerMessage.width;
-  state.height = state.targetHeight * (dataStore.global.canvasContainnerMessage.width / state.targetWidth);
-}, { deep: true })
+watch(() => dataStore.ratio, (newVal) => {
+  let obj = newVal.split("*")
+  state.width = obj[0]
+  state.height = obj[1]
+})
 
-watch(() => dataStore.global.canvasContainnerMessage, (newVal) => {
-  console.log('宽高改变了,hahah', newVal)
-  state.width = newVal.width;
-  state.height = state.targetHeight * (newVal.width / state.targetWidth);
-}, { deep: true })
+watch(() => dataStore.backgroundColor, (newVal) => {
+  state.backgroundColor = newVal
+})
+
+watch(() => dataStore.backgroundImg, (newVal) => {
+  console.log("背景改变了~~", newVal)
+  state.backgroundImg = newVal
+})
 
 
 const domDataPage = computed(() => {
@@ -118,12 +116,11 @@ const styleBox = computed(() => {
     left: -whiteboardBox.left + "px",
     top: -whiteboardBox.top + "px",
     transformOrigin: `${whiteboardBox.left}px ${whiteboardBox.top}px`, // ,
-    // transform: `scale(${props.positionInfo.zoom})`,
+    transform: `scale(${props.positionInfo.zoom})`,
     width: `${props.positionInfo.w * 200}px`,
     height: `${props.positionInfo.h * 200}px`,
   };
 });
-
 </script>
 
 <style scoped lang="scss">
