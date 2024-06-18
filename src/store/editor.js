@@ -57,4 +57,14 @@ export const useCounterStore = defineStore("editor", {
   }),
   getters: {},
   actions: {},
+  persist: {
+    enabled: true,
+    // 可以配置更多选项，例如存储的键、存储位置等
+    strategies: [
+      {
+        key: 'counter',
+        storage: localStorage,
+      },
+    ],
+  },
 });

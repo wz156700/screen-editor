@@ -15,7 +15,7 @@ import EchartsDom from "./components/echarts/index";
 import APBorder from "./components/border/index";
 import Maps from './components/map/index';
 import Customs from './components/custom/index';
-
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 
 import DataV from "./components/datav/index";
@@ -23,6 +23,7 @@ import DataV from "./components/datav/index";
 import { createPinia } from "pinia";
 
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 const app = createApp(App);
 app.config.globalProperties = {
     indexDBAdd,

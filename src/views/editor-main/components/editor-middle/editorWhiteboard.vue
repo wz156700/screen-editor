@@ -92,8 +92,14 @@ watch(() => props.domInfo, (newVal) => {
   state.backgroundImg = newVal.backgroundImg
   state.width = obj[0]
   state.height = obj[1]
+
 }, { deep: true })
 
+// watch(() => dataStore.global.canvasContainnerMessage, (newVal) => {
+//   console.log('宽高改变了,hahah', newVal, state.targetWidth)
+//   state.width = newVal.width;
+//   state.height = state.targetHeight * (newVal.width / state.targetWidth);
+// }, { deep: true })
 
 
 const domDataPage = computed(() => {
