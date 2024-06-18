@@ -80,23 +80,20 @@ const props = defineProps({
 });
 
 const state = reactive({
-  width: '', height: '', backgroundColor: '', backgroundImg: ''
+  width: '', height: '', backgroundColor: '', backgroundImg: '', targetWidth: '', targetHeight: ''
 })
 
-watch(() => dataStore.ratio, (newVal) => {
-  let obj = newVal.split("*")
+watch(() => props.domInfo, (newVal) => {
+  console.log("hahahha", newVal)
+  let obj = newVal.ratio.split("*");
+  state.targetWidth = obj[0]
+  state.targetHeight = obj[1]
+  state.backgroundColor = newVal.backgroundColor
+  state.backgroundImg = newVal.backgroundImg
   state.width = obj[0]
   state.height = obj[1]
-})
+}, { deep: true })
 
-watch(() => dataStore.backgroundColor, (newVal) => {
-  state.backgroundColor = newVal
-})
-
-watch(() => dataStore.backgroundImg, (newVal) => {
-  console.log("背景改变了~~", newVal)
-  state.backgroundImg = newVal
-})
 
 
 const domDataPage = computed(() => {

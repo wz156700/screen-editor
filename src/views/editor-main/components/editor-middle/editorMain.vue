@@ -12,7 +12,7 @@
 
 <script setup>
 import { fabric } from "fabric";
-import { nextTick, onMounted, ref, watch } from "vue";
+import { nextTick, onMounted, ref, watch, reactive, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
 //pinia仓库
 import { useCounterStore } from "@/store/editor";
@@ -74,6 +74,10 @@ let h = 0;
 let canvas;
 
 const FabricSelect = ref(null);
+
+const pageState = reactive({
+  domInfo: computed(() => props.domInfo)
+})
 
 const fixed = (num, seep = 2) => {
   return parseFloat(num.toFixed(seep));
@@ -413,8 +417,17 @@ const resizeInfo = () => {
     apEditorCanvas.value.setAttribute("height", h);
     canvas.setWidth(w);
     canvas.setHeight(h);
+    //记录当前中间区域的宽高
+    dataStore.global.canvasContainnerMessage.width = w;
+    dataStore.global.canvasContainnerMessage.height = h;
+    if (pageState.domInfo.ratio) {
+      let obj = pageState.domInfo.ratio.split("*");
+      let scale = w / obj[0]
+      console.log("scale~~", scale)
+      canvas.setZoom(scale)
+    }
     canvas.renderAll();
-    getPosition();
+    getPosition("referenceLine");
   }, 0)
 
 };
@@ -429,31 +442,10 @@ onMounted(() => {
 //监听左侧边栏和右侧边栏是否收起
 watch(() => dataStore.global.isShowLeftBar, (newVal) => {
   resizeInfo()
-  if (!newVal) {
-    dataStore.global.isShowRightBar ? canvas.setZoom(0.76) : canvas.setZoom(0.92)
-  } else {
-    dataStore.global.isShowRightBar ? canvas.setZoom(0.565) : canvas.setZoom(0.76)
-  }
 })
 
 watch(() => dataStore.global.isShowRightBar, (newVal) => {
   resizeInfo()
-  if (!newVal) {
-    dataStore.global.isShowLeftBar ? canvas.setZoom(0.8) : canvas.setZoom(0.92)
-  } else {
-    dataStore.global.isShowLeftBar ? canvas.setZoom(0.565) : canvas.setZoom(0.76)
-  }
-})
-
-watch(() => dataStore.ratio, (newVal) => {
-  let obj = newVal.split("*");
-  if (obj[0] == '1920') {
-    canvas.setZoom(0.565)
-  } else if (obj[0] == '1440') {
-    canvas.setZoom(0.565)
-  } else {
-    canvas.setZoom(0.565)
-  }
 })
 
 // 缩放

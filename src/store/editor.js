@@ -22,8 +22,9 @@ export const useCounterStore = defineStore("editor", {
       isShowLeftBar: true,
       isShowRightBar: true,
       ratio: '', //分辨率
-      backgroundColor: '', //背景颜色
-      backgroundImg: '' //背景图片
+      canvasContainnerMessage: {
+        width: '0'
+      }
     },
     element: {
       select: false,
