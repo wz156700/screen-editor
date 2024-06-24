@@ -139,7 +139,7 @@ const updataDomItems = (target) => {
 
 // 创建元素
 function createRect(top, left, item) {
-  console.log("2.为拖拽过来的文件生成一个相应大小的矩形框，然后添加到画布上")
+  console.log("2.为拖拽过来的文件生成一个相应大小的矩形框，然后添加到画布上", item)
   let rt = new fabric.Rect({
     top,
     left,
@@ -153,6 +153,8 @@ function createRect(top, left, item) {
     componentsuuid: item.uuid,
     uuid: uuidv4(),
     angle: 0,
+    content: item.content || '',
+    isShow: item.isShow
   });
   canvas.add(rt);
 }
@@ -230,6 +232,7 @@ const getInfo = async () => {
   canvas.on("object:added", function (event) {
     console.log('3.拖拽过来的文件已经被添加到画布上了~~')
     let target = event.target; // 获取目标元素
+    console.log("target~~", target)
     if (NotDom.includes(target.name)) return;
     // 同步数据到domData中
     emit("addDOM", {
@@ -264,6 +267,8 @@ const getInfo = async () => {
       scaleY: target.scaleY || 1,
       lockMovementX: target.lockMovementX || false,
       lockMovementY: target.lockMovementY || false,
+      content: target.content || '',
+      isShow: target.isShow
     });
   });
   // 当元素从画布上移除时触发。
@@ -880,11 +885,14 @@ const updataLine = () => {
 
 // 创建元素
 async function createInfoRect(item) {
-  let rt = new fabric.Rect({
-    ...item,
-    fill: "transparent",
-  });
-  canvas.add(rt);
+  if (item.isShow) {
+    let rt = new fabric.Rect({
+      ...item,
+      fill: "transparent",
+    });
+    canvas.add(rt);
+  }
+
 
 }
 

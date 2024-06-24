@@ -7,11 +7,7 @@
     <div class="component-title">
       <div class="component-title-input">
         <span style="margin-right: 10px">组件名称:</span>
-        <el-input
-          v-model="componentInfo.name"
-          placeholder="请输入组件名称"
-          style="width: 150px"
-        />
+        <el-input v-model="componentInfo.name" placeholder="请输入组件名称" style="width: 150px" />
       </div>
       <div class="component-title-input">
         <span style="margin-right: 10px">组件宽度:</span>
@@ -27,18 +23,11 @@
       <!-- <div ref="componentRef" :style="{width: componentInfo.width + 'px', height: componentInfo.height + 'px'}">
                 <component :is="componentInfo.name"  :style="{width: componentInfo.width + 'px', height: componentInfo.height + 'px'}"></component>
             </div> -->
-      <div
-        ref="componentRef"
-        class="component-main-bg"
-        :style="{
+      <div ref="componentRef" class="component-main-bg" :style="{
           width: componentInfo.width + 'px',
           height: componentInfo.height + 'px',
-        }"
-      >
-        <apWviewText1
-          style="width: 200px; height: 100px"
-          content="文本组件"
-        ></apWviewText1>
+        }">
+        <apWviewText1 style="width: 200px; height: 100px" content="文本组件"></apWviewText1>
       </div>
     </div>
   </div>
@@ -77,6 +66,7 @@ const downloadPng = async () => {
   width: 100%;
   height: 100%;
 }
+
 .component-title {
   width: 100%;
   height: 60px;
@@ -87,12 +77,14 @@ const downloadPng = async () => {
   padding-right: 50px;
   box-sizing: border-box;
 }
+
 .component-title-input {
   width: 350px;
   height: 100%;
   display: flex;
   align-items: center;
 }
+
 .component-main {
   width: 100%;
   height: calc(100% - 60px);
@@ -100,6 +92,7 @@ const downloadPng = async () => {
   justify-content: center;
   align-items: center;
 }
+
 .component-main-bg {
   display: flex;
   justify-content: center;

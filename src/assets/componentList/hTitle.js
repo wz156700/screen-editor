@@ -7,10 +7,11 @@ const hTitle = [{
     fabricType: 'rect',
     width: 450, // 初始化大小
     height: 150, // 
-    name: 'Text1',
+    name: 'Text1123',
     uuid: 'T1',
     content: 'xixixixi',
-    fontSize: '1.25'
+    fontSize: '1.25',
+    isShow: true
 }]
 
 export default hTitle

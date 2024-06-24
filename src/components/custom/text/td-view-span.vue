@@ -17,11 +17,12 @@
 </template>
 
 <script setup>
+import { watch } from 'vue'
 const props = defineProps({
   // 文本内容
   content: {
     type: String,
-    default: "文件组件",
+    default: "文本组件",
   },
   // 文本颜色
   color: {
@@ -65,6 +66,10 @@ const props = defineProps({
   },
 });
 defineOptions({ name: "apWviewText1" });
+
+watch(() => props.content, (newText) => {
+  console.log("文本变化了", newText)
+}, { deep: true })
 </script>
 
 <style scoped>

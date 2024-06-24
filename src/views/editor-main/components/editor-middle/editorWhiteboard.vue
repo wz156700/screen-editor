@@ -17,7 +17,9 @@
           item.mbr +
           item.mbl
         ">
+
         <div class="td-editor-whiteboard-box-item" :style="{
+    display: item.isShow ? 'block' : 'none',
     left:
       whiteboardBox.left + props.positionInfo.left + item.left + 'px',
     top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
@@ -31,7 +33,6 @@
     alignItems: `${item.alignW}`,
     justifyContent: `${item.alignH}`,
   }" :set-key="item.uuid">
-          {{ item.content }}
           <component :is="item.type" class="td-editor-whiteboard-box-item-com" :key="item.uuid" v-bind="item.attribute"
             :data="item.data ? item.data : '初始化'" :content="item.content"></component>
         </div>

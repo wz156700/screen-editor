@@ -12,7 +12,9 @@
     <div class="td-editorMain-main">
       <!-- 左侧 -->
       <div class="td-editorMain-main-left" :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }">
-        <EditorLeft @selectItem="selectItem" :selectId="selectUUID"></EditorLeft>
+        <EditorLeft @selectItem="selectItem" :selectId="selectUUID" :domData="domData" @updataDOM="updataDOM"
+          @updateShowOrHideEles="updateShowOrHideEles">
+        </EditorLeft>
       </div>
       <!-- 中间 -->
       <div class="td-editorMain-main-middle" ref="mainMiddle">
@@ -129,7 +131,6 @@ const updataDOMArray = (vals) => {
     if (!vals[i].uuid) continue;
     domData[vals[i].uuid] = {
       ...domData[vals[i].uuid],
-
       ...vals[i],
     };
   }
@@ -326,6 +327,12 @@ const getItem = () => {
     };
   });
 };
+
+const updateShowOrHideEles = (domData) => {
+  console.log('domData~~', domData)
+  EditorMiddleRef.value.deleteItem();
+  EditorMiddleRef.value.setCanvas(domData);
+}
 
 onMounted(() => {
   if (!route.params.id) {

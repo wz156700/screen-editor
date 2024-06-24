@@ -35,7 +35,9 @@ const components = [
                 height: 150, //
                 name: "边框-1",
                 image: BorderBox1Icon,
-                uuid: 'B1'
+                uuid: 'B1',
+
+                isShow: true
             },
             {
                 type: "BorderBox2", // 组件名
@@ -45,7 +47,9 @@ const components = [
                 height: 150, //
                 name: "边框-2",
                 image: BorderBox2Icon,
-                uuid: 'B2'
+                uuid: 'B2',
+
+                isShow: true
             },
             {
                 type: "BorderBox3", // 组件名
@@ -55,7 +59,9 @@ const components = [
                 height: 150, //
                 name: "边框-3",
                 image: BorderBox3Icon,
-                uuid: 'B3'
+                uuid: 'B3',
+
+                isShow: true
             },
             {
                 type: "BorderBox4", // 组件名
@@ -65,7 +71,9 @@ const components = [
                 height: 150, //
                 name: "边框-4",
                 image: BorderBox4Icon,
-                uuid: 'B4'
+                uuid: 'B4',
+
+                isShow: true
             },
             {
                 type: "BorderBox5", // 组件名
@@ -75,7 +83,9 @@ const components = [
                 height: 150, //
                 name: "边框-5",
                 image: BorderBox5Icon,
-                uuid: 'B5'
+                uuid: 'B5',
+
+                isShow: true
             },
             {
                 type: "BorderBox6", // 组件名
@@ -85,7 +95,9 @@ const components = [
                 height: 150, //
                 name: "边框-6",
                 image: BorderBox6Icon,
-                uuid: 'B6'
+                uuid: 'B6',
+
+                isShow: true
             },
             {
                 type: "BorderBox7", // 组件名
@@ -95,7 +107,9 @@ const components = [
                 height: 150, //
                 name: "边框-7",
                 image: BorderBox7Icon,
-                uuid: 'B7'
+                uuid: 'B7',
+
+                isShow: true
             },
             {
                 type: "BorderBox8", // 组件名
@@ -105,7 +119,9 @@ const components = [
                 height: 150, //
                 name: "边框-8",
                 image: BorderBox8Icon,
-                uuid: 'B8'
+                uuid: 'B8',
+
+                isShow: true
             },
             {
                 type: "BorderBox9", // 组件名
@@ -115,7 +131,9 @@ const components = [
                 height: 150, //
                 name: "边框-9",
                 image: BorderBox9Icon,
-                uuid: 'B9'
+                uuid: 'B9',
+
+                isShow: true
             },
             {
                 type: "BorderBox10", // 组件名
@@ -125,7 +143,8 @@ const components = [
                 height: 150, //
                 name: "边框-10",
                 image: BorderBox10Icon,
-                uuid: 'B10'
+                uuid: 'B10',
+                isShow: true
             },
             {
                 type: "BorderBox11", // 组件名
@@ -135,7 +154,8 @@ const components = [
                 height: 150, //
                 name: "边框-11",
                 image: BorderBox11Icon,
-                uuid: 'B11'
+                uuid: 'B11',
+                isShow: true
             },
             {
                 type: "BorderBox12", // 组件名
@@ -145,7 +165,8 @@ const components = [
                 height: 150, //
                 name: "边框-12",
                 image: BorderBox12Icon,
-                uuid: 'B12'
+                uuid: 'B12',
+                isShow: true
             },
             {
                 type: "BorderBox13", // 组件名
@@ -155,7 +176,8 @@ const components = [
                 height: 150, //
                 name: "边框-13",
                 image: BorderBox13Icon,
-                uuid: 'B13'
+                uuid: 'B13',
+                isShow: true
             },
         ],
     },
@@ -171,7 +193,8 @@ const components = [
                 height: 150, //
                 name: "装饰条1",
                 image: Decoration1Icon,
-                uuid: 'B21'
+                uuid: 'B21',
+                isShow: true
             },
             {
                 type: "Decoration3", // 组件名
@@ -181,7 +204,8 @@ const components = [
                 height: 150, //
                 name: "装饰条3",
                 image: Decoration3Icon,
-                uuid: 'B23'
+                uuid: 'B23',
+                isShow: true
             },
             {
                 type: "Decoration5", // 组件名
@@ -190,7 +214,8 @@ const components = [
                 width: 250, // 初始化大小
                 height: 150, //
                 name: "装饰条5",
-                uuid: 'B25'
+                uuid: 'B25',
+                isShow: true
             },
             {
                 type: "Decoration6", // 组件名
@@ -200,7 +225,8 @@ const components = [
                 height: 150, //
                 name: "装饰条6",
                 image: Decoration6Icon,
-                uuid: 'B26'
+                uuid: 'B26',
+                isShow: true
             },
             {
                 type: "Decoration7", // 组件名
@@ -210,7 +236,8 @@ const components = [
                 height: 150, //
                 name: "装饰条7",
                 image: Decoration7Icon,
-                uuid: 'B27'
+                uuid: 'B27',
+                isShow: true
             },
             {
                 type: "Decoration8", // 组件名
@@ -220,7 +247,8 @@ const components = [
                 height: 150, //
                 name: "装饰条8",
                 image: Decoration8Icon,
-                uuid: 'B28'
+                uuid: 'B28',
+                isShow: true
             },
             {
                 type: "Decoration11", // 组件名
@@ -230,7 +258,8 @@ const components = [
                 height: 80, //
                 name: "装饰条11",
                 image: Decoration11Icon,
-                uuid: 'B211'
+                uuid: 'B211',
+                isShow: true
             },
             {
                 type: "Decoration12", // 组件名
@@ -240,7 +269,8 @@ const components = [
                 height: 250, //
                 name: "装饰条12",
                 image: Decoration12Icon,
-                uuid: 'B212'
+                uuid: 'B212',
+                isShow: true
             },
         ],
     },
@@ -256,7 +286,8 @@ const components = [
                 height: 100, //
                 name: "文本1",
                 image: apWviewText1Icon,
-                uuid: 'C1'
+                uuid: 'C1',
+                isShow: true
             },
         ]
     }

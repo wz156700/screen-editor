@@ -11,7 +11,8 @@ const components = [
                 width: 450, // 初始化大小
                 height: 450, //
                 name: "地图-1",
-                uuid: 'D1'
+                uuid: 'D1',
+                isShow: true
             },
         ]
     }

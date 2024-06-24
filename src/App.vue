@@ -58,14 +58,14 @@ onMounted(() => {
 	background: rgb(9, 82, 176);
 }
 
-@font-face {
+/* @font-face {
 	font-family: 'Alibaba_PuHuiTi';
 	src:
 		url('./assets/font/Alibaba_PuHuiTi_2.0_45_Thin_45_Thin.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
-}
+} */
 
 .el-input__wrapper {
 	background: transparent !important;

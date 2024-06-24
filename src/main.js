@@ -4,7 +4,9 @@ import App from "./App.vue";
 import router from "./router/index";
 import "./assets/icon/icon";
 import "./assets/style/theme/dark.css";
+import '@/assets/iconfont/iconfont.js'
 import EditorIcon from "@/components/icon/index.vue";
+import SvgIcon from '@/components/icon/SvgIcon.vue'
 import { indexDBAdd, indexDBSearchAll, indexDBRemove, indexDBUpdata, indexDBSearch } from "./indexDb/index";
 
 import ElementPlus from "element-plus";
@@ -20,6 +22,8 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 import DataV from "./components/datav/index";
 
+
+
 import { createPinia } from "pinia";
 
 const pinia = createPinia();
@@ -32,4 +36,4 @@ app.config.globalProperties = {
     indexDBUpdata,
     indexDBSearch,
 };
-app.use(router).use(pinia).use(ElementPlus).use(EchartsDom).use(APBorder).use(Customs).use(Maps).use(DataV).component("EditorIcon", EditorIcon).mount("#app");
+app.use(router).use(pinia).use(ElementPlus).use(EchartsDom).use(APBorder).use(Customs).use(Maps).use(DataV).component("EditorIcon", EditorIcon).component("SvgIcon", SvgIcon).mount("#app");

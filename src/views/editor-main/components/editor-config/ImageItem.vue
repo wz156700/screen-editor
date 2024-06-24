@@ -59,7 +59,7 @@ const onDragstartItem = () => {
 }
 
 .image-preview-list-title {
-  font-family: 'Alibaba_PuHuiTi';
+  /* font-family: 'Alibaba_PuHuiTi'; */
   width: 100%;
   height: 2.1875rem;
   line-height: 2.1875rem;

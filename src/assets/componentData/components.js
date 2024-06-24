@@ -21,7 +21,7 @@ export const BorderBox1 = {
     ],
     style: [],
     data: {},
-    
+
 };
 
 export const BorderBox2 = {
@@ -47,7 +47,7 @@ export const BorderBox2 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox3 = {
     attribute: [
@@ -72,7 +72,7 @@ export const BorderBox3 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox4 = {
     attribute: [
@@ -103,7 +103,7 @@ export const BorderBox4 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox5 = {
     attribute: [
@@ -134,7 +134,7 @@ export const BorderBox5 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox6 = {
     attribute: [
@@ -159,7 +159,7 @@ export const BorderBox6 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox7 = {
     attribute: [
@@ -184,7 +184,7 @@ export const BorderBox7 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox8 = {
     attribute: [
@@ -223,7 +223,7 @@ export const BorderBox8 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox9 = {
     attribute: [
@@ -248,7 +248,7 @@ export const BorderBox9 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox10 = {
     attribute: [
@@ -273,7 +273,7 @@ export const BorderBox10 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox11 = {
     attribute: [
@@ -312,7 +312,7 @@ export const BorderBox11 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox12 = {
     attribute: [
@@ -337,7 +337,7 @@ export const BorderBox12 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const BorderBox13 = {
     attribute: [
@@ -362,7 +362,7 @@ export const BorderBox13 = {
     ],
     style: [],
     data: {},
-    
+
 };
 
 export const Decoration1 = {
@@ -382,7 +382,7 @@ export const Decoration1 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const Decoration3 = {
     attribute: [
@@ -401,7 +401,7 @@ export const Decoration3 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const Decoration5 = {
     attribute: [
@@ -428,7 +428,7 @@ export const Decoration5 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const Decoration6 = {
     attribute: [
@@ -447,7 +447,7 @@ export const Decoration6 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const Decoration7 = {
     attribute: [
@@ -472,7 +472,7 @@ export const Decoration7 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const Decoration8 = {
     attribute: [
@@ -497,7 +497,7 @@ export const Decoration8 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const Decoration11 = {
     attribute: [
@@ -522,7 +522,7 @@ export const Decoration11 = {
     ],
     style: [],
     data: {},
-    
+
 };
 export const Decoration12 = {
     attribute: [
@@ -556,7 +556,7 @@ export const Decoration12 = {
         }
     ],
     style: [],
-    data: {}, 
+    data: {},
 };
 
 export const apWviewText1 = {
@@ -687,5 +687,5 @@ export const apWviewText1 = {
         }
     ],
     style: [],
-    data: {}, 
+    data: {},
 };
