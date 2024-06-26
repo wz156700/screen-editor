@@ -885,6 +885,7 @@ const updataLine = () => {
 
 // 创建元素
 async function createInfoRect(item) {
+  console.log('从数据库读取数据之后，渲染元素', item.isShow)
   if (item.isShow) {
     let rt = new fabric.Rect({
       ...item,
@@ -927,6 +928,14 @@ const selectCanvas = (itemData) => {
   }
 };
 
+//控制元素显隐
+const showOrhideEle = (uuid) => {
+  let canvasObj = canvas.getObjects();
+  let target = canvasObj.filter((item) => item.uuid == uuid);
+  target[0].visible = !target[0].visible;
+  canvas.renderAll(); // 重新渲染画布
+}
+
 defineExpose({
   updataFiles,
   deleteItem,
@@ -935,6 +944,7 @@ defineExpose({
   creatLine,
   setCanvas,
   selectCanvas,
+  showOrhideEle
 });
 </script>
 

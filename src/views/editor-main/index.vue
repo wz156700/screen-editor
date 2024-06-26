@@ -114,7 +114,7 @@ const addDOM = (val) => {
     domData[val.uuid] = val;
   }
 };
-// 移动元素
+// 更新元素
 const updataDOM = (val) => {
   console.log("val~~~", val);
   if (!val.uuid) return;
@@ -281,6 +281,7 @@ provide("updataRightIcon", {
 // 保存
 const saveItem = async () => {
   let result = await indexDBSearch("project", route.params.id);
+  console.log('domData~~', domData)
 
   indexDBUpdata("project", {
     ...result,
@@ -328,10 +329,8 @@ const getItem = () => {
   });
 };
 
-const updateShowOrHideEles = (domData) => {
-  console.log('domData~~', domData)
-  EditorMiddleRef.value.deleteItem();
-  EditorMiddleRef.value.setCanvas(domData);
+const updateShowOrHideEles = async (uuid) => {
+  EditorMiddleRef.value.showOrhideEle(uuid);
 }
 
 onMounted(() => {

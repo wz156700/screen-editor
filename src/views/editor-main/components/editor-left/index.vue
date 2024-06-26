@@ -16,13 +16,14 @@
         </div>
         <!-- 内容 -->
         <div class="td-editorLeft-content">
-            <div class="itemContent" v-for="(item, index) in state.domData" :key="item.uuid">
+            <div v-for="(item, index) in state.domData" :key="item.uuid" @click="getActiveIndex(index)"
+                :class="state.activeIndex == index ? 'itemContent activeItemContent' : 'itemContent'">
                 <div class="img">
                     <img :src="item.img" alt="">
                 </div>
 
                 <div class="editText" v-if="state.showEditText">
-                    <el-input v-model="state.input" :placeholder="item.name" @blur="closeEdit" />
+                    <el-input v-model="item.name" :placeholder="item.name" @blur="closeEdit(item)" />
                 </div>
                 <div class="text" v-else @dblclick="edittext">{{ item.name }}</div>
 
@@ -54,7 +55,7 @@ const props = defineProps({
 });
 
 const state = reactive({
-    isShowLeftBar: computed(() => userStore.global.isShowLeftBar), input: '', showEditText: false,
+    isShowLeftBar: computed(() => userStore.global.isShowLeftBar), showEditText: false, activeIndex: 0,
     domData: computed(() => props.domData)
 })
 
@@ -70,15 +71,24 @@ const edittext = () => {
 
 }
 
-const closeEdit = () => {
+const closeEdit = (item) => {
     console.log("失去焦点了")
+    if (state.input) {
+        item.name = state.input
+        emit("updataDOM", item);
+    }
+
     state.showEditText = false;
 }
 
 const hideOrShowEle = (item) => {
     item.isShow = !item.isShow
     emit("updataDOM", item);
-    emit("updateShowOrHideEles", state.domData);
+    emit("updateShowOrHideEles", item.uuid);
+}
+
+const getActiveIndex = (index) => {
+    state.activeIndex = index
 }
 
 </script>
@@ -116,7 +126,6 @@ const hideOrShowEle = (item) => {
             width: 80%;
             height: 2.5rem;
             margin: 0.5rem auto;
-            outline: 1px solid red;
 
             .img {
                 width: 30%;
@@ -136,6 +145,7 @@ const hideOrShowEle = (item) => {
                 color: #fff;
                 margin-left: 0.5rem;
                 font-size: 0.85rem;
+                cursor: text;
 
             }
 
@@ -156,6 +166,10 @@ const hideOrShowEle = (item) => {
                 color: white;
                 cursor: pointer;
             }
+        }
+
+        .activeItemContent {
+            background-color: #3a89fe;
         }
     }
 
@@ -182,6 +196,9 @@ const hideOrShowEle = (item) => {
     padding-block: 0 !important;
     padding-inline: 0 !important;
     font-size: 0.85rem;
+    background-color: #000;
+    padding-left: 0.5rem !important;
+
 }
 
 .el-input__wrapper:hover {

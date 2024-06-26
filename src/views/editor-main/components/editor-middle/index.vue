@@ -142,6 +142,10 @@ const creatLine = (type, val) => {
 const setCanvas = (val) => {
   EditorMainRef.value.setCanvas(val);
 };
+
+const showOrhideEle = (uuid) => {
+  EditorMainRef.value.showOrhideEle(uuid);
+}
 defineExpose({
   updataFiles,
   deleteItem,
@@ -150,6 +154,7 @@ defineExpose({
   creatLine,
   setCanvas,
   selectCanvas,
+  showOrhideEle
 });
 </script>
 
