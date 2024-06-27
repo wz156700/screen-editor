@@ -100,11 +100,9 @@ const onChangeSelect = (label) => {
     padding-left: .625rem;
     box-sizing: border-box;
     height: 2.5rem;
-    background: url('/public/img/smalltitle.png');
-    background-size: 100% 100%;
     padding: 1.25rem;
     font-weight: bold;
-    color: #fff;
+    color: #3a89fe;
 
   }
 

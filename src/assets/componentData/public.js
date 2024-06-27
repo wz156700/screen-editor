@@ -1,6 +1,6 @@
 export const stylePublic = [
 	{
-		name: '盒子公共样式',
+		name: '盒子样式',
 		value: 'A',
 		children: [
 			{

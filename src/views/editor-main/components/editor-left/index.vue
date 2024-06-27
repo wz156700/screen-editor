@@ -7,11 +7,11 @@
         <!-- 名称 -->
         <div class="td-editorLeft-name">
             <span v-if="state.isShowLeftBar">页面结构</span>
-            <div style="cursor: pointer">
+            <!-- <div style="cursor: pointer">
                 <EditorIcon name="left" size="16px" @click="closeLeftBar" v-if="state.isShowLeftBar">
                 </EditorIcon>
                 <EditorIcon name="right" size="16px" @click="closeLeftBar" v-if="!state.isShowLeftBar"></EditorIcon>
-            </div>
+            </div> -->
 
         </div>
         <!-- 内容 -->
@@ -104,13 +104,15 @@ const getActiveIndex = (index) => {
 
     .td-editorLeft-name {
         width: 100%;
-        height: 36px;
+        height: 2.25rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 10px;
+        padding: 0 .625rem;
         box-sizing: border-box;
         border-bottom: 1px solid var(--td-editor-border);
+        color: white;
+        font-size: 1rem;
 
         i {
             font-size: 14px;
