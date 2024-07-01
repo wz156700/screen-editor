@@ -1,7 +1,3 @@
-<!--
-
-组件名称: 折线图1 https://www.isqqw.com/viewer?id=39689
--->
 <template>
   <div class="line1" ref="line1"></div>
 </template>
@@ -20,6 +16,11 @@ const props = defineProps({
     type: String,
     require: true,
   },
+  // 文本颜色
+  xColor: {
+    type: String,
+    default: "#fff",
+  },
 });
 
 let myChart;
@@ -30,6 +31,12 @@ const state = reactive({
     xAxis: {
       type: "category",
       data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#00c7ff",
+        }
+      },
     },
     yAxis: {
       type: "value",
@@ -57,19 +64,16 @@ function setOption(option) {
 watch(
   () => props.data,
   (newVal) => {
-    console.log("newVal1~~~", newVal);
     if (typeof newVal == "object") {
       newVal = newVal.val;
     }
-    console.log("newVal2~~~", newVal);
+
     if (!newVal) {
       setOption(state.option);
       return;
     }
     if (newVal) {
       state.option = JSON.parse(newVal);
-      console.log("state.option~~~", typeof state.option);
-      console.log("myChart~~~", myChart);
       setOption(state.option);
     }
   },

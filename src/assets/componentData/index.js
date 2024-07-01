@@ -59,17 +59,20 @@ let data = {
 };
 
 export const getConfig = (name) => {
+    console.log("name~~", data[name])
     let itemData = {};
     itemData = {
         ...JSON.parse(JSON.stringify(data[name])),
     };
     itemData.style.unshift(...stylePublic);
+    console.log("itemData~~~", itemData)
     return {
         ...itemData,
     };
 };
 
 export const getConfigData = (name, value) => {
+    console.log('name, value~~', name, value)
     let item = {
         attribute: {},
         style: {},
@@ -79,6 +82,8 @@ export const getConfigData = (name, value) => {
     let itemData = {
         ...data[name],
     };
+
+    console.log("itemDataxixix~~", itemData)
     let Public = {};
     for (let i = 0; i < stylePublic.length; i++) {
         for (let k = 0; k < stylePublic[i].children.length; k++) {
@@ -97,5 +102,6 @@ export const getConfigData = (name, value) => {
         }
     }
 
+    console.log('item~~~~', item)
     return item;
 };

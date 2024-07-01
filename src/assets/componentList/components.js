@@ -273,23 +273,6 @@ const components = [
                 isShow: true
             },
         ],
-    },
-    {
-        name: "信息组件",
-        value: 3,
-        children: [
-            {
-                type: "apWviewText1", // 组件名
-                mark: "apWviewText1", // 配置数据的名字
-                fabricType: "rect",
-                width: 250, // 初始化大小
-                height: 100, //
-                name: "文本1",
-                image: apWviewText1Icon,
-                uuid: 'C1',
-                isShow: true
-            },
-        ]
     }
 ];
 

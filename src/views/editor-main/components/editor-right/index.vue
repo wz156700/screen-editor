@@ -68,6 +68,7 @@
       </div>
       <div class="td-editor-right-main-right" :key="selectId">
         <el-tabs v-model="activeName" class="td-editor-right-main-right-tabs" @tab-click="handleClick" :stretch="true">
+
           <el-tab-pane label="属性" name="attribute">
             <el-scrollbar height="100%">
               <template v-if="propertyTable.attribute.length > 0">
@@ -92,6 +93,11 @@
           </el-tab-pane>
           <el-tab-pane label="数据" name="data">
             <ItemData @updataDOM="updataDOM"></ItemData>
+          </el-tab-pane>
+          <el-tab-pane label="交互" name="nnteraction">
+            <el-scrollbar height="100%">
+              <p style="text-align: center;line-height: 2.5rem;">功能正在开发中......</p>
+            </el-scrollbar>
           </el-tab-pane>
         </el-tabs>
       </div>

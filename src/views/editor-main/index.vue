@@ -241,6 +241,7 @@ let domUpdata = [
 ];
 
 const updataRight = (label, value, uuid, type) => {
+  console.log('label, value, uuid, type', label, value, uuid, type)
   if (type == "style" && canvasUpdata.includes(label)) {
     EditorMiddleRef.value.updataFiles(label, value, uuid);
   } else if (type == "style" && domUpdata.includes(label)) {
@@ -249,6 +250,7 @@ const updataRight = (label, value, uuid, type) => {
     domData[uuid].style[label] = value;
   } else if (type == "attribute") {
     domData[uuid].attribute[label] = value;
+    console.log(' domData[uuid]~~~', domData[uuid])
   }
 };
 
