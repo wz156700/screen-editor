@@ -96,15 +96,11 @@ watch(() => props.domInfo, (newVal) => {
 
 }, { deep: true })
 
-// watch(() => dataStore.global.canvasContainnerMessage, (newVal) => {
-//   console.log('宽高改变了,hahah', newVal, state.targetWidth)
-//   state.width = newVal.width;
-//   state.height = state.targetHeight * (newVal.width / state.targetWidth);
-// }, { deep: true })
 
 
 const domDataPage = computed(() => {
   console.log("Object.values(props.domData)~~~", Object.values(props.domData));
+
   return Object.values(props.domData);
 });
 

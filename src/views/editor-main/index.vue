@@ -144,13 +144,13 @@ const removeDOM = (val) => {
 const propertyData = ref({
   attribute: {},
   style: {},
-  data: {},
+  data: [],
 });
 // 当前选中的元素结构
 const propertyTable = ref({
   attribute: [],
   style: [],
-  data: {},
+  data: [],
 });
 
 // 选中元素
@@ -171,12 +171,12 @@ const selectDom = (val) => {
     propertyData.value = {
       attribute: {},
       style: {},
-      data: {},
+      data: [],
     };
     propertyTable.value = {
       attribute: [],
       style: [],
-      data: {},
+      data: [],
     };
   }
 };
@@ -283,7 +283,6 @@ provide("updataRightIcon", {
 // 保存
 const saveItem = async () => {
   let result = await indexDBSearch("project", route.params.id);
-  console.log('domData~~', domData)
 
   indexDBUpdata("project", {
     ...result,

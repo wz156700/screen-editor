@@ -92,7 +92,7 @@
             </el-scrollbar>
           </el-tab-pane>
           <el-tab-pane label="数据" name="data">
-            <ItemData @updataDOM="updataDOM"></ItemData>
+            <ItemData @updataDOM="updataDOM" :itemData="propertyTable.data"></ItemData>
           </el-tab-pane>
           <el-tab-pane label="交互" name="nnteraction">
             <el-scrollbar height="100%">

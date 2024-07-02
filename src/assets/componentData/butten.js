@@ -14,5 +14,5 @@ export const elButton = {
 		}
 	],
 	style: [],
-	data: {},
+	data: [],
 }

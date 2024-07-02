@@ -1,27 +1,15 @@
-<!--
-
-组件名称: 
--->
 <template>
   <div class="itemData_1712648946598">
-    <el-form
-      :model="formPublic"
-      label-width="100px"
-      style="padding-right: 10px; box-sizing: border-box"
-    >
+    <p class="title">数据字段说明</p>
+    <el-table :data="state.fieldDescription" style="width: 100%">
+      <el-table-column prop="field" label="字段" />
+      <el-table-column prop="mapping" label="映射" />
+      <el-table-column prop="description" label="说明" />
+    </el-table>
+    <el-form :model="formPublic" style="padding-right: 10px; box-sizing: border-box">
       <el-form-item label="请求方式">
-        <el-select
-          v-model="formPublic.dataType"
-          class="m-2"
-          placeholder="Select"
-          size="large"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
+        <el-select v-model="formPublic.dataType" class="m-2" placeholder="Select" size="large">
+          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
     </el-form>
@@ -30,29 +18,18 @@
     </div>
     <div class="itemDataItemCode">
       <div style="border: 1px solid #ccc">
-        <!-- <Toolbar
-          style="border-bottom: 1px solid #ccc"
-          :editor="editorRef"
-          :defaultConfig="toolbarConfig"
-          :mode="mode"
-        /> -->
-        <Editor
-          style="height: 500px; overflow-y: hidden"
-          v-model="valueHtml"
-          :defaultConfig="editorConfig"
-          :mode="mode"
-          @onCreated="handleCreated"
-          placeholder="123"
-        />
+        <!-- <Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :defaultConfig="toolbarConfig"
+          :mode="mode" /> -->
+        <Editor style="height: 500px;" :mode="mode" @onCreated="handleCreated" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-//引入wangEditor相关内容
+// 引入 wangEditor 相关内容
 import "@wangeditor/editor/dist/css/style.css"; // 引入 css
-import { onBeforeUnmount, ref, shallowRef, onMounted, reactive } from "vue";
+import { onBeforeUnmount, ref, shallowRef, onMounted, reactive, watch, nextTick } from "vue";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 
 import { useCounterStore } from "@/store/editor";
@@ -61,51 +38,58 @@ const dataStore = useCounterStore();
 
 const emit = defineEmits(["updataDOM"]);
 
+const props = defineProps({
+  itemData: Object,
+});
+
 const options = [
   { label: "静态数据", value: 1 },
-  // { label: "接口数据", value: 2 },
 ];
 
 const formPublic = reactive({
-  dataType: 1,
-  resBody: "",
-  defaultJson: {
-    xAxis: {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    },
-    yAxis: {
-      type: "value",
-    },
-    series: [
-      {
-        data: [120, 200, 150, 80, 70, 110, 130],
-        type: "bar",
-        showBackground: true,
-        backgroundStyle: {
-          color: "rgba(180, 180, 180, 0.2)",
-        },
-      },
-    ],
-  },
+  dataType: 1
 });
+
+const state = reactive({
+  fieldDescription: []
+})
 
 const mode = "default";
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef();
 
-// 内容 HTML
-const valueHtml = ref();
-onMounted(() => {});
+// 实例创建
+const handleCreated = (editor) => {
+  editorRef.value = editor; // 记录 editor 实例，重要！
 
-// 编辑器配置
-const editorConfig = {
-  placeholder:
-    "<p class='defaultMsg'>示例数据： " +
-    JSON.stringify(formPublic.defaultJson) +
-    "</p>",
 };
+
+const handleChange = () => {
+  const editor = editorRef.value;
+  const text = editor.getText();
+  emit("updataDOM", {
+    uuid: dataStore.element.selectedUUid,
+    data: JSON.parse(text),
+  });
+};
+
+
+// 监听图表数据
+watch(() => props.itemData, (newVal) => {
+
+  state.fieldDescription = newVal.fieldDescription
+  const dataString = JSON.stringify(newVal.data, null, 2); // 格式化 JSON 字符串
+  nextTick(() => {
+    const editor = editorRef.value;
+    // 使用命令插入代码块
+    editor.focus()
+    editor.insertText(dataString)
+  })
+
+}, {
+  immediate: true, deep: true
+})
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
@@ -113,30 +97,22 @@ onBeforeUnmount(() => {
   if (editor == null) return;
   editor.destroy();
 });
-
-const handleCreated = (editor) => {
-  editorRef.value = editor; // 记录 editor 实例，重要！
-};
-
-const handleChange = () => {
-  const editor = editorRef.value;
-  const text = editor.getText();
-  console.log("text~~~", dataStore.element.selectedUUid);
-  emit("updataDOM", {
-    uuid: dataStore.element.selectedUUid,
-    data: text,
-  });
-};
 </script>
 
 <style lang="scss">
 .itemData_1712648946598 {
   width: 100%;
   height: 100%;
+
+  .title {
+    font-size: 1rem;
+  }
+
   .w-e-text-container {
     background-color: rgb(54, 131, 231);
     color: white !important;
   }
+
   .itemDataItemName {
     width: 120px;
     height: 35px;
@@ -171,5 +147,15 @@ const handleChange = () => {
   .defaultMsg {
     word-wrap: break-word;
   }
+}
+
+.el-table .cell {
+  font-size: 0.85rem !important;
+}
+
+.el-form-item__label {
+  justify-content: flex-start !important;
+  height: 2.5rem !important;
+  line-height: 2.5rem !important;
 }
 </style>
