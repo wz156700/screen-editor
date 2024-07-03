@@ -9,10 +9,10 @@ const analysis = [
                 mark: 'LineChart1', // 配置数据的名字
                 fabricType: 'rect',
                 width: 450, // 初始化大小
-                height: 150, // 
+                height: 450, // 
                 name: '图表示例1',
                 uuid: 'A1',
-                image: "/public/img/smalltitle.png",
+                image: "/public/img/bar1.jpg",
                 isShow: true
             },
             {

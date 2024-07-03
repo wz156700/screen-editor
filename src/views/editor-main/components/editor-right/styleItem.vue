@@ -5,6 +5,7 @@
 <template>
   <div class="td-editor-style">
     <el-collapse v-model="value">
+      {{ itemData }}
       <el-collapse-item :title="item.name" :name="item.value" v-for="(item, index) in itemTable" :key="index">
         <el-form :model="formPublic" label-width="100px" style="padding-right: 10px; box-sizing: border-box"
           label-position="top">
@@ -37,6 +38,22 @@
             <template v-if="items.type === 'ArrayColorValue'">
               <ArrayValue v-model="formPublic[items.field]" @change="onChange(items.field)" :length="2"></ArrayValue>
             </template>
+
+            <template v-if="items.type === 'barColor'">
+              <el-tabs v-model="activeName" class="demo-tabs">
+                <el-tab-pane :label="item.name" :name="item.key" v-for="(item) in items.children">
+                  <p v-for="(ele) in item.children">
+                    <span style="font-size:0.65rem;color:#fff;">{{ ele.name }}:</span>
+                    {{ ele.field }}
+                    <el-color-picker v-model="formPublic[ele.field]" @change="onChange(ele.field)" show-alpha
+                      :predefine="ele.predefineColors" />
+                  </p>
+
+                </el-tab-pane>
+
+              </el-tabs>
+
+            </template>
           </el-form-item>
         </el-form>
       </el-collapse-item>
@@ -47,6 +64,7 @@
 <script setup>
 import { computed, inject, ref, watch } from "vue";
 import ArrayValue from "./arrayValue.vue";
+const emit = defineEmits(["updataDOM"]);
 
 const props = defineProps({
   itemData: Object,
@@ -56,19 +74,20 @@ const props = defineProps({
     default: null,
   },
   type: String,
-  selectId: String,
+  selectId: String
 });
 
 const value = ref(props.active);
 
 const formPublic = computed(() => props.itemData);
+const activeName = ref('series1')
 
-// watch(()=>formPublic, (news)=>{
-// 	console.log(news)
-// },{
-// 	deep: true,
-// 	immediate: true
-// })
+watch(() => formPublic, (news) => {
+  console.log("变化了，嘻嘻嘻", news.value)
+}, {
+  deep: true,
+  immediate: true
+})
 
 const provideFun = inject("updataRight", null);
 

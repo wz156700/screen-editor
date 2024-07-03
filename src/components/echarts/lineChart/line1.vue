@@ -60,11 +60,11 @@ const props = defineProps({
     default: "#fff",
   },
   //柱子颜色
-  barStartColor: {
+  barStartColorof1: {
     type: String,
     default: "#0000ff",
   },
-  barEndColor: {
+  barEndColorof1: {
     type: String,
     default: "#0000ff",
   }
@@ -136,15 +136,16 @@ const handleData = (data) => {
       series.push(item['s'])
     }
   })
+  console.log("series~~~~", series)
 
   let seriesArray = []
+  let XData = data.map((item) => {
+    if (item['s'] == series[0])
+      return item.x
+  }).filter((item) => item !== undefined && item !== null)
+  console.log('XData~~~', XData)
 
   for (let i = 0; i < series.length; i++) {
-    let XData = data.map((item) => {
-      if (item['s'] == series[i])
-        return item.x
-    }).filter((item) => item !== undefined && item !== null)
-
     let valueData = data.map((item) => {
       if (item['s'] == series[i])
         return item.y
@@ -163,6 +164,7 @@ const handleData = (data) => {
   }
 
   state.option.series = [...seriesArray]
+  state.option.xAxis.data = XData
 
   setOption(state.option)
 
@@ -290,38 +292,38 @@ watch(
 );
 
 //监听柱子颜色
-// watch(
-//   () => props.barStartColor,
-//   (newVal) => {
-//     if (newVal) {
-//       state.option.series[0].itemStyle.color = new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-//         { offset: 0, color: newVal }, // 渐变起始颜色
-//         { offset: 1, color: props.barEndColor } // 渐变结束颜色
-//       ]);
-//       setOption(state.option);
-//     }
-//   },
-//   {
-//     immediate: true,
-//     deep: true,
-//   }
-// );
-// watch(
-//   () => props.barEndColor,
-//   (newVal) => {
-//     if (newVal) {
-//       state.option.series[0].itemStyle.color = new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-//         { offset: 0, color: props.barStartColor }, // 渐变起始颜色
-//         { offset: 1, color: newVal } // 渐变结束颜色
-//       ]);
-//       setOption(state.option);
-//     }
-//   },
-//   {
-//     immediate: true,
-//     deep: true,
-//   }
-// );
+watch(
+  () => props.barStartColorof1,
+  (newVal) => {
+    if (newVal) {
+      state.option.series[0].itemStyle.color = new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: newVal }, // 渐变起始颜色
+        { offset: 1, color: props.barEndColorof1 } // 渐变结束颜色
+      ]);
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+watch(
+  () => props.barEndColorof1,
+  (newVal) => {
+    if (newVal) {
+      state.option.series[0].itemStyle.color = new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: props.barStartColorof1 }, // 渐变起始颜色
+        { offset: 1, color: newVal } // 渐变结束颜色
+      ]);
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 
 watch(() => props.data, (newval) => {
   console.log(newval)

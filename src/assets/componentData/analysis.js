@@ -1,4 +1,5 @@
 import { descriptionProps } from "element-plus";
+import { keyBy } from "lodash-es";
 
 // 图表
 export const LineChart1 = {
@@ -61,17 +62,44 @@ export const LineChart1 = {
                     default: "#fff",
                 },
                 {
-                    name: "柱状图柱子起始颜色",
-                    type: "el-color-picker",
-                    field: "barStartColor",
-                    default: "#0000ff",
+                    name: "图表颜色",
+                    type: 'barColor',
+                    children: [{
+                        name: '系列一',
+                        key: 'series1',
+                        children: [{
+                            name: "起始颜色",
+                            type: "el-color-picker",
+                            field: "barStartColorof1",
+                            default: "#0000ff",
+                        },
+                        {
+                            name: "终止颜色",
+                            type: "el-color-picker",
+                            field: "barEndColorof1",
+                            default: "#0000ff",
+                        }]
+                    },
+                    {
+                        name: '系列二',
+                        key: 'series2',
+                        children: [{
+                            name: "起始颜色",
+                            type: "el-color-picker",
+                            field: "barStartColorof2",
+                            default: "#0000ff",
+                        },
+                        {
+                            name: "终止颜色",
+                            type: "el-color-picker",
+                            field: "barEndColorof2",
+                            default: "#0000ff",
+                        }]
+                    }
+                    ]
+
                 },
-                {
-                    name: "柱状图柱子终止颜色",
-                    type: "el-color-picker",
-                    field: "barEndColor",
-                    default: "#0000ff",
-                },
+
             ],
         },
     ],
@@ -169,5 +197,5 @@ export const LineChart1 = {
 export const LineChart2 = {
     attribute: [],
     style: [],
-    data: [],
+    data: {},
 };

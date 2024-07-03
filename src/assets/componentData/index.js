@@ -102,6 +102,6 @@ export const getConfigData = (name, value) => {
         }
     }
 
-    console.log('item~~~~', item)
+    console.log('item~~~~wlf', item)
     return item;
 };

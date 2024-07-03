@@ -20,7 +20,7 @@ export const BorderBox1 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 
@@ -46,7 +46,7 @@ export const BorderBox2 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox3 = {
@@ -71,7 +71,7 @@ export const BorderBox3 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox4 = {
@@ -102,7 +102,7 @@ export const BorderBox4 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox5 = {
@@ -133,7 +133,7 @@ export const BorderBox5 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox6 = {
@@ -158,7 +158,7 @@ export const BorderBox6 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox7 = {
@@ -183,7 +183,7 @@ export const BorderBox7 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox8 = {
@@ -222,7 +222,7 @@ export const BorderBox8 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox9 = {
@@ -247,7 +247,7 @@ export const BorderBox9 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox10 = {
@@ -272,7 +272,7 @@ export const BorderBox10 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox11 = {
@@ -311,7 +311,7 @@ export const BorderBox11 = {
         },
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox12 = {
@@ -336,7 +336,7 @@ export const BorderBox12 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const BorderBox13 = {
@@ -361,7 +361,7 @@ export const BorderBox13 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 
@@ -381,7 +381,7 @@ export const Decoration1 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const Decoration3 = {
@@ -400,7 +400,7 @@ export const Decoration3 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const Decoration5 = {
@@ -427,7 +427,7 @@ export const Decoration5 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const Decoration6 = {
@@ -446,7 +446,7 @@ export const Decoration6 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const Decoration7 = {
@@ -471,7 +471,7 @@ export const Decoration7 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const Decoration8 = {
@@ -496,7 +496,7 @@ export const Decoration8 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const Decoration11 = {
@@ -521,7 +521,7 @@ export const Decoration11 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 
 };
 export const Decoration12 = {
@@ -556,7 +556,7 @@ export const Decoration12 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 };
 
 export const apWviewText1 = {
@@ -687,5 +687,5 @@ export const apWviewText1 = {
         }
     ],
     style: [],
-    data: [],
+    data: {},
 };

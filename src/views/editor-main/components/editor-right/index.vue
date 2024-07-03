@@ -72,8 +72,10 @@
           <el-tab-pane label="属性" name="attribute">
             <el-scrollbar height="100%">
               <template v-if="propertyTable.attribute.length > 0">
+                {{ propertyData.attribute }}
                 <StyleItem :itemData="propertyData.attribute" :itemTable="propertyTable.attribute"
-                  :selectId="selectUUIDItem" :active="attributeActive" type="attribute"></StyleItem>
+                  :selectId="selectUUIDItem" :active="attributeActive" type="attribute">
+                </StyleItem>
               </template>
               <el-empty description=" " v-else>
                 <template #image>暂无数据</template>
@@ -92,7 +94,12 @@
             </el-scrollbar>
           </el-tab-pane>
           <el-tab-pane label="数据" name="data">
-            <ItemData @updataDOM="updataDOM" :itemData="propertyTable.data"></ItemData>
+            <template v-if="Object.keys(propertyTable.data).length > 0">
+              <ItemData @updataDOM="updataDOM" :itemData="propertyTable.data"></ItemData>
+            </template>
+            <el-empty description=" " v-else>
+              <template #image>暂无数据</template>
+            </el-empty>
           </el-tab-pane>
           <el-tab-pane label="交互" name="nnteraction">
             <el-scrollbar height="100%">
