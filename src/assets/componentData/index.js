@@ -93,7 +93,17 @@ export const getConfigData = (name, value) => {
     item.style = { ...Public };
     for (let i = 0; i < itemData.attribute.length; i++) {
         for (let k = 0; k < itemData.attribute[i].children.length; k++) {
-            item.attribute[itemData.attribute[i].children[k].field] = value.attribute[itemData.attribute[i].children[k].field] || itemData.attribute[i].children[k].default;
+            if (itemData.attribute[i].children[k].field) {
+                item.attribute[itemData.attribute[i].children[k].field] = value.attribute[itemData.attribute[i].children[k].field] || itemData.attribute[i].children[k].default;
+            } else {
+                for (let j = 0; j < itemData.attribute[i].children[k].children.length; j++) {
+                    for (let m = 0; m < itemData.attribute[i].children[k].children[j].children.length; m++) {
+                        item.attribute[itemData.attribute[i].children[k].children[j].children[m].field] = value.attribute[itemData.attribute[i].children[k].children[j].children[m].field] || itemData.attribute[i].children[k].children[j].children[m].default;
+                    }
+                }
+
+            }
+
         }
     }
     for (let i = 0; i < itemData.style.length; i++) {
