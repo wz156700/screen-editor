@@ -3,13 +3,14 @@
 组件名称: 预览
 -->
 <template>
+  {{ pageInfo }}
   <div class="preview" :style="{
     height: pageInfo.height ? pageInfo.height : '100vh',
     width: pageInfo.width ? pageInfo.width : '100vw',
-    background: pageInfo.backgroundColor
+    backgroundColor: pageInfo.backgroundColor
       ? pageInfo.backgroundColor
       : 'transparent',
-    background: 'url(data:' + pageInfo.backgroundImg + ')',
+    backgroundImage: 'url(data:' + pageInfo.backgroundImg + ')',
     backgroundSize: '100% 100%',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center'
@@ -111,7 +112,6 @@ onMounted(() => {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  pointer-events: none;
 
   .td-editor-whiteboard-box-item-com {
     flex-shrink: 0;

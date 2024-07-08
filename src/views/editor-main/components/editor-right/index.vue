@@ -72,7 +72,6 @@
           <el-tab-pane label="属性" name="attribute">
             <el-scrollbar height="100%">
               <template v-if="propertyTable.attribute.length > 0">
-                {{ propertyData.attribute }}
                 <StyleItem :itemData="propertyData.attribute" :itemTable="propertyTable.attribute"
                   :selectId="selectUUIDItem" :active="attributeActive" type="attribute">
                 </StyleItem>

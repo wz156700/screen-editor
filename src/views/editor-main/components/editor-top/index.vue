@@ -144,6 +144,7 @@ const clearBg = () => {
 const okButton = async () => {
   await ruleFormRef.value.validate(async (valid, fields) => {
     if (valid) {
+      console.log("form.backgroundColor", form.backgroundColor)
       let result = await indexDBSearch("project", form.uuid);
       indexDBUpdata("project", {
         ...result,
@@ -159,9 +160,11 @@ const okButton = async () => {
             type: "success",
           });
           showShwo.value = false;
+          console.log(form.ratio, form.backgroundColor, bgData.value)
           dataStore.ratio = form.ratio
           dataStore.backgroundColor = form.backgroundColor
           dataStore.backgroundImg = bgData.value
+
         })
         .catch(() => {
           ElMessage({

@@ -63,43 +63,28 @@ export const LineChart1 = {
                 },
                 {
                     name: "图表颜色",
-                    type: 'barColor',
-                    children: [{
-                        name: '系列一',
-                        key: 'series1',
-                        children: [{
-                            name: "起始颜色",
-                            type: "el-color-picker",
-                            field: "barStartColorof1",
-                            default: "#0000ff",
-                        },
+                    type: "barColor",
+                    children: [
                         {
-                            name: "终止颜色",
-                            type: "el-color-picker",
-                            field: "barEndColorof1",
-                            default: "#0000ff",
-                        }]
-                    },
-                    {
-                        name: '系列二',
-                        key: 'series2',
-                        children: [{
-                            name: "起始颜色",
-                            type: "el-color-picker",
-                            field: "barStartColorof2",
-                            default: "#0000ff",
+                            name: "系列一",
+                            key: "series1",
+                            children: [
+                                {
+                                    name: "起始颜色",
+                                    type: "el-color-picker",
+                                    field: "barStartColorof1",
+                                    default: "#0000ff",
+                                },
+                                {
+                                    name: "终止颜色",
+                                    type: "el-color-picker",
+                                    field: "barEndColorof1",
+                                    default: "#0000ff",
+                                },
+                            ],
                         },
-                        {
-                            name: "终止颜色",
-                            type: "el-color-picker",
-                            field: "barEndColorof2",
-                            default: "#0000ff",
-                        }]
-                    }
-                    ]
-
+                    ],
                 },
-
             ],
         },
     ],
@@ -110,7 +95,6 @@ export const LineChart1 = {
                 field: "x",
                 mapping: "x",
                 description: "类目",
-
             },
             {
                 field: "y",
@@ -124,78 +108,104 @@ export const LineChart1 = {
             },
         ],
         data: [
-            {
-                "x": "2010/01/01 00:00:00",
-                "y": 180,
-                "s": "系列一"
-            },
-            {
-                "x": "2010/01/01 00:00:00",
-                "y": 320,
-                "s": "系列二"
-            },
-            {
-                "x": "2010/01/01 00:00:00",
-                "y": 320,
-                "s": "系列三"
-            },
-            {
-                "x": "2010/02/01 00:00:00",
-                "y": 200,
-                "s": "系列一"
-            },
-            {
-                "x": "2010/02/01 00:00:00",
-                "y": 120,
-                "s": "系列二"
-            },
-            {
-                "x": "2010/03/01 00:00:00",
-                "y": 160,
-                "s": "系列一"
-            },
-            {
-                "x": "2010/03/01 00:00:00",
-                "y": 180,
-                "s": "系列二"
-            },
-            {
-                "x": "2010/04/01 00:00:00",
-                "y": 200,
-                "s": "系列一"
-            },
-            {
-                "x": "2010/04/01 00:00:00",
-                "y": 160,
-                "s": "系列二"
-            },
-            {
-                "x": "2010/05/01 00:00:00",
-                "y": 180,
-                "s": "系列一"
-            },
-            {
-                "x": "2010/05/01 00:00:00",
-                "y": 220,
-                "s": "系列二"
-            },
-            {
-                "x": "2010/06/01 00:00:00",
-                "y": 180,
-                "s": "系列一"
-            },
-            {
-                "x": "2010/06/01 00:00:00",
-                "y": 220,
-                "s": "系列二"
-            }
-        ]
-
+            { x: "Mon", y: 120, s: "系列一" },
+            { x: "Tue", y: 200, s: "系列一" },
+            { x: "Wed", y: 150, s: "系列一" },
+            { x: "Thu", y: 80, s: "系列一" },
+            { x: "Fri", y: 70, s: "系列一" },
+            { x: "Sat", y: 110, s: "系列一" },
+            { x: "Sun", y: 130, s: "系列一" },
+        ],
     },
 };
 
 export const LineChart2 = {
-    attribute: [],
+    attribute: [{
+        name: "属性配置",
+        value: "A",
+        children: [
+            {
+                name: "x轴文本颜色",
+                type: "el-color-picker",
+                field: "xColor",
+                default: "#fff",
+            },
+            {
+                name: "x轴文字大小",
+                type: "el-input-number",
+                field: "xfontSize",
+                default: 12,
+                max: 12,
+                max: 100,
+            },
+            {
+                name: "x轴名称",
+                type: "el-input",
+                field: "xcontent",
+                default: "",
+            },
+            {
+                name: "x轴名称颜色",
+                type: "el-color-picker",
+                field: "xcontentColor",
+                default: "#fff",
+            },
+            {
+                name: "图表颜色",
+                type: "barColor",
+                children: [
+                    {
+                        name: "系列一",
+                        key: "series1",
+                        children: [
+                            {
+                                name: "起始颜色",
+                                type: "el-color-picker",
+                                field: "barStartColorof1",
+                                default: "#0000ff",
+                            },
+                            {
+                                name: "终止颜色",
+                                type: "el-color-picker",
+                                field: "barEndColorof1",
+                                default: "#0000ff",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },],
     style: [],
-    data: {},
+    data: {
+        fieldDescription: [
+            {
+                field: "x",
+                mapping: "x",
+                description: "类目",
+            },
+            {
+                field: "y",
+                mapping: "y",
+                description: "值",
+            },
+            {
+                field: "s",
+                mapping: "s",
+                description: "系列",
+            },
+        ],
+        data: [
+            { "x": -0.07, "y": "ten", "s": "系列一" },
+            { "x": -0.09, "y": "nine", "s": "系列一" },
+            { "x": 0.2, "y": "eight", "s": "系列一" },
+            { "x": 0.44, "y": "seven", "s": "系列一" },
+            { "x": -0.23, "y": "six", "s": "系列一" },
+            { "x": 0.08, "y": "five", "s": "系列一" },
+            { "x": -0.17, "y": "four", "s": "系列一" },
+            { "x": 0.47, "y": "three", "s": "系列一" },
+            { "x": -0.36, "y": "two", "s": "系列一" },
+            { "x": 0.18, "y": "one", "s": "系列一" }
+        ],
+    }
 };

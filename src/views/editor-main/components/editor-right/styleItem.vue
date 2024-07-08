@@ -5,7 +5,6 @@
 <template>
   <div class="td-editor-style">
     <el-collapse v-model="value">
-      {{ itemData }}
       <el-collapse-item :title="item.name" :name="item.value" v-for="(item, index) in itemTable" :key="index">
         <el-form :model="formPublic" label-width="100px" style="padding-right: 10px; box-sizing: border-box"
           label-position="top">
@@ -96,6 +95,7 @@ const onChange = (label) => {
     new Error("选中状态的UUID不存在");
     return;
   }
+  console.log("label~~", label)
   provideFun(label, formPublic.value[label], props.selectId, props.type);
 };
 const onChangeSelect = (label) => {

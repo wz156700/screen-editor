@@ -1,6 +1,3 @@
-<!--
-组件名称: 可视化编辑器
--->
 <template>
   <div class="td-editor">
     <!-- 标尺 -->

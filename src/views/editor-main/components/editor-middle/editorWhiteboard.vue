@@ -46,7 +46,7 @@
     backgroundColor: state.backgroundColor
       ? state.backgroundColor
       : 'transparent',
-    background: 'url(data:' + state.backgroundImg + ')',
+    backgroundImage: 'url(data:' + state.backgroundImg + ')',
     backgroundSize: '100% 100%',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center'
@@ -85,7 +85,7 @@ const state = reactive({
 })
 
 watch(() => props.domInfo, (newVal) => {
-  console.log("hahahha", newVal)
+  console.log("hahahha变化了~~", newVal)
   let obj = newVal.ratio.split("*");
   state.targetWidth = obj[0]
   state.targetHeight = obj[1]
@@ -96,11 +96,31 @@ watch(() => props.domInfo, (newVal) => {
 
 }, { deep: true })
 
+watch(() => dataStore.ratio, (newVal) => {
+  console.log("分辨率变化了", newVal)
+  let obj = newVal.split("*");
+  state.targetWidth = obj[0]
+  state.targetHeight = obj[1]
+  state.width = obj[0]
+  state.height = obj[1]
+}, {
+  deep: true
+})
 
+watch(() => dataStore.backgroundColor, (newVal) => {
+  state.backgroundColor = newVal
+}, {
+  deep: true
+})
+
+
+watch(() => dataStore.backgroundImg, (newVal) => {
+  state.backgroundImg = newVal
+}, {
+  deep: true
+})
 
 const domDataPage = computed(() => {
-  console.log("Object.values(props.domData)~~~", Object.values(props.domData));
-
   return Object.values(props.domData);
 });
 

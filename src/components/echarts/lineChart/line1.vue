@@ -156,8 +156,8 @@ const handleData = (data) => {
       type: "bar",
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: '#00FF00' }, // 渐变起始颜色
-          { offset: 1, color: '#0000FF' } // 渐变结束颜色
+          { offset: 0, color: props.barStartColorof1 }, // 渐变起始颜色
+          { offset: 1, color: props.barEndColorof1 } // 渐变结束颜色
         ])
       }
     })
@@ -291,7 +291,7 @@ watch(
   }
 );
 
-//监听柱子颜色
+//监听柱子起始颜色
 watch(
   () => props.barStartColorof1,
   (newVal) => {
@@ -308,6 +308,7 @@ watch(
     deep: true,
   }
 );
+//监听柱子终止颜色
 watch(
   () => props.barEndColorof1,
   (newVal) => {
@@ -325,6 +326,7 @@ watch(
   }
 );
 
+//监听页面数据变化
 watch(() => props.data, (newval) => {
   console.log(newval)
   let data = JSON.parse(JSON.stringify(newval))
