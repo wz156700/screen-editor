@@ -1,5 +1,5 @@
 <!--
-横向柱状图
+横向交错柱状图
 -->
 <template>
   <div class="line2" ref="line2"></div>
@@ -8,7 +8,7 @@
 <script setup>
 import * as echarts from "echarts";
 import { onMounted, ref, reactive, watch, nextTick } from "vue";
-defineOptions({ name: "LineChart2" });
+defineOptions({ name: "BarChart2" });
 
 const props = defineProps({
   data: {

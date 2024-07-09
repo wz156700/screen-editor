@@ -78,8 +78,10 @@ const onDragstartItem = () => {
 }
 
 .image-preview img {
-  width: 80%;
+  width: 98%;
   max-height: 100%;
   height: auto;
+  margin: 0 auto;
+  object-fit: cover;
 }
 </style>

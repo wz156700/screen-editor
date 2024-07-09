@@ -2,7 +2,7 @@ import { descriptionProps } from "element-plus";
 import { keyBy } from "lodash-es";
 
 // 图表
-export const LineChart1 = {
+export const BarChart1 = {
     attribute: [
         {
             name: "属性配置",
@@ -119,7 +119,7 @@ export const LineChart1 = {
     },
 };
 
-export const LineChart2 = {
+export const BarChart2 = {
     attribute: [{
         name: "属性配置",
         value: "A",
@@ -208,4 +208,85 @@ export const LineChart2 = {
             { "x": 0.18, "y": "one", "s": "系列一" }
         ],
     }
+};
+
+export const polarBar = {
+    attribute: [
+        {
+            name: "属性配置",
+            value: "A",
+            children: [
+                {
+                    name: "坐标轴文本颜色",
+                    type: "el-color-picker",
+                    field: "xColor",
+                    default: "#fff",
+                },
+                {
+                    name: "坐标轴文字大小",
+                    type: "el-input-number",
+                    field: "xfontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "文本颜色",
+                    type: "el-color-picker",
+                    field: "contentColor",
+                    default: "#fff",
+                },
+                {
+                    name: "图表颜色",
+                    type: "barColor",
+                    children: [
+                        {
+                            name: "系列一",
+                            key: "series1",
+                            children: [
+                                {
+                                    name: "起始颜色",
+                                    type: "el-color-picker",
+                                    field: "barStartColorof1",
+                                    default: "#0000ff",
+                                },
+                                {
+                                    name: "终止颜色",
+                                    type: "el-color-picker",
+                                    field: "barEndColorof1",
+                                    default: "#0000ff",
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "x",
+                mapping: "x",
+                description: "类目",
+            },
+            {
+                field: "y",
+                mapping: "y",
+                description: "值",
+            },
+            {
+                field: "s",
+                mapping: "s",
+                description: "系列",
+            },
+        ],
+        data: [
+            { x: "a", y: 2, s: "系列一" },
+            { x: "b", y: 1.2, s: "系列一" },
+            { x: "c", y: 2.4, s: "系列一" },
+            { x: "d", y: 3.6, s: "系列一" },
+        ],
+    },
 };

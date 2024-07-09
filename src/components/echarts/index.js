@@ -1,9 +1,11 @@
-import LineChart1 from './lineChart/line1.vue'
-import LineChart2 from './lineChart/line2.vue'
+import BarChart1 from './barChart/bar1.vue'
+import BarChart2 from './barChart/bar2.vue'
+import polarBar from './barChart/polarBar.vue'
 
 const components = [
-    LineChart1,
-    LineChart2
+    BarChart1,
+    BarChart2,
+    polarBar
 ]
 
 const install = (app) => {

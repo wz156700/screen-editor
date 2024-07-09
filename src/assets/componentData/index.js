@@ -2,7 +2,7 @@
 import { stylePublic } from "./public";
 
 import { elButton } from "./butten";
-import { LineChart1, LineChart2 } from "./analysis";
+import { BarChart1, BarChart2, polarBar } from "./analysis";
 import { Map1 } from './map'
 import {
     BorderBox1,
@@ -32,8 +32,9 @@ import {
 let data = {
     Map1,
     elButton,
-    LineChart1,
-    LineChart2,
+    BarChart1,
+    BarChart2,
+    polarBar,
     BorderBox1,
     BorderBox2,
     BorderBox3,
