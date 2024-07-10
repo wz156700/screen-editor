@@ -16,7 +16,7 @@
         </div>
         <!-- 内容 -->
         <div class="td-editorLeft-content">
-            <div v-for="(item, index) in state.domData" :key="item.uuid" @click="getActiveIndex(index)"
+            <div v-for="(item, index) in state.domData" :key="item.uuid" @click="getActiveIndex(index,item)"
                 :class="state.activeIndex == index ? 'itemContent activeItemContent' : 'itemContent'">
                 <div class="img">
                     <img :src="item.img" alt="">
@@ -87,9 +87,11 @@ const hideOrShowEle = (item) => {
     emit("updateShowOrHideEles", item.uuid);
 }
 
-const getActiveIndex = (index) => {
+const getActiveIndex = (index,item) => {
     state.activeIndex = index
+    emit("selectItem", item);
 }
+
 
 </script>
 

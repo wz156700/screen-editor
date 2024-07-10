@@ -206,9 +206,10 @@ const okButton = async () => {
           name: form.name,
           ratio: form.ratio,
           state: 0,
-          cover: imageData
+          cover: imageData.value
         })
           .then((res) => {
+            console.log("res",res)
             ElMessage({
               message: "创建成功",
               type: "success",

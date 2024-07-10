@@ -31,11 +31,12 @@ request.onupgradeneeded = function (event) {
 
 // 添加数据
 export const indexDBAdd = (name, data) => {
+    console.log('name', data)
     return new Promise((resolve, reject) => {
-        let result = db
+        let transaction = db
             .transaction([name], "readwrite") // 事务对象，制定表格名称和操作模式
-            .objectStore(name)
-            .add(data);
+        let objectStore = transaction.objectStore(name)
+        let result = objectStore.add(data)
         result.onsuccess = function () {
             resolve();
         };

@@ -37,7 +37,7 @@ const onDragstartItem = () => {
 .image-preview {
   width: 50% !important;
   height: 9.375rem !important;
-  padding: .625rem;
+  padding: 0.625rem;
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -55,7 +55,7 @@ const onDragstartItem = () => {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: .3125rem;
+  border-radius: 0.3125rem;
 }
 
 .image-preview-list-title {
@@ -78,10 +78,10 @@ const onDragstartItem = () => {
 }
 
 .image-preview img {
-  width: 98%;
+  width: 100%;
   max-height: 100%;
   height: auto;
   margin: 0 auto;
-  object-fit: cover;
+  object-fit: contain;
 }
 </style>

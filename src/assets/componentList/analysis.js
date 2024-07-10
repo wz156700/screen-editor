@@ -27,6 +27,17 @@ const analysis = [
                 isShow: true
             },
             {
+                type: 'BarChart3', // 组件名
+                mark: 'BarChart3', // 配置数据的名字
+                fabricType: 'rect',
+                width: 450, // 初始化大小
+                height: 450, // 
+                name: '横向双柱状图',
+                uuid: 'A2',
+                image: "/public/img/bar2.jpg",
+                isShow: true
+            },
+            {
                 type: 'polarBar', // 组件名
                 mark: 'polarBar', // 配置数据的名字
                 fabricType: 'rect',
@@ -34,7 +45,18 @@ const analysis = [
                 height: 450, // 
                 name: '极坐标柱状图',
                 uuid: 'A3',
-                image: "/public/img/bar2.jpg",
+                image: "/public/img/bar3.jpg",
+                isShow: true
+            },
+            {
+                type: 'polarBar2', // 组件名
+                mark: 'polarBar2', // 配置数据的名字
+                fabricType: 'rect',
+                width: 450, // 初始化大小
+                height: 450, // 
+                name: '极坐标柱状图',
+                uuid: 'A3',
+                image: "/public/img/bar3.jpg",
                 isShow: true
             }
         ]

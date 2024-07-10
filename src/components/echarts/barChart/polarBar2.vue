@@ -5,7 +5,7 @@
 <script setup>
 import * as echarts from "echarts";
 import { onMounted, ref, watch, reactive, nextTick } from "vue";
-defineOptions({ name: "polarBar" });
+defineOptions({ name: "polarBar2" });
 const props = defineProps({
   data: {
     type: String,
@@ -48,19 +48,19 @@ const state = reactive({
   option: {
     title: [
       {
-        text: "Radial Polar Bar Label Position (middle)",
+        text: "Tangential Polar Bar Label Position (middle)",
       },
     ],
     polar: {
       radius: [30, "80%"],
     },
-    radiusAxis: {
-      max: 4,
-    },
     angleAxis: {
+      max: 4,
+      startAngle: 75,
+    },
+    radiusAxis: {
       type: "category",
       data: ["a", "b", "c", "d"],
-      startAngle: 75,
       axisLabel: {
         color: "#fff", // 设置文字颜色
         fontSize: 18, // 设置字体大小
@@ -86,7 +86,6 @@ const state = reactive({
         },
       },
     ],
-    animation: false,
   },
 });
 
@@ -134,7 +133,7 @@ const handleData = (data) => {
         show: true,
         position: "middle",
         formatter: "{b}: {c}",
-        color: props.contentColor, // 设置文字颜色
+        color: "#912d2d", // 设置文字颜色
       },
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -146,7 +145,7 @@ const handleData = (data) => {
   }
 
   state.option.series = [...seriesArray];
-  state.option.angleAxis.data = XData;
+  state.option.radiusAxis.data = XData;
 
   setOption(state.option);
 };
@@ -157,7 +156,7 @@ watch(
   () => props.xColor,
   (newVal) => {
     if (newVal) {
-      state.option.angleAxis.axisLabel.color = newVal;
+      state.option.radiusAxis.axisLabel.color = newVal;
       setOption(state.option);
     }
   },
@@ -172,7 +171,7 @@ watch(
   () => props.xfontSize,
   (newVal) => {
     if (newVal) {
-      state.option.angleAxis.axisLabel.fontSize = newVal;
+      state.option.radiusAxis.axisLabel.fontSize = newVal;
       setOption(state.option);
     }
   },
@@ -182,7 +181,7 @@ watch(
   }
 );
 
-// 监听文本颜色
+//监听文本颜色;
 watch(
   () => props.contentColor,
   (newVal) => {
@@ -240,6 +239,7 @@ watch(
   (newval) => {
     console.log(newval);
     let data = JSON.parse(JSON.stringify(newval));
+    console.log("data~~~xixixi", typeof data);
     if (Object.keys(data).length == 0) {
       return;
     }

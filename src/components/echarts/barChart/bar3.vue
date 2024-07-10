@@ -5,7 +5,7 @@
 <script setup>
 import * as echarts from "echarts";
 import { onMounted, ref, reactive, watch, nextTick } from "vue";
-defineOptions({ name: "BarChart2" });
+defineOptions({ name: "BarChart3" });
 
 const props = defineProps({
   data: {
@@ -37,8 +37,25 @@ const props = defineProps({
     type: String,
     default: "#fff",
   },
-  //label颜色
-  labelColor: {
+
+  // y轴文字颜色
+  yColor: {
+    type: String,
+    default: "#fff",
+  },
+  // y轴文字大小
+  yfontSize: {
+    type: String,
+    default: "10",
+  },
+
+  // y轴名称
+  ycontent: {
+    type: String,
+    default: "",
+  },
+  // y轴名称颜色
+  ycontentColor: {
     type: String,
     default: "#fff",
   },
@@ -51,6 +68,14 @@ const props = defineProps({
     type: String,
     default: "#0000ff",
   },
+  barStartColorof2: {
+    type: String,
+    default: "#0000ff",
+  },
+  barEndColorof2: {
+    type: String,
+    default: "#0000ff",
+  },
 });
 
 let myChart;
@@ -59,7 +84,7 @@ const line2 = ref(null);
 const state = reactive({
   option: {
     title: {
-      text: "Bar Chart with Negative Value",
+      text: "World Population",
     },
     tooltip: {
       trigger: "axis",
@@ -67,21 +92,19 @@ const state = reactive({
         type: "shadow",
       },
     },
+    legend: {},
     grid: {
-      top: 80,
-      bottom: 30,
+      left: "3%",
+      right: "4%",
+      bottom: "3%",
+      containLabel: true,
     },
     xAxis: {
       type: "value",
-      position: "top",
+      boundaryGap: [0, 0.01],
       name: "值",
       nameTextStyle: {
         color: "#fff",
-      },
-      splitLine: {
-        lineStyle: {
-          type: "dashed",
-        },
       },
       axisLabel: {
         textStyle: {
@@ -94,40 +117,40 @@ const state = reactive({
     },
     yAxis: {
       type: "category",
-      axisLine: { show: false },
-      axisLabel: { show: false },
-      axisTick: { show: false },
-      splitLine: { show: false },
-      data: [
-        "ten",
-        "nine",
-        "eight",
-        "seven",
-        "six",
-        "five",
-        "four",
-        "three",
-        "two",
-        "one",
-      ],
+      data: ["Brazil", "Indonesia", "USA", "India", "China", "World"],
+      name: "",
+      nameTextStyle: {
+        color: "#fff",
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#fff",
+        },
+      },
     },
     series: [
       {
-        name: "Cost",
+        name: "2011",
         type: "bar",
-        stack: "Total",
-        label: {
-          show: true,
-          formatter: "{b}",
-          color: "#fff",
-        },
+        data: [18203, 23489, 29034, 104970, 131744, 630230],
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             { offset: 0, color: "#00FF00" }, // 渐变起始颜色
             { offset: 1, color: "#FF0000" }, // 渐变结束颜色
           ]),
         },
-        data: [-0.07, -0.09, 0.2, 0.44, -0.23, 0.08, -0.17, 0.47, -0.36, 0.18],
+      },
+      {
+        name: "2012",
+        type: "bar",
+        data: [19325, 23438, 31000, 121594, 134141, 681807],
+        itemStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: "#00FF00" }, // 渐变起始颜色
+            { offset: 1, color: "#FF0000" }, // 渐变结束颜色
+          ]),
+        },
       },
     ],
   },
@@ -154,6 +177,13 @@ const handleData = (data) => {
   });
   console.log("series~~~~", series);
 
+  let XData = data
+    .map((item) => {
+      if (item["s"] == series[0]) return item.x;
+    })
+    .filter((item) => item !== undefined && item !== null);
+  console.log("XData~~~", XData);
+
   let seriesArray = [];
 
   for (let i = 0; i < series.length; i++) {
@@ -166,13 +196,8 @@ const handleData = (data) => {
     console.log("valueData", valueData);
 
     seriesArray.push({
-      name: "Cost",
+      name: series[i],
       type: "bar",
-      stack: "Total",
-      label: {
-        show: true,
-        formatter: "{b}",
-      },
       data: valueData,
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -184,6 +209,7 @@ const handleData = (data) => {
   }
 
   state.option.series = [...seriesArray];
+  state.option.yAxis.data = XData;
 
   setOption(state.option);
 };
@@ -249,13 +275,57 @@ watch(
     deep: true,
   }
 );
-
-//label颜色
+//监听y轴文本颜色
 watch(
-  () => props.labelColor,
+  () => props.yColor,
   (newVal) => {
     if (newVal) {
-      state.option.series[0].label.color = newVal;
+      state.option.yAxis.axisLabel.textStyle.color = newVal;
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+// 监听y轴字体大小
+watch(
+  () => props.yfontSize,
+  (newVal) => {
+    if (newVal) {
+      state.option.yAxis.axisLabel.textStyle.fontSize = newVal;
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+//监听y轴name
+watch(
+  () => props.ycontent,
+  (newVal) => {
+    if (newVal) {
+      state.option.yAxis.name = newVal;
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+//监听y轴name颜色
+watch(
+  () => props.ycontentColor,
+  (newVal) => {
+    if (newVal) {
+      state.option.yAxis.nameTextStyle.color = newVal;
       setOption(state.option);
     }
   },
@@ -291,6 +361,43 @@ watch(
       state.option.series[0].itemStyle.color =
         new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           { offset: 0, color: props.barStartColorof1 }, // 渐变起始颜色
+          { offset: 1, color: newVal }, // 渐变结束颜色
+        ]);
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+//监听柱子起始颜色
+watch(
+  () => props.barStartColorof2,
+  (newVal) => {
+    if (newVal) {
+      state.option.series[1].itemStyle.color =
+        new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: newVal }, // 渐变起始颜色
+          { offset: 1, color: props.barEndColorof2 }, // 渐变结束颜色
+        ]);
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+//监听柱子终止颜色
+watch(
+  () => props.barEndColorof2,
+  (newVal) => {
+    if (newVal) {
+      state.option.series[1].itemStyle.color =
+        new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: props.barStartColorof2 }, // 渐变起始颜色
           { offset: 1, color: newVal }, // 渐变结束颜色
         ]);
       setOption(state.option);
