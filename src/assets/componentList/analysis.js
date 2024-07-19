@@ -34,7 +34,18 @@ const analysis = [
                 height: 450, // 
                 name: '横向双柱状图',
                 uuid: 'A2',
-                image: "/public/img/bar2.jpg",
+                image: "/public/img/bar5.jpg",
+                isShow: true
+            },
+            {
+                type: 'BarChart4', // 组件名
+                mark: 'BarChart4', // 配置数据的名字
+                fabricType: 'rect',
+                width: 450, // 初始化大小
+                height: 450, // 
+                name: '双柱状图',
+                uuid: 'A2',
+                image: "/public/img/bar5.jpg",
                 isShow: true
             },
             {
@@ -43,7 +54,7 @@ const analysis = [
                 fabricType: 'rect',
                 width: 450, // 初始化大小
                 height: 450, // 
-                name: '极坐标柱状图',
+                name: '极坐标柱状图-样式1',
                 uuid: 'A3',
                 image: "/public/img/bar3.jpg",
                 isShow: true
@@ -54,9 +65,20 @@ const analysis = [
                 fabricType: 'rect',
                 width: 450, // 初始化大小
                 height: 450, // 
-                name: '极坐标柱状图',
+                name: '极坐标柱状图-样式2',
                 uuid: 'A3',
-                image: "/public/img/bar3.jpg",
+                image: "/public/img/bar4.jpg",
+                isShow: true
+            },
+            {
+                type: 'BarChart4', // 组件名
+                mark: 'BarChart4', // 配置数据的名字
+                fabricType: 'rect',
+                width: 450, // 初始化大小
+                height: 450, // 
+                name: '极坐标柱状图-样式2',
+                uuid: 'A3',
+                image: "/public/img/bar4.jpg",
                 isShow: true
             }
         ]
