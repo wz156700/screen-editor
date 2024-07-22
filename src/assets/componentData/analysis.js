@@ -1,7 +1,7 @@
 import { descriptionProps } from "element-plus";
 import { keyBy } from "lodash-es";
 
-// 图表
+// 柱状图
 export const BarChart1 = {
     attribute: [
         {
@@ -697,4 +697,656 @@ export const polarBar2 = {
             { x: "d", y: 3.6, s: "系列一" },
         ],
     },
+};
+
+//折线图
+export const lineChart1 = {
+    attribute: [
+        {
+            name: "属性配置",
+            value: "A",
+            children: [
+                {
+                    name: "x轴文本颜色",
+                    type: "el-color-picker",
+                    field: "xColor",
+                    default: "#fff",
+                },
+                {
+                    name: "x轴文字大小",
+                    type: "el-input-number",
+                    field: "xfontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "x轴名称",
+                    type: "el-input",
+                    field: "xcontent",
+                    default: "",
+                },
+                {
+                    name: "x轴名称颜色",
+                    type: "el-color-picker",
+                    field: "xcontentColor",
+                    default: "#fff",
+                },
+
+                {
+                    name: "y轴文本颜色",
+                    type: "el-color-picker",
+                    field: "yColor",
+                    default: "#fff",
+                },
+                {
+                    name: "y轴文字大小",
+                    type: "el-input-number",
+                    field: "yfontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "y轴名称",
+                    type: "el-input",
+                    field: "ycontent",
+                    default: "",
+                },
+                {
+                    name: "y轴名称颜色",
+                    type: "el-color-picker",
+                    field: "ycontentColor",
+                    default: "#fff",
+                },
+                {
+                    name: "图表颜色",
+                    type: "barColor",
+                    children: [
+                        {
+                            name: "系列一",
+                            key: "series1",
+                            children: [
+                                {
+                                    name: "起始颜色",
+                                    type: "el-color-picker",
+                                    field: "barStartColorof1",
+                                    default: "#0000ff",
+                                },
+                                {
+                                    name: "终止颜色",
+                                    type: "el-color-picker",
+                                    field: "barEndColorof1",
+                                    default: "#0000ff",
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "x",
+                mapping: "x",
+                description: "类目",
+            },
+            {
+                field: "y",
+                mapping: "y",
+                description: "值",
+            },
+            {
+                field: "s",
+                mapping: "s",
+                description: "系列",
+            },
+        ],
+        data: [
+            { x: "Mon", y: 120, s: "系列一" },
+            { x: "Tue", y: 200, s: "系列一" },
+            { x: "Wed", y: 150, s: "系列一" },
+            { x: "Thu", y: 80, s: "系列一" },
+            { x: "Fri", y: 70, s: "系列一" },
+            { x: "Sat", y: 110, s: "系列一" },
+            { x: "Sun", y: 130, s: "系列一" },
+        ],
+    },
+};
+
+export const lineChart2 = {
+    attribute: [{
+        name: "属性配置",
+        value: "A",
+        children: [
+            {
+                name: "x轴文本颜色",
+                type: "el-color-picker",
+                field: "xColor",
+                default: "#fff",
+            },
+            {
+                name: "x轴文字大小",
+                type: "el-input-number",
+                field: "xfontSize",
+                default: 12,
+                max: 12,
+                max: 100,
+            },
+            {
+                name: "x轴名称",
+                type: "el-input",
+                field: "xcontent",
+                default: "",
+            },
+            {
+                name: "x轴名称颜色",
+                type: "el-color-picker",
+                field: "xcontentColor",
+                default: "#fff",
+            },
+            {
+                name: "y轴文本颜色",
+                type: "el-color-picker",
+                field: "yColor",
+                default: "#fff",
+            },
+            {
+                name: "y轴文字大小",
+                type: "el-input-number",
+                field: "yfontSize",
+                default: 12,
+                max: 12,
+                max: 100,
+            },
+            {
+                name: "y轴名称",
+                type: "el-input",
+                field: "ycontent",
+                default: "",
+            },
+            {
+                name: "y轴名称颜色",
+                type: "el-color-picker",
+                field: "ycontentColor",
+                default: "#fff",
+            },
+            {
+                name: "图表颜色",
+                type: "barColor",
+                children: [
+                    {
+                        name: "系列一",
+                        key: "series1",
+                        children: [
+                            {
+                                name: "起始颜色",
+                                type: "el-color-picker",
+                                field: "barStartColorof1",
+                                default: "#0000ff",
+                            },
+                            {
+                                name: "终止颜色",
+                                type: "el-color-picker",
+                                field: "barEndColorof1",
+                                default: "#0000ff",
+                            },
+                        ],
+                    },
+                    {
+                        name: "系列二",
+                        key: "series2",
+                        children: [
+                            {
+                                name: "起始颜色",
+                                type: "el-color-picker",
+                                field: "barStartColorof2",
+                                default: "#0000ff",
+                            },
+                            {
+                                name: "终止颜色",
+                                type: "el-color-picker",
+                                field: "barEndColorof2",
+                                default: "#0000ff",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "x",
+                mapping: "x",
+                description: "类目",
+            },
+            {
+                field: "y",
+                mapping: "y",
+                description: "值",
+            },
+            {
+                field: "s",
+                mapping: "s",
+                description: "系列",
+            },
+        ],
+        data: [
+            {
+                "y": 18203,
+                "x": "Brazil",
+                "s": "系列一"
+            },
+            {
+                "y": 23489,
+                "x": "Indonesia",
+                "s": "系列一"
+            },
+            {
+                "y": 29034,
+                "x": "USA",
+                "s": "系列一"
+            },
+            {
+                "y": 104970,
+                "x": "India",
+                "s": "系列一"
+            },
+            {
+                "y": 131744,
+                "x": "China",
+                "s": "系列一"
+            },
+            {
+                "y": 630230,
+                "x": "World",
+                "s": "系列一"
+            },
+            {
+                "y": 19325,
+                "x": "Brazil",
+                "s": "系列二"
+            },
+            {
+                "y": 23438,
+                "x": "Indonesia",
+                "s": "系列二"
+            },
+            {
+                "y": 31000,
+                "x": "USA",
+                "s": "系列二"
+            },
+            {
+                "y": 121594,
+                "x": "India",
+                "s": "系列二"
+            },
+            {
+                "y": 134141,
+                "x": "China",
+                "s": "系列二"
+            },
+            {
+                "y": 681807,
+                "x": "World",
+                "s": "系列二"
+            }
+        ],
+    }
+};
+
+export const lineChart3 = {
+    attribute: [{
+        name: "属性配置",
+        value: "A",
+        children: [
+            {
+                name: "x轴文本颜色",
+                type: "el-color-picker",
+                field: "xColor",
+                default: "#fff",
+            },
+            {
+                name: "x轴文字大小",
+                type: "el-input-number",
+                field: "xfontSize",
+                default: 12,
+                max: 12,
+                max: 100,
+            },
+            {
+                name: "x轴名称",
+                type: "el-input",
+                field: "xcontent",
+                default: "",
+            },
+            {
+                name: "x轴名称颜色",
+                type: "el-color-picker",
+                field: "xcontentColor",
+                default: "#fff",
+            },
+            {
+                name: "y轴文本颜色",
+                type: "el-color-picker",
+                field: "yColor",
+                default: "#fff",
+            },
+            {
+                name: "y轴文字大小",
+                type: "el-input-number",
+                field: "yfontSize",
+                default: 12,
+                max: 12,
+                max: 100,
+            },
+            {
+                name: "y轴名称",
+                type: "el-input",
+                field: "ycontent",
+                default: "",
+            },
+            {
+                name: "y轴名称颜色",
+                type: "el-color-picker",
+                field: "ycontentColor",
+                default: "#fff",
+            },
+            {
+                name: "图表颜色",
+                type: "barColor",
+                children: [
+                    {
+                        name: "系列一",
+                        key: "series1",
+                        children: [
+                            {
+                                name: "起始颜色",
+                                type: "el-color-picker",
+                                field: "barStartColorof1",
+                                default: "#0000ff",
+                            },
+                            {
+                                name: "终止颜色",
+                                type: "el-color-picker",
+                                field: "barEndColorof1",
+                                default: "#0000ff",
+                            },
+                        ],
+                    },
+                    {
+                        name: "系列二",
+                        key: "series2",
+                        children: [
+                            {
+                                name: "起始颜色",
+                                type: "el-color-picker",
+                                field: "barStartColorof2",
+                                default: "#0000ff",
+                            },
+                            {
+                                name: "终止颜色",
+                                type: "el-color-picker",
+                                field: "barEndColorof2",
+                                default: "#0000ff",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "x",
+                mapping: "x",
+                description: "类目",
+            },
+            {
+                field: "y",
+                mapping: "y",
+                description: "值",
+            },
+            {
+                field: "s",
+                mapping: "s",
+                description: "系列",
+            },
+        ],
+        data: [
+            {
+                "y": 18203,
+                "x": "Brazil",
+                "s": "系列一"
+            },
+            {
+                "y": 23489,
+                "x": "Indonesia",
+                "s": "系列一"
+            },
+            {
+                "y": 29034,
+                "x": "USA",
+                "s": "系列一"
+            },
+            {
+                "y": 104970,
+                "x": "India",
+                "s": "系列一"
+            },
+            {
+                "y": 131744,
+                "x": "China",
+                "s": "系列一"
+            },
+            {
+                "y": 630230,
+                "x": "World",
+                "s": "系列一"
+            },
+            {
+                "y": 19325,
+                "x": "Brazil",
+                "s": "系列二"
+            },
+            {
+                "y": 23438,
+                "x": "Indonesia",
+                "s": "系列二"
+            },
+            {
+                "y": 31000,
+                "x": "USA",
+                "s": "系列二"
+            },
+            {
+                "y": 121594,
+                "x": "India",
+                "s": "系列二"
+            },
+            {
+                "y": 134141,
+                "x": "China",
+                "s": "系列二"
+            },
+            {
+                "y": 681807,
+                "x": "World",
+                "s": "系列二"
+            }
+        ],
+    }
+};
+
+export const lineChart4 = {
+    attribute: [{
+        name: "属性配置",
+        value: "A",
+        children: [
+            {
+                name: "x轴文本颜色",
+                type: "el-color-picker",
+                field: "xColor",
+                default: "#fff",
+            },
+            {
+                name: "x轴文字大小",
+                type: "el-input-number",
+                field: "xfontSize",
+                default: 12,
+                max: 12,
+                max: 100,
+            },
+            {
+                name: "x轴名称",
+                type: "el-input",
+                field: "xcontent",
+                default: "",
+            },
+            {
+                name: "x轴名称颜色",
+                type: "el-color-picker",
+                field: "xcontentColor",
+                default: "#fff",
+            },
+            {
+                name: "y轴文本颜色",
+                type: "el-color-picker",
+                field: "yColor",
+                default: "#fff",
+            },
+            {
+                name: "y轴文字大小",
+                type: "el-input-number",
+                field: "yfontSize",
+                default: 12,
+                max: 12,
+                max: 100,
+            },
+            {
+                name: "y轴名称",
+                type: "el-input",
+                field: "ycontent",
+                default: "",
+            },
+            {
+                name: "y轴名称颜色",
+                type: "el-color-picker",
+                field: "ycontentColor",
+                default: "#fff",
+            },
+            {
+                name: "图表颜色",
+                type: "barColor",
+                children: [
+                    {
+                        name: "系列一",
+                        key: "series1",
+                        children: [
+                            {
+                                name: "起始颜色",
+                                type: "el-color-picker",
+                                field: "barStartColorof1",
+                                default: "#0000ff",
+                            },
+                            {
+                                name: "终止颜色",
+                                type: "el-color-picker",
+                                field: "barEndColorof1",
+                                default: "#0000ff",
+                            },
+                        ],
+                    },
+                    {
+                        name: "系列二",
+                        key: "series2",
+                        children: [
+                            {
+                                name: "起始颜色",
+                                type: "el-color-picker",
+                                field: "barStartColorof2",
+                                default: "#0000ff",
+                            },
+                            {
+                                name: "终止颜色",
+                                type: "el-color-picker",
+                                field: "barEndColorof2",
+                                default: "#0000ff",
+                            },
+                        ],
+                    },
+                    {
+                        name: "系列三",
+                        key: "series3",
+                        children: [
+                            {
+                                name: "起始颜色",
+                                type: "el-color-picker",
+                                field: "barStartColorof3",
+                                default: "#0000ff",
+                            },
+                            {
+                                name: "终止颜色",
+                                type: "el-color-picker",
+                                field: "barEndColorof3",
+                                default: "#0000ff",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "x",
+                mapping: "x",
+                description: "类目",
+            },
+            {
+                field: "y",
+                mapping: "y",
+                description: "值",
+            },
+            {
+                field: "s",
+                mapping: "s",
+                description: "系列",
+            },
+        ],
+        data: [
+            { "x": "2020-11-03", "y": 12, "s": "供温" },
+            { "x": "2020-11-03", "y": 22, "s": "回温" },
+            { "x": "2020-11-03", "y": 45, "s": "均温" },
+            { "x": "2020-11-04", "y": 13, "s": "供温" },
+            { "x": "2020-11-04", "y": 28, "s": "回温" },
+            { "x": "2020-11-04", "y": 43, "s": "均温" },
+            { "x": "2020-11-05", "y": 10, "s": "供温" },
+            { "x": "2020-11-05", "y": 20, "s": "回温" },
+            { "x": "2020-11-05", "y": 40, "s": "均温" },
+            { "x": "2020-11-06", "y": 13, "s": "供温" },
+            { "x": "2020-11-06", "y": 23, "s": "回温" },
+            { "x": "2020-11-06", "y": 44, "s": "均温" },
+            { "x": "2020-11-07", "y": 10, "s": "供温" },
+            { "x": "2020-11-07", "y": 29, "s": "回温" },
+            { "x": "2020-11-07", "y": 59, "s": "均温" },
+            { "x": "2020-11-08", "y": 23, "s": "供温" },
+            { "x": "2020-11-08", "y": 43, "s": "回温" },
+            { "x": "2020-11-08", "y": 53, "s": "均温" },
+            { "x": "2020-11-09", "y": 21, "s": "供温" },
+            { "x": "2020-11-09", "y": 41, "s": "回温" },
+            { "x": "2020-11-09", "y": 51, "s": "均温" }
+        ],
+    }
 };

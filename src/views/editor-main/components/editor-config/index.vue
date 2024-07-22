@@ -5,11 +5,17 @@
         <EditorIcon name="analysis" size="16px"></EditorIcon>
         <span>图表</span>
         <div class="dropDowm">
-          <el-tabs tab-position="left" style="width:100%;height: 100%;" class="demo-tabs">
+          <el-tabs
+            tab-position="left"
+            style="width: 100%; height: 100%"
+            class="demo-tabs"
+          >
             <el-tab-pane label="柱状图">
               <rightCom :menuList="analysisData"></rightCom>
             </el-tab-pane>
-            <el-tab-pane label="Config">Config</el-tab-pane>
+            <el-tab-pane label="折线图">
+              <rightCom :menuList="linesData"></rightCom>
+            </el-tab-pane>
             <el-tab-pane label="Role">Role</el-tab-pane>
             <el-tab-pane label="Task">Task</el-tab-pane>
           </el-tabs>
@@ -19,7 +25,11 @@
         <EditorIcon name="components" size="16px"></EditorIcon>
         <span>组件</span>
         <div class="dropDowm">
-          <el-tabs tab-position="left" style="width:100%;height: 100%;" class="demo-tabs">
+          <el-tabs
+            tab-position="left"
+            style="width: 100%; height: 100%"
+            class="demo-tabs"
+          >
             <el-tab-pane label="柱状图">
               <rightCom :menuList="componentsData"></rightCom>
             </el-tab-pane>
@@ -33,7 +43,11 @@
         <EditorIcon name="history" size="16px"></EditorIcon>
         <span>地图</span>
         <div class="dropDowm">
-          <el-tabs tab-position="left" style="width:100%;height: 100%;" class="demo-tabs">
+          <el-tabs
+            tab-position="left"
+            style="width: 100%; height: 100%"
+            class="demo-tabs"
+          >
             <el-tab-pane label="柱状图">
               <rightCom :menuList="mapData"></rightCom>
             </el-tab-pane>
@@ -47,7 +61,11 @@
         <EditorIcon name="history" size="16px"></EditorIcon>
         <span>文字</span>
         <div class="dropDowm">
-          <el-tabs tab-position="left" style="width:100%;height: 100%;" class="demo-tabs">
+          <el-tabs
+            tab-position="left"
+            style="width: 100%; height: 100%"
+            class="demo-tabs"
+          >
             <el-tab-pane label="柱状图">
               <textCom :menuList="hTitleData"></textCom>
             </el-tab-pane>
@@ -58,7 +76,6 @@
         </div>
       </div>
     </div>
-
 
     <!-- 展示列表 -->
     <!-- 暂时不考虑历史记录功能 -->
@@ -75,7 +92,6 @@
         </div>
       </el-scrollbar>
     </div> -->
-
   </div>
 </template>
 
@@ -85,11 +101,12 @@ import rightCom from "./rightCom.vue";
 import textCom from "./textCom.vue";
 import historyList from "./historyList.vue";
 import analysisData from "@/assets/componentList/analysis.js";
+import linesData from "@/assets/componentList/line.js";
 import componentsData from "@/assets/componentList/components.js";
 import mapData from "@/assets/componentList/map.js";
 import hTitleData from "@/assets/componentList/hTitle.js";
 import materialData from "@/assets/componentList/material.js";
-import { useCounterStore } from '@/store/editor'
+import { useCounterStore } from "@/store/editor";
 const emit = defineEmits(["selectItem"]);
 
 const props = defineProps({
@@ -106,7 +123,6 @@ const props = defineProps({
   height: 100%;
   font-size: 12px;
   user-select: none;
-
 
   .td-editorConfig-content-top {
     width: 20%;

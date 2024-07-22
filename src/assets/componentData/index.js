@@ -2,7 +2,7 @@
 import { stylePublic } from "./public";
 
 import { elButton } from "./butten";
-import { BarChart1, BarChart2, BarChart3, BarChart4, polarBar, polarBar2 } from "./analysis";
+import { BarChart1, BarChart2, BarChart3, BarChart4, polarBar, polarBar2, lineChart1, lineChart2, lineChart3, lineChart4 } from "./analysis";
 import { Map1 } from './map'
 import {
     BorderBox1,
@@ -59,7 +59,12 @@ let data = {
     Decoration8,
     Decoration11,
     Decoration12,
-    apWviewText1
+    apWviewText1,
+    lineChart1,
+    lineChart2,
+    lineChart3,
+    lineChart4
+
 };
 
 export const getConfig = (name) => {
