@@ -137,6 +137,7 @@ const updataDOMArray = (vals) => {
 };
 // 删除元素
 const removeDOM = (val) => {
+  alert("123")
   delete domData[val];
 };
 

@@ -1350,3 +1350,89 @@ export const lineChart4 = {
         ],
     }
 };
+
+//饼图
+
+export const pieChart1 = {
+    attribute: [
+        {
+            name: "属性配置",
+            value: "A",
+            children: [
+
+                {
+                    name: "label文字大小",
+                    type: "el-input-number",
+                    field: "labelfontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "图表颜色",
+                    type: "barColor",
+                    children: [
+                        {
+                            name: "系列一",
+                            key: "series1",
+                            children: [
+                                {
+                                    name: "part1颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof1",
+                                    default: "#c23531",
+                                },
+                                {
+                                    name: "part2颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof2",
+                                    default: "#2f4554",
+                                },
+                                {
+                                    name: "part3颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof3",
+                                    default: "#61a0a8",
+                                },
+                                {
+                                    name: "part4颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof4",
+                                    default: "#d48265",
+                                },
+                                {
+                                    name: "part5颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof5",
+                                    default: "#91c7ae",
+                                }
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "y",
+                mapping: "y",
+                description: "值",
+            },
+            {
+                field: "s",
+                mapping: "s",
+                description: "系列",
+            },
+        ],
+        data: [
+            { y: 1048, s: 'Search Engine' },
+            { y: 735, s: 'Direct' },
+            { y: 580, s: 'Email' },
+            { y: 484, s: 'Union Ads' },
+            { y: 300, s: 'Video Ads' },
+        ],
+    },
+}

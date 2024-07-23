@@ -3,9 +3,12 @@
 组件名称: 可视化编辑器主内容区
 -->
 <template>
-
-
-  <div class="td-editor-main-box" ref="apEditorMain" @mousemove="canvasMouseMove" @mousewheel="canvasMouseWheel">
+  <div
+    class="td-editor-main-box"
+    ref="apEditorMain"
+    @mousemove="canvasMouseMove"
+    @mousewheel="canvasMouseWheel"
+  >
     <canvas ref="apEditorCanvas"></canvas>
   </div>
 </template>
@@ -14,10 +17,10 @@
 import { fabric } from "fabric";
 import { nextTick, onMounted, ref, watch, reactive, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
+import { toRaw } from "@vue/reactivity";
 //pinia仓库
 import { useCounterStore } from "@/store/editor";
 const dataStore = useCounterStore();
-
 
 // 不需要渲染到画布上的
 let NotDom = ["referenceLine", "datunBox"];
@@ -44,14 +47,18 @@ const props = defineProps({
   domInfo: {
     type: Object,
     required: true,
-  }
+  },
 });
 
-watch(() => props.domInfo, (newVal) => {
-  console.log('domInfo~~~', newVal)
-}, {
-  deep: true
-})
+watch(
+  () => props.domInfo,
+  (newVal) => {
+    console.log("domInfo~~~", newVal);
+  },
+  {
+    deep: true,
+  }
+);
 
 // 操作历史记录数组
 var history = [];
@@ -76,8 +83,8 @@ let canvas;
 const FabricSelect = ref(null);
 
 const pageState = reactive({
-  domInfo: computed(() => props.domInfo)
-})
+  domInfo: computed(() => props.domInfo),
+});
 
 const fixed = (num, seep = 2) => {
   return parseFloat(num.toFixed(seep));
@@ -113,13 +120,13 @@ const updataDomItems = (target) => {
       uuid: targetsItem.uuid,
       left: fixed(
         targetsItem.left * target.scaleX +
-        target.left +
-        (target.width * target.scaleX) / 2
+          target.left +
+          (target.width * target.scaleX) / 2
       ),
       top: fixed(
         targetsItem.top * target.scaleY +
-        target.top +
-        (target.height * target.scaleY) / 2
+          target.top +
+          (target.height * target.scaleY) / 2
       ),
       width: fixed(targetsItem.width * targetsItem.scaleX * target.scaleX),
       height: fixed(targetsItem.height * targetsItem.scaleY * target.scaleY),
@@ -139,7 +146,10 @@ const updataDomItems = (target) => {
 
 // 创建元素
 function createRect(top, left, item) {
-  console.log("2.为拖拽过来的文件生成一个相应大小的矩形框，然后添加到画布上", item)
+  console.log(
+    "2.为拖拽过来的文件生成一个相应大小的矩形框，然后添加到画布上",
+    item
+  );
   let rt = new fabric.Rect({
     top,
     left,
@@ -153,8 +163,8 @@ function createRect(top, left, item) {
     componentsuuid: item.uuid,
     uuid: uuidv4(),
     angle: 0,
-    content: item.content || '',
-    isShow: item.isShow
+    content: item.content || "",
+    isShow: item.isShow,
   });
   canvas.add(rt);
 }
@@ -172,7 +182,6 @@ const getInfo = async () => {
   canvas.setWidth(w);
   canvas.setHeight(h);
 
-
   // 位置参考
   refer = new fabric.Rect({
     top: 0, // 距离容器顶部 100px
@@ -185,8 +194,6 @@ const getInfo = async () => {
   });
   canvas.add(refer);
   getPosition();
-
-
 
   // 元素移动
   canvas.on("object:moving", function (event) {
@@ -230,9 +237,9 @@ const getInfo = async () => {
   });
   // 当元素添加到画布上时触发。
   canvas.on("object:added", function (event) {
-    console.log('3.拖拽过来的文件已经被添加到画布上了~~')
+    console.log("3.拖拽过来的文件已经被添加到画布上了~~");
     let target = event.target; // 获取目标元素
-    console.log("target~~", target)
+    console.log("target~~", target);
     if (NotDom.includes(target.name)) return;
     // 同步数据到domData中
     emit("addDOM", {
@@ -267,8 +274,8 @@ const getInfo = async () => {
       scaleY: target.scaleY || 1,
       lockMovementX: target.lockMovementX || false,
       lockMovementY: target.lockMovementY || false,
-      content: target.content || '',
-      isShow: target.isShow
+      content: target.content || "",
+      isShow: target.isShow,
     });
   });
   // 当元素从画布上移除时触发。
@@ -276,32 +283,32 @@ const getInfo = async () => {
     let target = event.target; // 获取目标元素
   });
 
-  // //当元素被选中时触发。
-  // canvas.on("object:selected", function (event) {
-  //   console.log("2.1元素被选中了")
-  //   let target = event.target; // 获取目标元素
-  //   if (NotDom.includes(target.name)) {
-  //     return;
-  //   }
-  // });
+  //当元素被选中时触发。
+  canvas.on("object:selected", function (event) {
+    console.log("元素被选中了xixixi");
+    let target = event.target; // 获取目标元素
+    if (NotDom.includes(target.name)) {
+      return;
+    }
+  });
 
-  // // 当元素被取消选中时触发。
-  // canvas.on("object:deselected", function (event) {
-  //   let target = event.target; // 获取目标元素
-  // });
+  // 当元素被取消选中时触发。
+  canvas.on("object:deselected", function (event) {
+    let target = event.target; // 获取目标元素
+  });
 
   // 当画布平移时触发。
-  canvas.on("after:render", function (event) { });
+  canvas.on("after:render", function (event) {});
 
   canvas.on("object:removed", function (event) {
-    console.log('元素删除了！')
+    console.log("元素删除了！");
     var removedElement = event.target;
     emit("removeDOM", removedElement.uuid);
   });
 
   // 监听元素被选中的事件
   canvas.on("selection:created", function (e) {
-    console.log("2.1 元素被选中了")
+    console.log("2.1 元素被选中了");
     var selectedObjects = e.selected.filter(
       (item) => !NotDom.includes(item.name)
     );
@@ -384,7 +391,7 @@ const getInfo = async () => {
   // 拖拽
   //文件被拖拽到画布上时触发
   canvas.on("drop", function (opt) {
-    console.log('1. 拖拽的文件被丢过来了')
+    console.log("1. 拖拽的文件被丢过来了");
     // 画布元素距离浏览器左侧和顶部的距离
     let offset = {
       left: canvas.getSelectionElement().getBoundingClientRect().left,
@@ -427,31 +434,34 @@ const resizeInfo = () => {
     dataStore.global.canvasContainnerMessage.height = h;
     if (pageState.domInfo.ratio) {
       let obj = pageState.domInfo.ratio.split("*");
-      let scale = w / obj[0]
-      console.log("scale~~", scale)
-      canvas.setZoom(scale)
+      let scale = w / obj[0];
+      console.log("scale~~", scale);
+      canvas.setZoom(scale);
     }
     canvas.renderAll();
     getPosition("referenceLine");
-  }, 0)
-
+  }, 0);
 };
-
 
 onMounted(() => {
   getInfo();
   window.addEventListener("resize", resizeInfo, false);
-  console.log('canvas的全部元素', canvas.getObjects())
 });
 
 //监听左侧边栏和右侧边栏是否收起
-watch(() => dataStore.global.isShowLeftBar, (newVal) => {
-  resizeInfo()
-})
+watch(
+  () => dataStore.global.isShowLeftBar,
+  (newVal) => {
+    resizeInfo();
+  }
+);
 
-watch(() => dataStore.global.isShowRightBar, (newVal) => {
-  resizeInfo()
-})
+watch(
+  () => dataStore.global.isShowRightBar,
+  (newVal) => {
+    resizeInfo();
+  }
+);
 
 // 缩放
 const canvasMouseWheel = (e) => {
@@ -484,7 +494,7 @@ const canvasMouseWheel = (e) => {
 // 移动
 const canvasMouseMove = (e) => {
   origin.x = e.layerX; //记录下鼠标相对于画布左上角的x坐标
-  origin.y = e.layerY;//记录下鼠标相对于画布左上角的y坐标
+  origin.y = e.layerY; //记录下鼠标相对于画布左上角的y坐标
 };
 
 // 获取位置坐标
@@ -532,7 +542,7 @@ watch(
   () => FabricSelect.value,
   (news) => {
     if (news) {
-      console.log("news~~~", news)
+      console.log("news~~~", news);
       let selectUUID = news.map((item) => item.uuid);
       let selectLock = news.map((item) => {
         return {
@@ -610,11 +620,17 @@ const updataFiles = (label, value, uuid) => {
 // 删除元素
 const deleteItem = (val) => {
   if (val) {
-    console.log('canvas~~~', canvas.getObjects)
+    console.log("canvas~~~", canvas.getObjects);
     FabricSelect.value = null;
     let canvasObj = canvas.getObjects();
-    console.log("canvasObj~~hehiehi", canvasObj)
-    let target = canvasObj.filter((item) => val.includes(item.uuid));
+    console.log("canvasObj~~hehiehi", canvasObj);
+    let target = canvasObj.filter((item) => {
+      let uuid = Array.isArray(item.uuid) ? item.uuid[0] : item.uuid;
+      console.log("uuid~~~", uuid);
+      console.log(val.includes(uuid));
+      return val.includes(uuid);
+    });
+    console.log("目标删除元素", target);
 
     for (let i = 0; i < target.length; i++) {
       canvas.remove(target[i]);
@@ -674,7 +690,7 @@ const creatLine = (type, val) => {
   let referItem = t.filter((item) => item.name == referName)[0];
   // 获取位置信息
   let referInfo = referItem.getBoundingRect();
-  console.log('referInfo~~~', referInfo)
+  console.log("referInfo~~~", referInfo);
   // let move = {}
   if (type == "lineW") {
     // lineArr = [-(referInfo.left / referInfo.width), val.value, canvas.width, val.value]
@@ -723,7 +739,7 @@ const creatLine = (type, val) => {
     // 将分组添加到画布
     canvas.add(group);
 
-    group.on("click", (e) => { });
+    group.on("click", (e) => {});
     let groupRect = group.item(1);
     // 给分组添加拖动事件
     group.on("mousedown", function (e) {
@@ -885,7 +901,7 @@ const updataLine = () => {
 
 // 创建元素
 async function createInfoRect(item) {
-  console.log('从数据库读取数据之后，渲染元素', item.isShow)
+  console.log("从数据库读取数据之后，渲染元素", item.isShow);
   if (item.isShow) {
     let rt = new fabric.Rect({
       ...item,
@@ -893,29 +909,34 @@ async function createInfoRect(item) {
     });
     canvas.add(rt);
   }
-
-
 }
 
 const setCanvas = async (canvasData) => {
-  console.log('canvasData~~', canvasData)
+  console.log("canvasData~~", canvasData);
   for (let item in canvasData) {
     await createInfoRect(canvasData[item]);
   }
   canvas.renderAll();
-  console.log('canvas.getObjects()', canvas.getObjects())
+  console.log("canvas.getObjects()", canvas.getObjects());
   // 处理按键删除事件
   document.addEventListener("keydown", (e) => {
-    console.log('canvas的全部元素', canvas.getObjects())
+    console.log("canvas的全部元素xixixi", canvas.getObjects());
     if (e.key === "Delete") {
       //获取选中元素
       let targetIds = FabricSelect.value.map((item) => item.uuid);
-      deleteItem(targetIds)
-      console.log("目标元素~~", targetIds)
+      console.log("目标元素~~", FabricSelect.value);
+      targetIds = targetIds.map((item) => {
+        if (Object.prototype.toString.call(item) == "[object Array]") {
+          return toRaw(item)[0];
+        } else {
+          return item;
+        }
+      });
+      console.log("目标元素~~", targetIds);
 
+      deleteItem(targetIds);
     }
   });
-
 };
 
 // 选择元素
@@ -934,7 +955,7 @@ const showOrhideEle = (uuid) => {
   let target = canvasObj.filter((item) => item.uuid == uuid);
   target[0].visible = !target[0].visible;
   canvas.renderAll(); // 重新渲染画布
-}
+};
 
 defineExpose({
   updataFiles,
@@ -944,7 +965,7 @@ defineExpose({
   creatLine,
   setCanvas,
   selectCanvas,
-  showOrhideEle
+  showOrhideEle,
 });
 </script>
 
@@ -953,7 +974,6 @@ defineExpose({
   width: 100%;
   height: 100%;
   background: transparent;
-
 }
 
 .elBT {

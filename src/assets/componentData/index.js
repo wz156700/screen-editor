@@ -2,7 +2,7 @@
 import { stylePublic } from "./public";
 
 import { elButton } from "./butten";
-import { BarChart1, BarChart2, BarChart3, BarChart4, polarBar, polarBar2, lineChart1, lineChart2, lineChart3, lineChart4 } from "./analysis";
+import { BarChart1, BarChart2, BarChart3, BarChart4, polarBar, polarBar2, lineChart1, lineChart2, lineChart3, lineChart4, pieChart1 } from "./analysis";
 import { Map1 } from './map'
 import {
     BorderBox1,
@@ -63,7 +63,8 @@ let data = {
     lineChart1,
     lineChart2,
     lineChart3,
-    lineChart4
+    lineChart4,
+    pieChart1
 
 };
 

@@ -33,7 +33,7 @@ const analysis = [
                 width: 450, // 初始化大小
                 height: 450, // 
                 name: '横向双柱状图',
-                uuid: 'A2',
+                uuid: 'A3',
                 image: "/public/img/bar5.jpg",
                 isShow: true
             },
@@ -44,7 +44,7 @@ const analysis = [
                 width: 450, // 初始化大小
                 height: 450, // 
                 name: '双柱状图',
-                uuid: 'A2',
+                uuid: 'A4',
                 image: "/public/img/bar5.jpg",
                 isShow: true
             },
@@ -55,7 +55,7 @@ const analysis = [
                 width: 450, // 初始化大小
                 height: 450, // 
                 name: '极坐标柱状图-样式1',
-                uuid: 'A3',
+                uuid: 'A5',
                 image: "/public/img/bar3.jpg",
                 isShow: true
             },
@@ -66,7 +66,7 @@ const analysis = [
                 width: 450, // 初始化大小
                 height: 450, // 
                 name: '极坐标柱状图-样式2',
-                uuid: 'A3',
+                uuid: 'A6',
                 image: "/public/img/bar4.jpg",
                 isShow: true
             },
@@ -77,7 +77,7 @@ const analysis = [
                 width: 450, // 初始化大小
                 height: 450, // 
                 name: '极坐标柱状图-样式2',
-                uuid: 'A3',
+                uuid: 'A7',
                 image: "/public/img/bar4.jpg",
                 isShow: true
             }

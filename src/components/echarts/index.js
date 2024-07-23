@@ -12,6 +12,9 @@ import lineChart2 from './lineChart/line2.vue'
 import lineChart3 from './lineChart/line3.vue'
 import lineChart4 from './lineChart/line4.vue'
 
+//引入饼图
+import pieChart1 from './pieChart/pie1.vue'
+
 const components = [
     //柱状图部分
     BarChart1,
@@ -24,7 +27,10 @@ const components = [
     lineChart1,
     lineChart2,
     lineChart3,
-    lineChart4
+    lineChart4,
+
+    //饼图部分
+    pieChart1
 ]
 
 const install = (app) => {

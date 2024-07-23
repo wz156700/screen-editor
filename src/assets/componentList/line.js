@@ -22,7 +22,7 @@ const lines = [
                 width: 450, // 初始化大小
                 height: 450, // 
                 name: '双折线图',
-                uuid: 'A1',
+                uuid: 'A2',
                 image: "/public/img/bar1.jpg",
                 isShow: true
             },
@@ -33,7 +33,7 @@ const lines = [
                 width: 450, // 初始化大小
                 height: 450, // 
                 name: '渐变堆叠折线图',
-                uuid: 'A1',
+                uuid: 'A3',
                 image: "/public/img/bar1.jpg",
                 isShow: true
             },
@@ -44,7 +44,7 @@ const lines = [
                 width: 450, // 初始化大小
                 height: 450, // 
                 name: '阶梯折线图',
-                uuid: 'A1',
+                uuid: 'A4',
                 image: "/public/img/bar1.jpg",
                 isShow: true
             },
