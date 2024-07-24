@@ -5,7 +5,7 @@
 <script setup>
 import * as echarts from "echarts";
 import { onMounted, ref, watch, reactive, nextTick } from "vue";
-defineOptions({ name: "pieChart1" });
+defineOptions({ name: "pieChart3" });
 
 const props = defineProps({
   data: {
@@ -60,48 +60,47 @@ const line1 = ref(null);
 
 const state = reactive({
   option: {
-    title: {
-      text: "Referer of a Website",
-      subtext: "Fake Data",
-      left: "center",
-    },
-    tooltip: {
-      trigger: "item",
-    },
     legend: {
-      orient: "vertical",
-      left: "left",
+      top: "bottom",
       textStyle: {
         // 这是另一种设置文字颜色的方式
         color: "#ffffff",
       },
     },
-
+    toolbox: {
+      show: true,
+      feature: {
+        mark: { show: true },
+        dataView: { show: true, readOnly: false },
+        restore: { show: true },
+        saveAsImage: { show: true },
+      },
+    },
+    tooltip: {
+      trigger: "item",
+    },
     color: ["#c23531", "#2f4554", "#61a0a8", "#d48265", "#91c7ae"],
     series: [
       {
-        name: "Access From",
+        name: "Nightingale Chart",
         type: "pie",
-        radius: "50%",
-
+        radius: [50, 250],
+        center: ["50%", "50%"],
+        roseType: "area",
         label: {
           show: false,
           fontSize: 12,
         },
-        data: [
-          { value: 1048, name: "Search Engine" },
-          { value: 735, name: "Direct" },
-          { value: 580, name: "Email" },
-          { value: 484, name: "Union Ads" },
-          { value: 300, name: "Video Ads" },
-        ],
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-          },
+        itemStyle: {
+          borderRadius: 8,
         },
+        data: [
+          { value: 40, name: "rose 1" },
+          { value: 38, name: "rose 2" },
+          { value: 32, name: "rose 3" },
+          { value: 30, name: "rose 4" },
+          { value: 28, name: "rose 5" },
+        ],
       },
     ],
   },
@@ -122,18 +121,16 @@ function setOption(option) {
 const handleData = (data) => {
   let seriesArray = [];
   seriesArray.push({
-    name: "Access From",
+    name: "Nightingale Chart",
     type: "pie",
-    radius: "50%",
-    data: data,
+    radius: [50, 250],
+    center: ["50%", "50%"],
+    roseType: "area",
     label: { show: props.isShowLabel, fontSize: props.labelfontSize },
-    emphasis: {
-      itemStyle: {
-        shadowBlur: 10,
-        shadowOffsetX: 0,
-        shadowColor: "rgba(0, 0, 0, 0.5)",
-      },
+    itemStyle: {
+      borderRadius: 8,
     },
+    data: data,
   });
 
   state.option.series = [...seriesArray];
@@ -147,20 +144,6 @@ watch(
   (newVal) => {
     if (newVal) {
       state.option.series[0].label.fontSize = newVal;
-      setOption(state.option);
-    }
-  },
-  {
-    immediate: true,
-    deep: true,
-  }
-);
-
-watch(
-  () => props.lengendColor,
-  (newVal) => {
-    if (newVal) {
-      state.option.legend.textStyle.color = newVal;
       setOption(state.option);
     }
   },
@@ -246,6 +229,20 @@ watch(
     console.log("newValxixixiix", typeof newVal, newVal);
     state.option.series[0].label.show = newVal;
     setOption(state.option);
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+watch(
+  () => props.lengendColor,
+  (newVal) => {
+    if (newVal) {
+      state.option.legend.textStyle.color = newVal;
+      setOption(state.option);
+    }
   },
   {
     immediate: true,

@@ -7,52 +7,113 @@
     <!-- 头部 -->
     <div class="td-editor-right-header">
       <span v-if="state.isShowRightBar">属性管理</span>
-      <div style="cursor: pointer;">
-        <EditorIcon name="right" size="16px" @click="isShowRightBar" v-if="state.isShowRightBar"></EditorIcon>
-        <EditorIcon name="left" size="16px" @click="isShowRightBar" v-if="!state.isShowRightBar"></EditorIcon>
+      <div style="cursor: pointer">
+        <EditorIcon
+          name="right"
+          size="16px"
+          @click="isShowRightBar"
+          v-if="state.isShowRightBar"
+        ></EditorIcon>
+        <EditorIcon
+          name="left"
+          size="16px"
+          @click="isShowRightBar"
+          v-if="!state.isShowRightBar"
+        ></EditorIcon>
       </div>
-
     </div>
     <div class="td-editor-right-main">
       <div class="td-editor-right-main-left">
-        <div class="td-editor-right-main-left-item" title="撤回" @click="redraw('undo')">
+        <div
+          class="td-editor-right-main-left-item"
+          title="撤回"
+          @click="redraw('undo')"
+        >
           <EditorIcon name="back" size="18px"></EditorIcon>
         </div>
-        <div class="td-editor-right-main-left-item" title="重做" @click="redraw('redo')">
+        <div
+          class="td-editor-right-main-left-item"
+          title="重做"
+          @click="redraw('redo')"
+        >
           <EditorIcon name="next" size="18px"></EditorIcon>
         </div>
-        <div class="td-editor-right-main-left-item" :class="moveing ? 'is-active' : ''" title="移动画布"
-          @click="updataMoveing">
-          <EditorIcon name="direction-adjustment-three" size="20px"></EditorIcon>
+        <div
+          class="td-editor-right-main-left-item"
+          :class="moveing ? 'is-active' : ''"
+          title="移动画布"
+          @click="updataMoveing"
+        >
+          <EditorIcon
+            name="direction-adjustment-three"
+            size="20px"
+          ></EditorIcon>
         </div>
-        <el-popconfirm title="确定要清空画布嘛?" width="200" confirm-button-text="清空" cancel-button-text="取消"
-          @confirm="confirmDelete">
+        <el-popconfirm
+          title="确定要清空画布嘛?"
+          width="200"
+          confirm-button-text="清空"
+          cancel-button-text="取消"
+          @confirm="confirmDelete"
+        >
           <template #reference>
             <div class="td-editor-right-main-left-item" title="清空画布">
               <EditorIcon name="clear" size="20px"></EditorIcon>
             </div>
           </template>
         </el-popconfirm>
-        <div class="td-editor-right-main-left-item" title="横向参考线" @click="reactLine('lineW')">
+        <div
+          class="td-editor-right-main-left-item"
+          title="横向参考线"
+          @click="reactLine('lineW')"
+        >
           <EditorIcon name="dividing-line" size="20px"></EditorIcon>
         </div>
-        <div class="td-editor-right-main-left-item" title="纵向参考线" @click="reactLine('lineH')">
-          <EditorIcon name="dividing-line" size="20px" style="transform: rotate(90deg)"></EditorIcon>
+        <div
+          class="td-editor-right-main-left-item"
+          title="纵向参考线"
+          @click="reactLine('lineH')"
+        >
+          <EditorIcon
+            name="dividing-line"
+            size="20px"
+            style="transform: rotate(90deg)"
+          ></EditorIcon>
         </div>
         <div class="td-editor-right-main-left-line"></div>
-        <div :class="classIconRadio" title="图层上移" @click="updataElement('topIndex')">
+        <div
+          :class="classIconRadio"
+          title="图层上移"
+          @click="updataElement('topIndex')"
+        >
           <EditorIcon name="to-top" size="22px"></EditorIcon>
         </div>
-        <div :class="classIconRadio" title="图层下移" @click="updataElement('bottomIndex')">
+        <div
+          :class="classIconRadio"
+          title="图层下移"
+          @click="updataElement('bottomIndex')"
+        >
           <EditorIcon name="to-bottom" size="22px"></EditorIcon>
         </div>
-        <div :class="classIconRadioLockL" title="锁定左右" @click="updataElement('auto-height-one')">
+        <div
+          :class="classIconRadioLockL"
+          title="锁定左右"
+          @click="updataElement('auto-height-one')"
+        >
           <EditorIcon name="auto-height-one" size="20px"></EditorIcon>
         </div>
-        <div :class="classIconRadioLockT" title="锁定上下" @click="updataElement('auto-width-one')">
+        <div
+          :class="classIconRadioLockT"
+          title="锁定上下"
+          @click="updataElement('auto-width-one')"
+        >
           <EditorIcon name="auto-width-one" size="20px"></EditorIcon>
         </div>
-        <div :class="classIcon" title="图层删除" @click="updataElement('delete')">
+        <div
+          :class="classIcon"
+          title="图层删除"
+          @click="updataElement('delete')"
+        >
           <EditorIcon name="delete" size="20px"></EditorIcon>
         </div>
         <!-- <div :class="classIcon" title="图层复制" @click="updataElement('copy')">
@@ -67,13 +128,22 @@
         </div>
       </div>
       <div class="td-editor-right-main-right" :key="selectId">
-        <el-tabs v-model="activeName" class="td-editor-right-main-right-tabs" @tab-click="handleClick" :stretch="true">
-
+        <el-tabs
+          v-model="activeName"
+          class="td-editor-right-main-right-tabs"
+          @tab-click="handleClick"
+          :stretch="true"
+        >
           <el-tab-pane label="属性" name="attribute">
             <el-scrollbar height="100%">
               <template v-if="propertyTable.attribute.length > 0">
-                <StyleItem :itemData="propertyData.attribute" :itemTable="propertyTable.attribute"
-                  :selectId="selectUUIDItem" :active="attributeActive" type="attribute">
+                <StyleItem
+                  :itemData="propertyData.attribute"
+                  :itemTable="propertyTable.attribute"
+                  :selectId="selectUUIDItem"
+                  :active="attributeActive"
+                  type="attribute"
+                >
                 </StyleItem>
               </template>
               <el-empty description=" " v-else>
@@ -84,8 +154,13 @@
           <el-tab-pane label="样式" name="style">
             <el-scrollbar height="100%">
               <template v-if="propertyTable.style.length > 0">
-                <StyleItem :itemData="propertyData.style" :itemTable="propertyTable.style" :active="styleActive"
-                  :selectId="selectUUIDItem" type="style"></StyleItem>
+                <StyleItem
+                  :itemData="propertyData.style"
+                  :itemTable="propertyTable.style"
+                  :active="styleActive"
+                  :selectId="selectUUIDItem"
+                  type="style"
+                ></StyleItem>
               </template>
               <el-empty description=" " v-else>
                 <template #image>暂无数据</template>
@@ -94,7 +169,10 @@
           </el-tab-pane>
           <el-tab-pane label="数据" name="data">
             <template v-if="Object.keys(propertyTable.data).length > 0">
-              <ItemData @updataDOM="updataDOM" :itemData="propertyTable.data"></ItemData>
+              <ItemData
+                @updataDOM="updataDOM"
+                :itemData="propertyTable.data"
+              ></ItemData>
             </template>
             <el-empty description=" " v-else>
               <template #image>暂无数据</template>
@@ -102,7 +180,9 @@
           </el-tab-pane>
           <el-tab-pane label="交互" name="nnteraction">
             <el-scrollbar height="100%">
-              <p style="text-align: center;line-height: 2.5rem;">功能正在开发中......</p>
+              <p style="text-align: center; line-height: 2.5rem">
+                功能正在开发中......
+              </p>
             </el-scrollbar>
           </el-tab-pane>
         </el-tabs>
@@ -133,14 +213,13 @@ const updataDOM = (val) => {
 };
 
 const state = reactive({
-  isShowRightBar: computed(() => dataStore.global.isShowRightBar)
-})
-
+  isShowRightBar: computed(() => dataStore.global.isShowRightBar),
+});
 
 //控制右侧边栏是否展开
 const isShowRightBar = () => {
   dataStore.global.isShowRightBar = !dataStore.global.isShowRightBar;
-}
+};
 
 const props = defineProps({
   propertyTable: {
@@ -306,7 +385,7 @@ const reactLine = (val) => {
         value,
       });
     })
-    .catch(() => { });
+    .catch(() => {});
 };
 </script>
 

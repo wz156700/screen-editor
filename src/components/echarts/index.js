@@ -14,6 +14,12 @@ import lineChart4 from './lineChart/line4.vue'
 
 //引入饼图
 import pieChart1 from './pieChart/pie1.vue'
+import pieChart2 from './pieChart/pie2.vue'
+import pieChart3 from './pieChart/pie3.vue'
+
+//散点图
+import scatterPlot1 from './scatterPlot/scatterPlot1.vue'
+import scatterPlot2 from './scatterPlot/scatterPlot2.vue'
 
 const components = [
     //柱状图部分
@@ -30,7 +36,13 @@ const components = [
     lineChart4,
 
     //饼图部分
-    pieChart1
+    pieChart1,
+    pieChart2,
+    pieChart3,
+
+    //散点部分
+    scatterPlot1,
+    scatterPlot2
 ]
 
 const install = (app) => {

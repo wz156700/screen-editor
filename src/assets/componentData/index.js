@@ -2,7 +2,7 @@
 import { stylePublic } from "./public";
 
 import { elButton } from "./butten";
-import { BarChart1, BarChart2, BarChart3, BarChart4, polarBar, polarBar2, lineChart1, lineChart2, lineChart3, lineChart4, pieChart1 } from "./analysis";
+import { BarChart1, BarChart2, BarChart3, BarChart4, polarBar, polarBar2, lineChart1, lineChart2, lineChart3, lineChart4, pieChart1, pieChart2, pieChart3, scatterPlot1, scatterPlot2 } from "./analysis";
 import { Map1 } from './map'
 import {
     BorderBox1,
@@ -64,7 +64,11 @@ let data = {
     lineChart2,
     lineChart3,
     lineChart4,
-    pieChart1
+    pieChart1,
+    pieChart2,
+    pieChart3,
+    scatterPlot1,
+    scatterPlot2
 
 };
 
@@ -104,7 +108,13 @@ export const getConfigData = (name, value) => {
     for (let i = 0; i < itemData.attribute.length; i++) {
         for (let k = 0; k < itemData.attribute[i].children.length; k++) {
             if (itemData.attribute[i].children[k].field) {
-                item.attribute[itemData.attribute[i].children[k].field] = value.attribute[itemData.attribute[i].children[k].field] || itemData.attribute[i].children[k].default;
+                console.log('typeof value.attribute[itemData.attribute[i].children[k].field]', typeof value.attribute[itemData.attribute[i].children[k].field])
+                if (typeof value.attribute[itemData.attribute[i].children[k].field] == 'boolean') {
+                    item.attribute[itemData.attribute[i].children[k].field] = value.attribute[itemData.attribute[i].children[k].field]
+                } else {
+                    item.attribute[itemData.attribute[i].children[k].field] = value.attribute[itemData.attribute[i].children[k].field] || itemData.attribute[i].children[k].default;
+                }
+
             } else {
                 for (let j = 0; j < itemData.attribute[i].children[k].children.length; j++) {
                     for (let m = 0; m < itemData.attribute[i].children[k].children[j].children.length; m++) {

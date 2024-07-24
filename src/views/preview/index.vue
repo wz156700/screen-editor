@@ -3,19 +3,23 @@
 组件名称: 预览
 -->
 <template>
-  {{ pageInfo }}
-  <div class="preview" :style="{
-    height: pageInfo.height ? pageInfo.height : '100vh',
-    width: pageInfo.width ? pageInfo.width : '100vw',
-    backgroundColor: pageInfo.backgroundColor
-      ? pageInfo.backgroundColor
-      : 'transparent',
-    backgroundImage: 'url(data:' + pageInfo.backgroundImg + ')',
-    backgroundSize: '100% 100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center'
-  }">
-    <template v-for="item in domDataPage" :key="
+  <div
+    class="preview"
+    :style="{
+      height: pageInfo.height ? pageInfo.height : '100vh',
+      width: pageInfo.width ? pageInfo.width : '100vw',
+      backgroundColor: pageInfo.backgroundColor
+        ? pageInfo.backgroundColor
+        : 'transparent',
+      backgroundImage: 'url(data:' + pageInfo.backgroundImg + ')',
+      backgroundSize: '100% 100%',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center center',
+    }"
+  >
+    <template
+      v-for="item in domDataPage"
+      :key="
         item.uuid +
         item.width +
         item.height +
@@ -23,22 +27,31 @@
         item.mtr +
         item.mbr +
         item.mbl
-      ">
-      <div class="td-editor-whiteboard-box-item" :style="{
-    left: item.left + 'px',
-    top: item.top + 'px',
-    width: item.width + 'px',
-    height: item.height + 'px',
-    transform: `rotate(${item.angle}deg)`,
-    transformOrigin: `${item.angleX}px ${item.angleY}px`,
-    zIndex: item.zIndex,
-    borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
-    padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
-    alignItems: `${item.alignW}`,
-    justifyContent: `${item.alignH}`,
-  }">
-        <component :is="item.type" class="td-editor-whiteboard-box-item-com" :key="item.uuid"
-          :data="item.data ? item.data : '初始化'" v-bind="item.attribute"></component>
+      "
+    >
+      <div
+        class="td-editor-whiteboard-box-item"
+        :style="{
+          left: item.left + 'px',
+          top: item.top + 'px',
+          width: item.width + 'px',
+          height: item.height + 'px',
+          transform: `rotate(${item.angle}deg)`,
+          transformOrigin: `${item.angleX}px ${item.angleY}px`,
+          zIndex: item.zIndex,
+          borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
+          padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
+          alignItems: `${item.alignW}`,
+          justifyContent: `${item.alignH}`,
+        }"
+      >
+        <component
+          :is="item.type"
+          class="td-editor-whiteboard-box-item-com"
+          :key="item.uuid"
+          :data="item.data ? item.data : '初始化'"
+          v-bind="item.attribute"
+        ></component>
       </div>
     </template>
   </div>

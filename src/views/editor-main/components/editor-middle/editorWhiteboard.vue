@@ -3,12 +3,20 @@
 组件名称: 画布白板
 -->
 <template>
-  <div class="td-editor-whiteboard" id="td-editor-whiteboard" :style="{
-    width: state.width + 'px',
-    height: state.height + 'px',
-  }">
+  <div
+    class="td-editor-whiteboard"
+    id="td-editor-whiteboard"
+    :style="{
+      width: state.width + 'px',
+      height: state.height + 'px',
+    }"
+  >
+    <!-- {{ domDataPage }} -->
     <div class="td-editor-whiteboard-box" :style="styleBox">
-      <template v-for="item in domDataPage" :key="
+      <!-- {{ domDataPage }} -->
+      <template
+        v-for="item in domDataPage"
+        :key="
           item.uuid +
           item.width +
           item.height +
@@ -16,41 +24,54 @@
           item.mtr +
           item.mbr +
           item.mbl
-        ">
-
-        <div class="td-editor-whiteboard-box-item" :style="{
-    display: item.isShow ? 'block' : 'none',
-    left:
-      whiteboardBox.left + props.positionInfo.left + item.left + 'px',
-    top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
-    width: item.width + 'px',
-    height: item.height + 'px',
-    transform: `rotate(${item.angle}deg)`,
-    transformOrigin: `${item.angleX}px ${item.angleY}px`,
-    zIndex: item.zIndex,
-    borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
-    padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
-    alignItems: `${item.alignW}`,
-    justifyContent: `${item.alignH}`,
-  }" :set-key="item.uuid">
-          <component :is="item.type" class="td-editor-whiteboard-box-item-com" :key="item.uuid" v-bind="item.attribute"
-            :data="item.data ? item.data : '初始化'"></component>
+        "
+      >
+        <div
+          class="td-editor-whiteboard-box-item"
+          :style="{
+            display: item.isShow ? 'block' : 'none',
+            left:
+              whiteboardBox.left + props.positionInfo.left + item.left + 'px',
+            top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
+            width: item.width + 'px',
+            height: item.height + 'px',
+            transform: `rotate(${item.angle}deg)`,
+            transformOrigin: `${item.angleX}px ${item.angleY}px`,
+            zIndex: item.zIndex,
+            borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
+            padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
+            alignItems: `${item.alignW}`,
+            justifyContent: `${item.alignH}`,
+          }"
+          :set-key="item.uuid"
+        >
+          <component
+            :is="item.type"
+            class="td-editor-whiteboard-box-item-com"
+            :key="item.uuid"
+            v-bind="item.attribute"
+            :data="item.data ? item.data : '初始化'"
+          ></component>
         </div>
       </template>
       <h1>{{ domInfo.backgroundColor }}</h1>
-      <div class="td-editor-whiteboard-border" id="td-editor-whiteboard-border" :style="{
-    left: whiteboardBox.left + props.positionInfo.left + 'px',
-    top: whiteboardBox.top + props.positionInfo.top + 'px',
-    width: state.width + 'px',
-    height: state.height + 'px',
-    backgroundColor: state.backgroundColor
-      ? state.backgroundColor
-      : 'transparent',
-    backgroundImage: 'url(data:' + state.backgroundImg + ')',
-    backgroundSize: '100% 100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center'
-  }"></div>
+      <div
+        class="td-editor-whiteboard-border"
+        id="td-editor-whiteboard-border"
+        :style="{
+          left: whiteboardBox.left + props.positionInfo.left + 'px',
+          top: whiteboardBox.top + props.positionInfo.top + 'px',
+          width: state.width + 'px',
+          height: state.height + 'px',
+          backgroundColor: state.backgroundColor
+            ? state.backgroundColor
+            : 'transparent',
+          backgroundImage: 'url(data:' + state.backgroundImg + ')',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center center',
+        }"
+      ></div>
     </div>
   </div>
 </template>
@@ -80,45 +101,71 @@ const props = defineProps({
   },
 });
 
+watch(
+  () => props.domData,
+  (newVal) => {
+    console.log("domData变化了", newVal);
+  }
+);
+
 const state = reactive({
-  width: '', height: '', backgroundColor: '', backgroundImg: '', targetWidth: '', targetHeight: ''
-})
+  width: "",
+  height: "",
+  backgroundColor: "",
+  backgroundImg: "",
+  targetWidth: "",
+  targetHeight: "",
+});
 
-watch(() => props.domInfo, (newVal) => {
-  console.log("hahahha变化了~~", newVal)
-  let obj = newVal.ratio.split("*");
-  state.targetWidth = obj[0]
-  state.targetHeight = obj[1]
-  state.backgroundColor = newVal.backgroundColor
-  state.backgroundImg = newVal.backgroundImg
-  state.width = obj[0]
-  state.height = obj[1]
+watch(
+  () => props.domInfo,
+  (newVal) => {
+    console.log("hahahha变化了~~", newVal);
+    let obj = newVal.ratio.split("*");
+    state.targetWidth = obj[0];
+    state.targetHeight = obj[1];
+    state.backgroundColor = newVal.backgroundColor;
+    state.backgroundImg = newVal.backgroundImg;
+    state.width = obj[0];
+    state.height = obj[1];
+  },
+  { deep: true }
+);
 
-}, { deep: true })
+watch(
+  () => dataStore.ratio,
+  (newVal) => {
+    console.log("分辨率变化了", newVal);
+    let obj = newVal.split("*");
+    state.targetWidth = obj[0];
+    state.targetHeight = obj[1];
+    state.width = obj[0];
+    state.height = obj[1];
+  },
+  {
+    deep: true,
+  }
+);
 
-watch(() => dataStore.ratio, (newVal) => {
-  console.log("分辨率变化了", newVal)
-  let obj = newVal.split("*");
-  state.targetWidth = obj[0]
-  state.targetHeight = obj[1]
-  state.width = obj[0]
-  state.height = obj[1]
-}, {
-  deep: true
-})
+watch(
+  () => dataStore.backgroundColor,
+  (newVal) => {
+    state.backgroundColor = newVal;
+  },
+  {
+    deep: true,
+  }
+);
 
-watch(() => dataStore.backgroundColor, (newVal) => {
-  state.backgroundColor = newVal
-}, {
-  deep: true
-})
-
-
-watch(() => dataStore.backgroundImg, (newVal) => {
-  state.backgroundImg = newVal
-}, {
-  deep: true
-})
+watch(
+  () => dataStore.backgroundImg,
+  (newVal) => {
+    state.backgroundImg = newVal;
+  },
+  {
+    deep: true,
+  }
+);
 
 const domDataPage = computed(() => {
   return Object.values(props.domData);

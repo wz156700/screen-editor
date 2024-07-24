@@ -5,7 +5,7 @@
 <script setup>
 import * as echarts from "echarts";
 import { onMounted, ref, watch, reactive, nextTick } from "vue";
-defineOptions({ name: "pieChart1" });
+defineOptions({ name: "pieChart2" });
 
 const props = defineProps({
   data: {
@@ -21,15 +21,6 @@ const props = defineProps({
   labelfontSize: {
     type: String,
     default: "10",
-  },
-  isShowLabel: {
-    type: Boolean,
-    default: true,
-  },
-
-  lengendColor: {
-    type: String,
-    default: "#c23531",
   },
 
   //系列颜色
@@ -53,6 +44,10 @@ const props = defineProps({
     type: String,
     default: "#91c7ae",
   },
+  lengendColor: {
+    type: String,
+    default: "#c23531",
+  },
 });
 
 let myChart;
@@ -60,33 +55,42 @@ const line1 = ref(null);
 
 const state = reactive({
   option: {
-    title: {
-      text: "Referer of a Website",
-      subtext: "Fake Data",
-      left: "center",
-    },
     tooltip: {
       trigger: "item",
     },
     legend: {
-      orient: "vertical",
-      left: "left",
+      top: "5%",
+      left: "center",
       textStyle: {
         // 这是另一种设置文字颜色的方式
         color: "#ffffff",
       },
     },
-
     color: ["#c23531", "#2f4554", "#61a0a8", "#d48265", "#91c7ae"],
     series: [
       {
         name: "Access From",
         type: "pie",
-        radius: "50%",
-
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
         label: {
           show: false,
-          fontSize: 12,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
         },
         data: [
           { value: 1048, name: "Search Engine" },
@@ -95,20 +99,12 @@ const state = reactive({
           { value: 484, name: "Union Ads" },
           { value: 300, name: "Video Ads" },
         ],
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-          },
-        },
       },
     ],
   },
 });
 
 function setOption(option) {
-  console.log("option", option, myChart);
   if (!myChart) {
     nextTick(() => {
       myChart.setOption(option);
@@ -126,7 +122,6 @@ const handleData = (data) => {
     type: "pie",
     radius: "50%",
     data: data,
-    label: { show: props.isShowLabel, fontSize: props.labelfontSize },
     emphasis: {
       itemStyle: {
         shadowBlur: 10,
@@ -146,21 +141,7 @@ watch(
   () => props.labelfontSize,
   (newVal) => {
     if (newVal) {
-      state.option.series[0].label.fontSize = newVal;
-      setOption(state.option);
-    }
-  },
-  {
-    immediate: true,
-    deep: true,
-  }
-);
-
-watch(
-  () => props.lengendColor,
-  (newVal) => {
-    if (newVal) {
-      state.option.legend.textStyle.color = newVal;
+      state.option.series[0].emphasis.label.fontSize = newVal;
       setOption(state.option);
     }
   },
@@ -241,11 +222,12 @@ watch(
 );
 
 watch(
-  () => props.isShowLabel,
+  () => props.lengendColor,
   (newVal) => {
-    console.log("newValxixixiix", typeof newVal, newVal);
-    state.option.series[0].label.show = newVal;
-    setOption(state.option);
+    if (newVal) {
+      state.option.legend.textStyle.color = newVal;
+      setOption(state.option);
+    }
   },
   {
     immediate: true,

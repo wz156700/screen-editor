@@ -1369,6 +1369,18 @@ export const pieChart1 = {
                     max: 100,
                 },
                 {
+                    name: "是否显示label",
+                    type: "el-switch",
+                    field: "isShowLabel",
+                    default: true
+                },
+                {
+                    name: "图例颜色",
+                    type: "el-color-picker",
+                    field: "lengendColor",
+                    default: "#c23531",
+                },
+                {
                     name: "图表颜色",
                     type: "barColor",
                     children: [
@@ -1417,22 +1429,397 @@ export const pieChart1 = {
     data: {
         fieldDescription: [
             {
-                field: "y",
-                mapping: "y",
+                field: "value",
+                mapping: "value",
                 description: "值",
             },
             {
-                field: "s",
-                mapping: "s",
+                field: "name",
+                mapping: "name",
                 description: "系列",
             },
         ],
         data: [
-            { y: 1048, s: 'Search Engine' },
-            { y: 735, s: 'Direct' },
-            { y: 580, s: 'Email' },
-            { y: 484, s: 'Union Ads' },
-            { y: 300, s: 'Video Ads' },
+            { value: 1048, name: "Search Engine" },
+            { value: 735, name: "Direct" },
+            { value: 580, name: "Email" },
+            { value: 484, name: "Union Ads" },
+            { value: 300, name: "Video Ads" },
+        ],
+    },
+}
+
+export const pieChart2 = {
+    attribute: [
+        {
+            name: "属性配置",
+            value: "A",
+            children: [
+
+                {
+                    name: "label文字大小",
+                    type: "el-input-number",
+                    field: "labelfontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "图例颜色",
+                    type: "el-color-picker",
+                    field: "lengendColor",
+                    default: "#c23531",
+                },
+                {
+                    name: "图表颜色",
+                    type: "barColor",
+                    children: [
+                        {
+                            name: "系列一",
+                            key: "series1",
+                            children: [
+                                {
+                                    name: "part1颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof1",
+                                    default: "#c23531",
+                                },
+                                {
+                                    name: "part2颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof2",
+                                    default: "#2f4554",
+                                },
+                                {
+                                    name: "part3颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof3",
+                                    default: "#61a0a8",
+                                },
+                                {
+                                    name: "part4颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof4",
+                                    default: "#d48265",
+                                },
+                                {
+                                    name: "part5颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof5",
+                                    default: "#91c7ae",
+                                }
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "value",
+                mapping: "value",
+                description: "值",
+            },
+            {
+                field: "name",
+                mapping: "name",
+                description: "系列",
+            },
+        ],
+        data: [
+            { value: 1048, name: "Search Engine" },
+            { value: 735, name: "Direct" },
+            { value: 580, name: "Email" },
+            { value: 484, name: "Union Ads" },
+            { value: 300, name: "Video Ads" },
+        ],
+    },
+}
+
+export const pieChart3 = {
+    attribute: [
+        {
+            name: "属性配置",
+            value: "A",
+            children: [
+
+                {
+                    name: "label文字大小",
+                    type: "el-input-number",
+                    field: "labelfontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "是否显示label",
+                    type: "el-switch",
+                    field: "isShowLabel",
+                    default: true
+                },
+                {
+                    name: "图例颜色",
+                    type: "el-color-picker",
+                    field: "lengendColor",
+                    default: "#c23531",
+                },
+                {
+                    name: "图表颜色",
+                    type: "barColor",
+                    children: [
+                        {
+                            name: "系列一",
+                            key: "series1",
+                            children: [
+                                {
+                                    name: "part1颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof1",
+                                    default: "#c23531",
+                                },
+                                {
+                                    name: "part2颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof2",
+                                    default: "#2f4554",
+                                },
+                                {
+                                    name: "part3颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof3",
+                                    default: "#61a0a8",
+                                },
+                                {
+                                    name: "part4颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof4",
+                                    default: "#d48265",
+                                },
+                                {
+                                    name: "part5颜色",
+                                    type: "el-color-picker",
+                                    field: "partColorof5",
+                                    default: "#91c7ae",
+                                }
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "value",
+                mapping: "value",
+                description: "值",
+            },
+            {
+                field: "name",
+                mapping: "name",
+                description: "系列",
+            },
+        ],
+        data: [
+            { value: 40, name: 'rose 1' },
+            { value: 38, name: 'rose 2' },
+            { value: 32, name: 'rose 3' },
+            { value: 30, name: 'rose 4' },
+            { value: 28, name: 'rose 5' },
+        ],
+    },
+}
+
+//散点图
+export const scatterPlot1 = {
+    attribute: [
+        {
+            name: "属性配置",
+            value: "A",
+            children: [
+                {
+                    name: "散点颜色",
+                    type: "el-color-picker",
+                    field: "scatterPlotColor",
+                    default: "#c23531",
+                },
+                {
+                    name: "散点大小",
+                    type: "el-input-number",
+                    field: "scatterPlotSize",
+                    default: 20,
+
+                },
+            ],
+        },
+    ],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "value",
+                mapping: "value",
+                description: "值",
+            },
+            {
+                field: "name",
+                mapping: "name",
+                description: "系列",
+            },
+        ],
+        data: [
+            [10.0, 8.04],
+            [8.07, 6.95],
+            [13.0, 7.58],
+            [9.05, 8.81],
+            [11.0, 8.33],
+            [14.0, 7.66],
+            [13.4, 6.81],
+            [10.0, 6.33],
+            [14.0, 8.96],
+            [12.5, 6.82],
+            [9.15, 7.2],
+            [11.5, 7.2],
+            [3.03, 4.23],
+            [12.2, 7.83],
+            [2.02, 4.47],
+            [1.05, 3.33],
+            [4.05, 4.96],
+            [6.03, 7.24],
+            [12.0, 6.26],
+            [12.0, 8.84],
+            [7.08, 5.82],
+            [5.02, 5.68]
+        ],
+    },
+}
+
+export const scatterPlot2 = {
+    attribute: [
+        {
+            name: "属性配置",
+            value: "A",
+            children: [
+                {
+                    name: "x轴文本颜色",
+                    type: "el-color-picker",
+                    field: "xColor",
+                    default: "#fff",
+                },
+                {
+                    name: "x轴文字大小",
+                    type: "el-input-number",
+                    field: "xfontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "x轴名称",
+                    type: "el-input",
+                    field: "xcontent",
+                    default: "",
+                },
+                {
+                    name: "x轴名称颜色",
+                    type: "el-color-picker",
+                    field: "xcontentColor",
+                    default: "#fff",
+                },
+
+                {
+                    name: "y轴文本颜色",
+                    type: "el-color-picker",
+                    field: "yColor",
+                    default: "#fff",
+                },
+                {
+                    name: "y轴文字大小",
+                    type: "el-input-number",
+                    field: "yfontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "y轴名称",
+                    type: "el-input",
+                    field: "ycontent",
+                    default: "",
+                },
+                {
+                    name: "y轴名称颜色",
+                    type: "el-color-picker",
+                    field: "ycontentColor",
+                    default: "#fff",
+                },
+
+
+            ],
+        },
+    ],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "value",
+                mapping: "value",
+                description: "值",
+            },
+            {
+                field: "name",
+                mapping: "name",
+                description: "系列",
+            },
+        ],
+        data: [
+            [
+                [28604, 77, 17096869, 'Australia', 1990],
+                [31163, 77.4, 27662440, 'Canada', 1990],
+                [1516, 68, 1154605773, 'China', 1990],
+                [13670, 74.7, 10582082, 'Cuba', 1990],
+                [28599, 75, 4986705, 'Finland', 1990],
+                [29476, 77.1, 56943299, 'France', 1990],
+                [31476, 75.4, 78958237, 'Germany', 1990],
+                [28666, 78.1, 254830, 'Iceland', 1990],
+                [1777, 57.7, 870601776, 'India', 1990],
+                [29550, 79.1, 122249285, 'Japan', 1990],
+                [2076, 67.9, 20194354, 'North Korea', 1990],
+                [12087, 72, 42972254, 'South Korea', 1990],
+                [24021, 75.4, 3397534, 'New Zealand', 1990],
+                [43296, 76.8, 4240375, 'Norway', 1990],
+                [10088, 70.8, 38195258, 'Poland', 1990],
+                [19349, 69.6, 147568552, 'Russia', 1990],
+                [10670, 67.3, 53994605, 'Turkey', 1990],
+                [26424, 75.7, 57110117, 'United Kingdom', 1990],
+                [37062, 75.4, 252847810, 'United States', 1990]
+            ],
+            [
+                [44056, 81.8, 23968973, 'Australia', 2015],
+                [43294, 81.7, 35939927, 'Canada', 2015],
+                [13334, 76.9, 1376048943, 'China', 2015],
+                [21291, 78.5, 11389562, 'Cuba', 2015],
+                [38923, 80.8, 5503457, 'Finland', 2015],
+                [37599, 81.9, 64395345, 'France', 2015],
+                [44053, 81.1, 80688545, 'Germany', 2015],
+                [42182, 82.8, 329425, 'Iceland', 2015],
+                [5903, 66.8, 1311050527, 'India', 2015],
+                [36162, 83.5, 126573481, 'Japan', 2015],
+                [1390, 71.4, 25155317, 'North Korea', 2015],
+                [34644, 80.7, 50293439, 'South Korea', 2015],
+                [34186, 80.6, 4528526, 'New Zealand', 2015],
+                [64304, 81.6, 5210967, 'Norway', 2015],
+                [24787, 77.3, 38611794, 'Poland', 2015],
+                [23038, 73.13, 143456918, 'Russia', 2015],
+                [19360, 76.5, 78665830, 'Turkey', 2015],
+                [38225, 81.4, 64715810, 'United Kingdom', 2015],
+                [53354, 79.1, 321773631, 'United States', 2015]
+            ]
         ],
     },
 }

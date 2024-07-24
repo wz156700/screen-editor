@@ -19,7 +19,9 @@
             <el-tab-pane label="饼图">
               <rightCom :menuList="piesData"></rightCom>
             </el-tab-pane>
-            <el-tab-pane label="Task">Task</el-tab-pane>
+            <el-tab-pane label="散点">
+              <rightCom :menuList="scatterPlot"></rightCom>
+            </el-tab-pane>
           </el-tabs>
         </div>
       </div>
@@ -105,6 +107,7 @@ import historyList from "./historyList.vue";
 import analysisData from "@/assets/componentList/analysis.js";
 import linesData from "@/assets/componentList/line.js";
 import piesData from "@/assets/componentList/pie.js";
+import scatterPlot from "@/assets/componentList/scatterPlot.js";
 import componentsData from "@/assets/componentList/components.js";
 import mapData from "@/assets/componentList/map.js";
 import hTitleData from "@/assets/componentList/hTitle.js";

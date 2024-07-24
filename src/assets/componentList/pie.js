@@ -14,6 +14,28 @@ const pies = [
                 uuid: 'A1',
                 image: "/public/img/bar1.jpg",
                 isShow: true
+            },
+            {
+                type: 'pieChart2', // 组件名
+                mark: 'pieChart2', // 配置数据的名字
+                fabricType: 'rect',
+                width: 450, // 初始化大小
+                height: 450, // 
+                name: '圆角饼图',
+                uuid: 'A1',
+                image: "/public/img/bar1.jpg",
+                isShow: true
+            },
+            {
+                type: 'pieChart3', // 组件名
+                mark: 'pieChart3', // 配置数据的名字
+                fabricType: 'rect',
+                width: 450, // 初始化大小
+                height: 450, // 
+                name: '基础南丁格尔玫瑰图',
+                uuid: 'A1',
+                image: "/public/img/bar1.jpg",
+                isShow: true
             }
         ]
     }

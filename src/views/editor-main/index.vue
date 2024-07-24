@@ -6,26 +6,56 @@
   <div class="td-editorMain">
     <!-- 上 -->
     <div class="td-editorMain-topBox">
-      <EditorTop @saveItem="saveItem" @previewItem="previewItem" :domInfo="domInfo"></EditorTop>
+      <EditorTop
+        @saveItem="saveItem"
+        @previewItem="previewItem"
+        :domInfo="domInfo"
+      ></EditorTop>
     </div>
     <!-- 中心 -->
     <div class="td-editorMain-main">
       <!-- 左侧 -->
-      <div class="td-editorMain-main-left" :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }">
-        <EditorLeft @selectItem="selectItem" :selectId="selectUUID" :domData="domData" @updataDOM="updataDOM"
-          @updateShowOrHideEles="updateShowOrHideEles">
+      <div
+        class="td-editorMain-main-left"
+        :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }"
+      >
+        <EditorLeft
+          @selectItem="selectItem"
+          :selectId="selectUUID"
+          :domData="domData"
+          @updataDOM="updataDOM"
+          @updateShowOrHideEles="updateShowOrHideEles"
+        >
         </EditorLeft>
       </div>
       <!-- 中间 -->
       <div class="td-editorMain-main-middle" ref="mainMiddle">
-        <EditorMiddle :domData="domData" @addDOM="addDOM" @updataDOM="updataDOM" @updataDOMArray="updataDOMArray"
-          @removeDOM="removeDOM" @selectDom="selectDom" :draggable="draggable" ref="EditorMiddleRef"
-          :canvasInfo="canvasState" :domInfo="domInfo"></EditorMiddle>
+        <EditorMiddle
+          :domData="domData"
+          @addDOM="addDOM"
+          @updataDOM="updataDOM"
+          @updataDOMArray="updataDOMArray"
+          @removeDOM="removeDOM"
+          @selectDom="selectDom"
+          :draggable="draggable"
+          ref="EditorMiddleRef"
+          :canvasInfo="canvasState"
+          :domInfo="domInfo"
+        ></EditorMiddle>
       </div>
       <!-- 右侧 -->
-      <div class="td-editorMain-main-right" :style="{ width: state.isShowRightBar ? '22.5rem' : '2.5rem' }">
-        <EditorRight :propertyData="propertyData" :propertyTable="propertyTable" :selectId="selectUUID"
-          :domData="domData" :canvasInfo="canvasState" @updataDOM="updataDOM"></EditorRight>
+      <div
+        class="td-editorMain-main-right"
+        :style="{ width: state.isShowRightBar ? '22.5rem' : '2.5rem' }"
+      >
+        <EditorRight
+          :propertyData="propertyData"
+          :propertyTable="propertyTable"
+          :selectId="selectUUID"
+          :domData="domData"
+          :canvasInfo="canvasState"
+          @updataDOM="updataDOM"
+        ></EditorRight>
       </div>
     </div>
   </div>
@@ -46,7 +76,7 @@ import {
   watch,
   toRaw,
   getCurrentInstance,
-  onMounted
+  onMounted,
 } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
@@ -63,29 +93,43 @@ const mainMiddle = ref(null);
 
 const state = reactive({
   isShowLeftBar: computed(() => dataStore.global.isShowLeftBar),
-  isShowRightBar: computed(() => dataStore.global.isShowRightBar)
-})
+  isShowRightBar: computed(() => dataStore.global.isShowRightBar),
+});
 
 //监听左侧边栏更改中间编辑区域的宽度
-watch(() => dataStore.global.isShowLeftBar, (newVal) => {
-  console.log('mainMiddle', mainMiddle.value.style, newVal)
-  if (newVal) {
-    //如果两边都展开的话
-    mainMiddle.value.style.width = dataStore.global.isShowRightBar ? 'calc(100% - 41.25rem)' : 'calc(100% - 21.25rem)';
-  } else {
-    mainMiddle.value.style.width = dataStore.global.isShowRightBar ? 'calc(100% - 26.25rem)' : 'calc(100% - 6.25rem)';
+watch(
+  () => dataStore.global.isShowLeftBar,
+  (newVal) => {
+    console.log("mainMiddle", mainMiddle.value.style, newVal);
+    if (newVal) {
+      //如果两边都展开的话
+      mainMiddle.value.style.width = dataStore.global.isShowRightBar
+        ? "calc(100% - 41.25rem)"
+        : "calc(100% - 21.25rem)";
+    } else {
+      mainMiddle.value.style.width = dataStore.global.isShowRightBar
+        ? "calc(100% - 26.25rem)"
+        : "calc(100% - 6.25rem)";
+    }
   }
-})
+);
 
 //监听右侧边栏更改中间编辑区域的宽度
-watch(() => dataStore.global.isShowRightBar, (newVal) => {
-  if (newVal) {
-    //如果两边都展开的话
-    mainMiddle.value.style.width = dataStore.global.isShowLeftBar ? 'calc(100% - 41.25rem)' : 'calc(100% - 26.5rem)';
-  } else {
-    mainMiddle.value.style.width = dataStore.global.isShowLeftBar ? 'calc(100% - 21.25rem)' : 'calc(100% - 6.25rem)';
+watch(
+  () => dataStore.global.isShowRightBar,
+  (newVal) => {
+    if (newVal) {
+      //如果两边都展开的话
+      mainMiddle.value.style.width = dataStore.global.isShowLeftBar
+        ? "calc(100% - 41.25rem)"
+        : "calc(100% - 26.5rem)";
+    } else {
+      mainMiddle.value.style.width = dataStore.global.isShowLeftBar
+        ? "calc(100% - 21.25rem)"
+        : "calc(100% - 6.25rem)";
+    }
   }
-})
+);
 
 // 当前拖拽的元素
 const draggable = ref(null);
@@ -137,7 +181,7 @@ const updataDOMArray = (vals) => {
 };
 // 删除元素
 const removeDOM = (val) => {
-  alert("123")
+  alert("123");
   delete domData[val];
 };
 
@@ -190,14 +234,17 @@ const selectItem = (item) => {
 watch(
   () => domData,
   (news) => {
+    console.log("123");
     // 检查对象是否为空
     const isEmpty = Object.keys(news).length === 0;
     if (!isEmpty && selectUUID.value && selectUUID.value.length == 1) {
       let itemData = news[selectUUID.value];
+      console.log("itemData~~~", itemData);
       if (itemData) {
         propertyData.value = {
           ...getConfigData(itemData.mark, itemData),
         };
+        console.log(" propertyData.value", propertyData.value);
       } else {
         propertyData.value = {
           attribute: {},
@@ -213,6 +260,7 @@ watch(
     }
   },
   {
+    immediate: true,
     deep: true,
   }
 );
@@ -242,7 +290,7 @@ let domUpdata = [
 ];
 
 const updataRight = (label, value, uuid, type) => {
-  console.log('label, value, uuid, type', label, value, uuid, type)
+  console.log("label, value, uuid, type", label, value, uuid, type);
   if (type == "style" && canvasUpdata.includes(label)) {
     EditorMiddleRef.value.updataFiles(label, value, uuid);
   } else if (type == "style" && domUpdata.includes(label)) {
@@ -251,7 +299,7 @@ const updataRight = (label, value, uuid, type) => {
     domData[uuid].style[label] = value;
   } else if (type == "attribute") {
     domData[uuid].attribute[label] = value;
-    console.log(' domData[uuid]~~~', domData[uuid])
+    console.log("domData[uuid]~~~", domData[uuid]);
   }
 };
 
@@ -305,7 +353,7 @@ const previewItem = () => {
     },
   }).href;
 
-  window.open(url, '_blank');
+  window.open(url, "_blank");
 };
 
 // 查询数据
@@ -333,7 +381,7 @@ const getItem = () => {
 
 const updateShowOrHideEles = async (uuid) => {
   EditorMiddleRef.value.showOrhideEle(uuid);
-}
+};
 
 onMounted(() => {
   if (!route.params.id) {
@@ -352,7 +400,6 @@ onMounted(() => {
   //background: url("/public/img/bg.png");
   background-size: 100% 100%;
   color: var(--td-editor-color);
-
 
   .td-editorMain-topBox {
     width: 100%;
