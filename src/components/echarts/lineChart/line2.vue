@@ -59,6 +59,10 @@ const props = defineProps({
     type: String,
     default: "#fff",
   },
+  legendColor: {
+    type: String,
+    default: "#fff",
+  },
   //柱子颜色
   barStartColorof1: {
     type: String,
@@ -107,13 +111,12 @@ const state = reactive({
         },
       },
     },
-    // legend: {
-    //     data: ["供水", "回水"],
-    //     top: "15%",
-    //     textStyle: {
-    //         color: "#ffffff"
-    //     }
-    // },
+    legend: {
+      top: "15%",
+      textStyle: {
+        color: "#ffffff"
+      }
+    },
     xAxis: {
       data: ["国投热源1#", "国投热源2#", "城西热源"],
       axisLine: {
@@ -320,6 +323,20 @@ watch(
   (newVal) => {
     if (newVal) {
       state.option.xAxis.nameTextStyle.color = newVal;
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+//监听x轴name颜色
+watch(
+  () => props.legendColor,
+  (newVal) => {
+    if (newVal) {
+      state.option.legend.textStyle.color = newVal;
       setOption(state.option);
     }
   },

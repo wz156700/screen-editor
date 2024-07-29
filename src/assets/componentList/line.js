@@ -12,7 +12,7 @@ const lines = [
                 height: 450, // 
                 name: '普通折线图',
                 uuid: 'A1',
-                image: "/public/img/bar1.jpg",
+                image: "/public/img/line1.jpg",
                 isShow: true
             },
             {

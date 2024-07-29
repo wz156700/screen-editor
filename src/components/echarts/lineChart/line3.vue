@@ -5,7 +5,7 @@
 <script setup>
 import * as echarts from "echarts";
 import { onMounted, ref, reactive, watch, nextTick } from "vue";
-defineOptions({ name: "lineChart2" });
+defineOptions({ name: "lineChart3" });
 
 const props = defineProps({
   data: {

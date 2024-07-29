@@ -59,6 +59,10 @@ const props = defineProps({
     type: String,
     default: "#fff",
   },
+  lengendColor: {
+    type: String,
+    default: "#fff",
+  },
   //柱子颜色
   barStartColorof1: {
     type: String,
@@ -92,7 +96,11 @@ const state = reactive({
         type: "shadow",
       },
     },
-    legend: {},
+    legend: {
+      textStyle: {
+        color: '#ff0000'  // 修改为红色
+      },
+    },
     grid: {
       left: "3%",
       right: "4%",
@@ -223,6 +231,20 @@ watch(
     if (newVal) {
       console.log("newval~~变化了", newVal);
       state.option.xAxis.axisLabel.textStyle.color = newVal;
+      setOption(state.option);
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+watch(
+  () => props.lengendColor,
+  (newVal) => {
+    if (newVal) {
+      state.option.legend.textStyle.color = newVal;
       setOption(state.option);
     }
   },

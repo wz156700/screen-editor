@@ -45,7 +45,7 @@ const analysis = [
                 height: 450, // 
                 name: '双柱状图',
                 uuid: 'A4',
-                image: "/public/img/bar5.jpg",
+                image: "/public/img/bar6.jpg",
                 isShow: true
             },
             {
@@ -67,17 +67,6 @@ const analysis = [
                 height: 450, // 
                 name: '极坐标柱状图-样式2',
                 uuid: 'A6',
-                image: "/public/img/bar4.jpg",
-                isShow: true
-            },
-            {
-                type: 'BarChart4', // 组件名
-                mark: 'BarChart4', // 配置数据的名字
-                fabricType: 'rect',
-                width: 450, // 初始化大小
-                height: 450, // 
-                name: '极坐标柱状图-样式2',
-                uuid: 'A7',
                 image: "/public/img/bar4.jpg",
                 isShow: true
             }
