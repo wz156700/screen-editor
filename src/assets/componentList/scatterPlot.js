@@ -12,7 +12,7 @@ const scatterPlot = [
                 height: 450, // 
                 name: '基础散点图',
                 uuid: 'A1',
-                image: "/public/img/bar1.jpg",
+                image: "/public/img/dot1.png",
                 isShow: true
             },
             {
@@ -23,7 +23,7 @@ const scatterPlot = [
                 height: 450, // 
                 name: '气泡图',
                 uuid: 'A1',
-                image: "/public/img/bar1.jpg",
+                image: "/public/img/dot2.png",
                 isShow: true
             }
         ]

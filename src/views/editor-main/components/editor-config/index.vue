@@ -19,7 +19,10 @@
             <el-tab-pane label="饼图">
               <rightCom :menuList="piesData"></rightCom>
             </el-tab-pane>
-            <el-tab-pane label="散点">
+            <el-tab-pane label="散点图">
+              <rightCom :menuList="scatterPlot"></rightCom>
+            </el-tab-pane>
+            <el-tab-pane label="雷达图">
               <rightCom :menuList="scatterPlot"></rightCom>
             </el-tab-pane>
           </el-tabs>
@@ -34,48 +37,12 @@
             style="width: 100%; height: 100%"
             class="demo-tabs"
           >
-            <el-tab-pane label="柱状图">
+          <el-tab-pane label="文字"><textCom :menuList="hTitleData"></textCom></el-tab-pane> 
+          <el-tab-pane label="地图"> <rightCom :menuList="mapData"></rightCom></el-tab-pane>
+            <el-tab-pane label="边框">
               <rightCom :menuList="componentsData"></rightCom>
             </el-tab-pane>
-            <el-tab-pane label="Config">Config</el-tab-pane>
-            <el-tab-pane label="Role">Role</el-tab-pane>
-            <el-tab-pane label="Task">Task</el-tab-pane>
-          </el-tabs>
-        </div>
-      </div>
-      <div class="td-editorConfig-content-top-item">
-        <EditorIcon name="history" size="16px"></EditorIcon>
-        <span>地图</span>
-        <div class="dropDowm">
-          <el-tabs
-            tab-position="left"
-            style="width: 100%; height: 100%"
-            class="demo-tabs"
-          >
-            <el-tab-pane label="柱状图">
-              <rightCom :menuList="mapData"></rightCom>
-            </el-tab-pane>
-            <el-tab-pane label="Config">Config</el-tab-pane>
-            <el-tab-pane label="Role">Role</el-tab-pane>
-            <el-tab-pane label="Task">Task</el-tab-pane>
-          </el-tabs>
-        </div>
-      </div>
-      <div class="td-editorConfig-content-top-item">
-        <EditorIcon name="history" size="16px"></EditorIcon>
-        <span>文字</span>
-        <div class="dropDowm">
-          <el-tabs
-            tab-position="left"
-            style="width: 100%; height: 100%"
-            class="demo-tabs"
-          >
-            <el-tab-pane label="柱状图">
-              <textCom :menuList="hTitleData"></textCom>
-            </el-tab-pane>
-            <el-tab-pane label="Config">Config</el-tab-pane>
-            <el-tab-pane label="Role">Role</el-tab-pane>
-            <el-tab-pane label="Task">Task</el-tab-pane>
+            <el-tab-pane label="装饰条"><rightCom :menuList="componentsData2"></rightCom></el-tab-pane>
           </el-tabs>
         </div>
       </div>
@@ -109,6 +76,7 @@ import linesData from "@/assets/componentList/line.js";
 import piesData from "@/assets/componentList/pie.js";
 import scatterPlot from "@/assets/componentList/scatterPlot.js";
 import componentsData from "@/assets/componentList/components.js";
+import componentsData2 from "@/assets/componentList/components2.js";
 import mapData from "@/assets/componentList/map.js";
 import hTitleData from "@/assets/componentList/hTitle.js";
 import materialData from "@/assets/componentList/material.js";

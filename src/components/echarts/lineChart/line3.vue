@@ -62,19 +62,19 @@ const props = defineProps({
   //柱子颜色
   barStartColorof1: {
     type: String,
-    default: "#0000ff",
+    default: "rgba(139, 228, 6, 1)",
   },
   barEndColorof1: {
     type: String,
-    default: "#0000ff",
+    default: "rgba(0, 255, 238, 1)",
   },
   barStartColorof2: {
     type: String,
-    default: "#0000ff",
+    default: "rgba(255, 225, 0, 1)",
   },
   barEndColorof2: {
     type: String,
-    default: "#0000ff",
+    default: "rgba(255, 115, 0, 1)",
   },
 });
 

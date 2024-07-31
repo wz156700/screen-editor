@@ -66,19 +66,19 @@ const props = defineProps({
   //柱子颜色
   barStartColorof1: {
     type: String,
-    default: "#0000ff",
+    default: "rgba(94, 255, 0, 1)",
   },
   barEndColorof1: {
     type: String,
-    default: "#0000ff",
+    default: "rgba(0, 255, 221, 1)",
   },
   barStartColorof2: {
     type: String,
-    default: "#0000ff",
+    default: "rgba(204, 255, 0, 1)",
   },
   barEndColorof2: {
     type: String,
-    default: "#0000ff",
+    default: "rgba(255, 191, 0, 1)",
   },
 });
 
@@ -97,7 +97,6 @@ const state = reactive({
       top: "3%",
       left: "10%",
     },
-    backgroundColor: "#0f375f",
     grid: {
       top: "25%",
       bottom: "10%", //也可设置left和right设置距离来控制图表的大小

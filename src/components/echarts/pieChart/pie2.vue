@@ -118,18 +118,31 @@ function setOption(option) {
 const handleData = (data) => {
   let seriesArray = [];
   seriesArray.push({
-    name: "Access From",
-    type: "pie",
-    radius: "50%",
-    data: data,
-    emphasis: {
-      itemStyle: {
-        shadowBlur: 10,
-        shadowOffsetX: 0,
-        shadowColor: "rgba(0, 0, 0, 0.5)",
-      },
-    },
-  });
+        name: "Access From",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        data: data,
+      });
 
   state.option.series = [...seriesArray];
 

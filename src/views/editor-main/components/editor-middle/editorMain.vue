@@ -921,6 +921,7 @@ const setCanvas = async (canvasData) => {
   // 处理按键删除事件
   document.addEventListener("keydown", (e) => {
     console.log("canvas的全部元素xixixi", canvas.getObjects());
+    console.log('e.key',e.key)
     if (e.key === "Delete") {
       //获取选中元素
       let targetIds = FabricSelect.value.map((item) => item.uuid);

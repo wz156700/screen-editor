@@ -60,11 +60,6 @@ const line1 = ref(null);
 
 const state = reactive({
   option: {
-    title: {
-      text: "Referer of a Website",
-      subtext: "Fake Data",
-      left: "center",
-    },
     tooltip: {
       trigger: "item",
     },

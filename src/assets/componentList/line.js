@@ -23,7 +23,7 @@ const lines = [
                 height: 450, // 
                 name: '双折线图',
                 uuid: 'A2',
-                image: "/public/img/bar1.jpg",
+                image: "/public/img/line2.png",
                 isShow: true
             },
             {
@@ -34,7 +34,7 @@ const lines = [
                 height: 450, // 
                 name: '渐变堆叠折线图',
                 uuid: 'A3',
-                image: "/public/img/bar1.jpg",
+                image: "/public/img/line3.png",
                 isShow: true
             },
             {
@@ -45,7 +45,7 @@ const lines = [
                 height: 450, // 
                 name: '阶梯折线图',
                 uuid: 'A4',
-                image: "/public/img/bar1.jpg",
+                image: "/public/img/line4.png",
                 isShow: true
             },
         ]
