@@ -7,7 +7,7 @@ const hTitle = [{
     fabricType: 'rect',
     width: 450, // 初始化大小
     height: 150, // 
-    name: '文本组件1',
+    name: '文本组件',
     uuid: 'T1',
     content: 'xixixixi',
     fontSize: '1.25',

@@ -1837,3 +1837,104 @@ export const scatterPlot2 = {
         ],
     },
 }
+
+
+
+export const Map1 = {
+    attribute: [
+        {
+            name: "属性配置",
+            value: "A",
+            children: [
+                {
+                    name: "地图文字颜色",
+                    type: "el-color-picker",
+                    field: "mapLabelColor",
+                    default: "#fff",
+                },
+                {
+                    name: "地图文字大小",
+                    type: "el-input-number",
+                    field: "mapLabelFontSize",
+                    default: 12,
+                    max: 12,
+                    max: 100,
+                },
+                {
+                    name: "地图高亮颜色",
+                    type: "el-color-picker",
+                    field: "emphasisColor",
+                    default: "#fff",
+                },
+
+                {
+                    name: "地图板块边缘颜色",
+                    type: "el-color-picker",
+                    field: "plateEdgeColor",
+                    default: "#fff",
+                },
+                {
+                    name: "图例颜色",
+                    type: "visualMapColor",
+                    children: [
+                        {
+                            name: "系列一",
+                            key: "series1",
+                            children: [
+                                {
+                                    name: "低位颜色",
+                                    type: "el-color-picker",
+                                    field: "lowColorof1",
+                                    default: "rgba(4, 255, 0, 1)",
+                                },
+                                {
+                                    name: "中位颜色",
+                                    type: "el-color-picker",
+                                    field: "MiddleColorof1",
+                                    default: "rgba(14, 208, 202, 1)",
+                                }, {
+                                    name: "高位颜色",
+                                    type: "el-color-picker",
+                                    field: "highColorof1",
+                                    default: "rgba(14, 208, 202, 1)",
+                                },
+                            ],
+                        },
+                    ],
+                },
+
+            ],
+        },
+    ],
+    style: [],
+    data: {
+        fieldDescription: [
+            {
+                field: "value",
+                mapping: "value",
+                description: "值",
+            },
+            {
+                field: "name",
+                mapping: "name",
+                description: "系列",
+            },
+        ],
+        data: [
+            { name: "沈阳市", value: 11 },
+            { name: "大连市", value: 14 },
+            { name: "鞍山市", value: 31 },
+            { name: "抚顺市", value: 6 },
+            { name: "本溪市", value: 0 },
+            { name: "丹东市", value: 0 },
+            { name: "锦州市", value: 3 },
+            { name: "营口市", value: 4 },
+            { name: "阜新市", value: 5 },
+            { name: "辽阳市", value: 21 },
+            { name: "盘锦市", value: 4 },
+            { name: "铁岭市", value: 5 },
+            { name: "朝阳市", value: 0 },
+            { name: "葫芦岛市", value: 0 },
+        ],
+    },
+}

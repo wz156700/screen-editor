@@ -5,11 +5,7 @@
         <EditorIcon name="analysis" size="16px"></EditorIcon>
         <span>图表</span>
         <div class="dropDowm">
-          <el-tabs
-            tab-position="left"
-            style="width: 100%; height: 100%"
-            class="demo-tabs"
-          >
+          <el-tabs tab-position="left" style="width: 100%; height: 100%" class="demo-tabs">
             <el-tab-pane label="柱状图">
               <rightCom :menuList="analysisData"></rightCom>
             </el-tab-pane>
@@ -22,8 +18,8 @@
             <el-tab-pane label="散点图">
               <rightCom :menuList="scatterPlot"></rightCom>
             </el-tab-pane>
-            <el-tab-pane label="雷达图">
-              <rightCom :menuList="scatterPlot"></rightCom>
+            <el-tab-pane label="其他图表">
+              <p style="color:white;text-align: center;line-height:45px;font-size: 1.15rem;">更多图表模板正在添加中......</p>
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -32,17 +28,20 @@
         <EditorIcon name="components" size="16px"></EditorIcon>
         <span>组件</span>
         <div class="dropDowm">
-          <el-tabs
-            tab-position="left"
-            style="width: 100%; height: 100%"
-            class="demo-tabs"
-          >
-          <el-tab-pane label="文字"><textCom :menuList="hTitleData"></textCom></el-tab-pane> 
-          <el-tab-pane label="地图"> <rightCom :menuList="mapData"></rightCom></el-tab-pane>
+          <el-tabs tab-position="left" style="width: 100%; height: 100%" class="demo-tabs">
+
+            <el-tab-pane label="地图">
+              <rightCom :menuList="mapData"></rightCom>
+            </el-tab-pane>
             <el-tab-pane label="边框">
               <rightCom :menuList="componentsData"></rightCom>
             </el-tab-pane>
-            <el-tab-pane label="装饰条"><rightCom :menuList="componentsData2"></rightCom></el-tab-pane>
+            <el-tab-pane label="装饰条">
+              <rightCom :menuList="componentsData2"></rightCom>
+            </el-tab-pane>
+            <el-tab-pane label="文字">
+              <textCom :menuList="hTitleData"></textCom>
+            </el-tab-pane>
           </el-tabs>
         </div>
       </div>

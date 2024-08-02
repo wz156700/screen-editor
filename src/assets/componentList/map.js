@@ -10,9 +10,10 @@ const components = [
                 fabricType: "rect",
                 width: 450, // 初始化大小
                 height: 450, //
-                name: "地图-1",
+                name: "基础地图",
                 uuid: 'D1',
-                isShow: true
+                isShow: true,
+                image: "/public/img/Map1.png",
             },
         ]
     }

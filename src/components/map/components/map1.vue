@@ -1,37 +1,74 @@
-<!--
-
-组件名称: 地图组件
--->
 <template>
   <div class="map-container" ref="refDom"></div>
 </template>
 
 <script setup>
 import * as echarts from "echarts";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { repJson } from "./data";
 
 defineOptions({ name: "Map1" });
+
+const props = defineProps({
+  data: {
+    type: String,
+    require: true,
+  },
+  key: {
+    type: String,
+    require: true,
+  },
+
+  mapLabelColor: {
+    type: String,
+    default: "#fff",
+  },
+
+  mapLabelFontSize: {
+    type: String,
+    default: "10",
+  },
+
+  emphasisColor: {
+    type: String,
+    default: "#fff",
+  },
+
+  plateEdgeColor: {
+    type: String,
+    default: "#fff",
+  },
+
+  lowColorof1: {
+    type: String,
+    default: "rgba(4, 255, 0, 1)",
+  },
+  MiddleColorof1: {
+    type: String,
+    default: "rgba(14, 208, 202, 1)",
+  },
+  highColorof1: {
+    type: String,
+    default: "rgba(187, 224, 2, 1)",
+  },
+});
 const refDom = ref(null);
 
-const infoMap = () => {
-  let myChart = echarts.init(refDom.value);
-  echarts.registerMap("liaoning", repJson);
-
-  let option = {
-    // visualMap: {
-    //     min: 0,
-    //     max: 50,
-    //     text:['High','Low'],
-    //     textStyle:{
-    //         color:'#fff'
-    //     },
-    //     realtime: false,
-    //     calculable: true,
-    //     inRange: {
-    //         color: ['lightskyblue','yellow', 'orangered']
-    //     }
-    // },
+const state = reactive({
+  option: {
+    visualMap: {
+      min: 0,
+      max: 50,
+      text: ['High', 'Low'],
+      textStyle: {
+        color: '#fff'
+      },
+      realtime: false,
+      calculable: true,
+      inRange: {
+        color: ['lightskyblue', 'yellow', 'orangered']
+      }
+    },
     series: [
       {
         name: "辽宁地图全览",
@@ -63,22 +100,6 @@ const infoMap = () => {
           borderColor: "#17caf0", //地图各块的边框颜色
           borderWidth: 1, //地图各块的边框
           borderType: "solid",
-          areaColor: {
-            x: 0.5,
-            y: 0.7,
-            r: 0.5,
-            colorStops: [
-              {
-                offset: 0,
-                color: "#2A72D7",
-              },
-              {
-                offset: 1,
-                color: "#51A1FB",
-              },
-            ],
-            global: false, // 缺省为 false
-          },
         },
         data: [
           { name: "沈阳市", value: 11 },
@@ -98,14 +119,24 @@ const infoMap = () => {
         ],
       },
     ],
-  };
+  }
+})
 
-  option && myChart.setOption(option);
+const infoMap = () => {
+  let myChart = echarts.init(refDom.value);
+  echarts.registerMap("liaoning", repJson);
+  state.option && myChart.setOption(state.option);
 };
 
 onMounted(() => {
   infoMap();
 });
+
+watch(() => props.mapLabelColor, (newVal) => {
+  if (newVal) {
+
+  }
+})
 </script>
 
 <style scoped>
