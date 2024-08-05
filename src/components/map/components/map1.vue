@@ -4,7 +4,7 @@
 
 <script setup>
 import * as echarts from "echarts";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, defineProps, reactive } from "vue";
 import { repJson } from "./data";
 
 defineOptions({ name: "Map1" });
@@ -52,6 +52,7 @@ const props = defineProps({
     default: "rgba(187, 224, 2, 1)",
   },
 });
+
 const refDom = ref(null);
 
 const state = reactive({
@@ -122,11 +123,22 @@ const state = reactive({
   }
 })
 
+let myChart;
 const infoMap = () => {
-  let myChart = echarts.init(refDom.value);
+  myChart = echarts.init(refDom.value);
   echarts.registerMap("liaoning", repJson);
-  state.option && myChart.setOption(state.option);
+  myChart.setOption(state.option);
 };
+
+function setOption(option) {
+  if (!myChart) {
+    nextTick(() => {
+      myChart.setOption(option);
+    });
+    return;
+  }
+  myChart.setOption(option);
+}
 
 onMounted(() => {
   infoMap();
@@ -134,9 +146,54 @@ onMounted(() => {
 
 watch(() => props.mapLabelColor, (newVal) => {
   if (newVal) {
-
+    state.option.series[0].label.normal.color = newVal
+    setOption(state.option)
   }
 })
+
+watch(() => props.mapLabelFontSize, (newVal) => {
+  if (newVal) {
+    state.option.series[0].label.normal.fontSize = newVal
+    setOption(state.option)
+  }
+})
+
+
+watch(() => props.emphasisColor, (newVal) => {
+  if (newVal) {
+    state.option.series[0].label.emphasis.color = newVal
+    setOption(state.option)
+  }
+})
+
+watch(() => props.plateEdgeColor, (newVal) => {
+  if (newVal) {
+    state.option.series[0].itemStyle.borderColor = newVal
+    setOption(state.option)
+  }
+})
+
+watch(() => props.lowColorof1, (newVal) => {
+  if (newVal) {
+    state.option.visualMap.inRange.color[0] = newVal
+    setOption(state.option)
+  }
+})
+
+watch(() => props.MiddleColorof1, (newVal) => {
+  if (newVal) {
+    state.option.visualMap.inRange.color[1] = newVal
+    setOption(state.option)
+  }
+})
+
+watch(() => props.highColorof1, (newVal) => {
+  if (newVal) {
+    state.option.visualMap.inRange.color[2] = newVal
+    setOption(state.option)
+  }
+})
+
 </script>
 
 <style scoped>

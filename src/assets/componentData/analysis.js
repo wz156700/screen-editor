@@ -1839,7 +1839,7 @@ export const scatterPlot2 = {
 }
 
 
-
+//地图
 export const Map1 = {
     attribute: [
         {
@@ -1875,7 +1875,7 @@ export const Map1 = {
                 },
                 {
                     name: "图例颜色",
-                    type: "visualMapColor",
+                    type: "barColor",
                     children: [
                         {
                             name: "系列一",
