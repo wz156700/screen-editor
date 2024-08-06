@@ -41,15 +41,15 @@ const props = defineProps({
 
   lowColorof1: {
     type: String,
-    default: "rgba(4, 255, 0, 1)",
+    default: "",
   },
   MiddleColorof1: {
     type: String,
-    default: "rgba(14, 208, 202, 1)",
+    default: "",
   },
   highColorof1: {
     type: String,
-    default: "rgba(187, 224, 2, 1)",
+    default: "",
   },
 });
 
@@ -175,21 +175,30 @@ watch(() => props.plateEdgeColor, (newVal) => {
 
 watch(() => props.lowColorof1, (newVal) => {
   if (newVal) {
+    console.log("xixixi1")
     state.option.visualMap.inRange.color[0] = newVal
+    state.option.visualMap.inRange.color[1] = props.MiddleColorof1
+    state.option.visualMap.inRange.color[2] = props.highColorof1
     setOption(state.option)
   }
 })
 
 watch(() => props.MiddleColorof1, (newVal) => {
   if (newVal) {
+    console.log("xixixi2")
     state.option.visualMap.inRange.color[1] = newVal
+    state.option.visualMap.inRange.color[0] = props.lowColorof1
+    state.option.visualMap.inRange.color[2] = props.highColorof1
     setOption(state.option)
   }
 })
 
 watch(() => props.highColorof1, (newVal) => {
   if (newVal) {
+    console.log("xixixi3")
     state.option.visualMap.inRange.color[2] = newVal
+    state.option.visualMap.inRange.color[1] = props.MiddleColorof1
+    state.option.visualMap.inRange.color[0] = props.lowColorof1
     setOption(state.option)
   }
 })
