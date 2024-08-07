@@ -1,5 +1,5 @@
 import { descriptionProps } from "element-plus";
-import { keyBy } from "lodash-es";
+import { isMap, keyBy } from "lodash-es";
 
 // 柱状图
 export const BarChart1 = {
@@ -1857,7 +1857,7 @@ export const Map1 = {
                     type: "el-input-number",
                     field: "mapLabelFontSize",
                     default: 12,
-                    max: 12,
+                    min: 12,
                     max: 100,
                 },
                 {
@@ -1891,7 +1891,7 @@ export const Map1 = {
                                     name: "中位颜色",
                                     type: "el-color-picker",
                                     field: "MiddleColorof1",
-                                    default: "rgba(14, 208, 202, 1)",
+                                    default: "rgba(225, 24, 162, 1)",
                                 }, {
                                     name: "高位颜色",
                                     type: "el-color-picker",
@@ -1920,21 +1920,24 @@ export const Map1 = {
                 description: "系列",
             },
         ],
-        data: [
-            { name: "沈阳市", value: 11 },
-            { name: "大连市", value: 14 },
-            { name: "鞍山市", value: 31 },
-            { name: "抚顺市", value: 6 },
-            { name: "本溪市", value: 0 },
-            { name: "丹东市", value: 0 },
-            { name: "锦州市", value: 3 },
-            { name: "营口市", value: 4 },
-            { name: "阜新市", value: 5 },
-            { name: "辽阳市", value: 21 },
-            { name: "盘锦市", value: 4 },
-            { name: "铁岭市", value: 5 },
-            { name: "朝阳市", value: 0 },
-            { name: "葫芦岛市", value: 0 },
-        ],
+        data: {
+            isMap: true,
+            mapData: [
+                { name: "沈阳市", value: 11 },
+                { name: "大连市", value: 14 },
+                { name: "鞍山市", value: 31 },
+                { name: "抚顺市", value: 6 },
+                { name: "本溪市", value: 0 },
+                { name: "丹东市", value: 0 },
+                { name: "锦州市", value: 3 },
+                { name: "营口市", value: 4 },
+                { name: "阜新市", value: 5 },
+                { name: "辽阳市", value: 21 },
+                { name: "盘锦市", value: 4 },
+                { name: "铁岭市", value: 5 },
+                { name: "朝阳市", value: 0 },
+                { name: "葫芦岛市", value: 0 },
+            ]
+        }
     },
 }

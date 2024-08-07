@@ -13,6 +13,7 @@
         </el-select>
       </el-form-item>
     </el-form>
+    <p v-if="state.isMap"><span>上传地图json文件</span><input type="file" id="jsonFileInput" @change="handleJsonChange"></p>
     <div class="itemDataItemName">
       静态数据 <button @click="handleChange">提交</button>
     </div>
@@ -51,7 +52,8 @@ const formPublic = reactive({
 });
 
 const state = reactive({
-  fieldDescription: []
+  fieldDescription: [],
+  isMap: false
 })
 
 const mode = "default";
@@ -74,18 +76,59 @@ const handleChange = () => {
   });
 };
 
+//针对地图部分的逻辑
+const handleJsonChange = (e) => {
+  var file = e.target.files[0];
+
+  if (file) {
+    var reader = new FileReader();
+
+    // 当读取完成时触发
+    reader.onload = function (event) {
+      try {
+        var content = event.target.result; // 这里是文件的原始文本内容
+        emit("updataDOM", {
+          uuid: dataStore.element.selectedUUid,
+          jsonData: JSON.parse(content),
+        });
+      } catch (error) {
+        console.error('Error parsing JSON string:', error);
+      }
+    };
+
+    // 开始读取文件
+    reader.readAsText(file);
+  }
+}
+
+
 
 // 监听图表数据
 watch(() => props.itemData, (newVal) => {
-
   state.fieldDescription = newVal.fieldDescription
-  const dataString = JSON.stringify(newVal.data, null, 2); // 格式化 JSON 字符串
-  nextTick(() => {
-    const editor = editorRef.value;
-    // 使用命令插入代码块
-    editor.focus()
-    editor.insertText(dataString)
-  })
+  //如果是数组
+  if (Array.isArray(newVal.data)) {
+    const dataString = JSON.stringify(newVal.data, null, 2); // 格式化 JSON 字符串
+    nextTick(() => {
+      const editor = editorRef.value;
+      // 使用命令插入代码块
+      editor.focus()
+      editor.insertText(dataString)
+    })
+  } else {
+    state.isMap = newVal.data.isMap
+    const dataString = JSON.stringify(newVal.data.mapData, null, 2); // 格式化 JSON 字符串
+    nextTick(() => {
+      //地图数据data
+      const editor = editorRef.value;
+      // 使用命令插入代码块
+      editor.focus()
+      editor.insertText(dataString)
+
+    })
+  }
+
+
 
 }, {
   immediate: true, deep: true
@@ -113,6 +156,7 @@ onBeforeUnmount(() => {
     color: white !important;
   }
 
+
   .itemDataItemName {
     width: 120px;
     height: 35px;
@@ -125,7 +169,6 @@ onBeforeUnmount(() => {
 
   .itemDataItemCode {
     width: 100%;
-    height: 400px;
     border-top: 1px solid #040404;
     border-bottom: 1px solid #040404;
 

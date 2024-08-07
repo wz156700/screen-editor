@@ -4,13 +4,17 @@
 
 <script setup>
 import * as echarts from "echarts";
-import { onMounted, ref, watch, defineProps, reactive } from "vue";
+import { onMounted, ref, watch, defineProps, reactive, nextTick } from "vue";
 import { repJson } from "./data";
 
 defineOptions({ name: "Map1" });
 
 const props = defineProps({
   data: {
+    type: String,
+    require: true,
+  },
+  jsonData: {
     type: String,
     require: true,
   },
@@ -58,16 +62,14 @@ const refDom = ref(null);
 const state = reactive({
   option: {
     visualMap: {
-      min: 0,
-      max: 50,
-      text: ['High', 'Low'],
+      text: ['高', '低'],
       textStyle: {
         color: '#fff'
       },
       realtime: false,
       calculable: true,
       inRange: {
-        color: ['lightskyblue', 'yellow', 'orangered']
+        color: ['#006edd', '#e0ffff',]
       }
     },
     series: [
@@ -79,23 +81,18 @@ const state = reactive({
           normal: {
             show: true,
             color: "#fff",
-            fontSize: 12,
+            fontSize: 18,
           },
           emphasis: {
             show: true,
-            color: "#fff",
-            fontSize: 12,
+            color: "#ff0000",
           },
         },
         emphasis: {
           itemStyle: {
             areaColor: "red", // 高亮时候地图显示的颜色
             borderWidth: 1, // 高亮时的边框宽度
-          },
-          label: {
-            fontSize: 12, // 选中地图文字字号和字体颜色
-            color: "#fff",
-          },
+          }
         },
         itemStyle: {
           borderColor: "#17caf0", //地图各块的边框颜色
@@ -149,14 +146,14 @@ watch(() => props.mapLabelColor, (newVal) => {
     state.option.series[0].label.normal.color = newVal
     setOption(state.option)
   }
-})
+}, { immediate: true, deep: true })
 
 watch(() => props.mapLabelFontSize, (newVal) => {
   if (newVal) {
     state.option.series[0].label.normal.fontSize = newVal
     setOption(state.option)
   }
-})
+}, { immediate: true, deep: true })
 
 
 watch(() => props.emphasisColor, (newVal) => {
@@ -164,18 +161,17 @@ watch(() => props.emphasisColor, (newVal) => {
     state.option.series[0].label.emphasis.color = newVal
     setOption(state.option)
   }
-})
+}, { immediate: true, deep: true })
 
 watch(() => props.plateEdgeColor, (newVal) => {
   if (newVal) {
     state.option.series[0].itemStyle.borderColor = newVal
     setOption(state.option)
   }
-})
+}, { immediate: true, deep: true })
 
 watch(() => props.lowColorof1, (newVal) => {
   if (newVal) {
-    console.log("xixixi1")
     state.option.visualMap.inRange.color[0] = newVal
     state.option.visualMap.inRange.color[1] = props.MiddleColorof1
     state.option.visualMap.inRange.color[2] = props.highColorof1
@@ -185,23 +181,46 @@ watch(() => props.lowColorof1, (newVal) => {
 
 watch(() => props.MiddleColorof1, (newVal) => {
   if (newVal) {
-    console.log("xixixi2")
     state.option.visualMap.inRange.color[1] = newVal
     state.option.visualMap.inRange.color[0] = props.lowColorof1
     state.option.visualMap.inRange.color[2] = props.highColorof1
     setOption(state.option)
   }
-})
+}, { immediate: true, deep: true })
 
 watch(() => props.highColorof1, (newVal) => {
   if (newVal) {
-    console.log("xixixi3")
     state.option.visualMap.inRange.color[2] = newVal
     state.option.visualMap.inRange.color[1] = props.MiddleColorof1
     state.option.visualMap.inRange.color[0] = props.lowColorof1
     setOption(state.option)
   }
-})
+}, { immediate: true, deep: true })
+
+//监听页面数据变化
+watch(() => props.data, (newval) => {
+  console.log(newval)
+  if (newval) {
+    let data = JSON.parse(JSON.stringify(newval))
+    console.log("data~~~xixixi", typeof data)
+    // if (Object.keys(data).length == 0) {
+    //   return
+    // }
+    // handleData(data)
+  }
+
+}, { immediate: true, deep: true })
+
+watch(() => props.jsonData, (newval) => {
+  console.log('地图Json数据~~', newval)
+  if (newval) {
+    let data = JSON.parse(JSON.stringify(newval))
+    console.log("data~~~", data)
+    echarts.registerMap("china", data);
+    myChart.setOption(state.option);
+  }
+
+}, { immediate: true, deep: true })
 
 </script>
 

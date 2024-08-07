@@ -3,20 +3,14 @@
 组件名称: 画布白板
 -->
 <template>
-  <div
-    class="td-editor-whiteboard"
-    id="td-editor-whiteboard"
-    :style="{
-      width: state.width + 'px',
-      height: state.height + 'px',
-    }"
-  >
+  <div class="td-editor-whiteboard" id="td-editor-whiteboard" :style="{
+    width: state.width + 'px',
+    height: state.height + 'px',
+  }">
     <!-- {{ domDataPage }} -->
     <div class="td-editor-whiteboard-box" :style="styleBox">
       <!-- {{ domDataPage }} -->
-      <template
-        v-for="item in domDataPage"
-        :key="
+      <template v-for="item in domDataPage" :key="
           item.uuid +
           item.width +
           item.height +
@@ -24,54 +18,42 @@
           item.mtr +
           item.mbr +
           item.mbl
-        "
-      >
-        <div
-          class="td-editor-whiteboard-box-item"
-          :style="{
-            display: item.isShow ? 'block' : 'none',
-            left:
-              whiteboardBox.left + props.positionInfo.left + item.left + 'px',
-            top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
-            width: item.width + 'px',
-            height: item.height + 'px',
-            transform: `rotate(${item.angle}deg)`,
-            transformOrigin: `${item.angleX}px ${item.angleY}px`,
-            zIndex: item.zIndex,
-            borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
-            padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
-            alignItems: `${item.alignW}`,
-            justifyContent: `${item.alignH}`,
-          }"
-          :set-key="item.uuid"
-        >
-          <component
-            :is="item.type"
-            class="td-editor-whiteboard-box-item-com"
-            :key="item.uuid"
-            v-bind="item.attribute"
-            :data="item.data ? item.data : '初始化'"
-          ></component>
+        ">
+
+        <div class="td-editor-whiteboard-box-item" :style="{
+    display: item.isShow ? 'block' : 'none',
+    left:
+      whiteboardBox.left + props.positionInfo.left + item.left + 'px',
+    top: whiteboardBox.top + props.positionInfo.top + item.top + 'px',
+    width: item.width + 'px',
+    height: item.height + 'px',
+    transform: `rotate(${item.angle}deg)`,
+    transformOrigin: `${item.angleX}px ${item.angleY}px`,
+    zIndex: item.zIndex,
+    borderRadius: `${item.btl}px ${item.btr}px ${item.bbr}px ${item.bbl}px`,
+    padding: `${item.mtl}px ${item.mtr}px ${item.mbr}px ${item.mbl}px`,
+    alignItems: `${item.alignW}`,
+    justifyContent: `${item.alignH}`,
+  }" :set-key="item.uuid">
+          {{ item.jsonData }}
+          <component :is="item.type" class="td-editor-whiteboard-box-item-com" :key="item.uuid" v-bind="item.attribute"
+            :data="item.data ? item.data : '初始化'" :jsondata="item.jsonData ? item.jsonData : '初始化'"></component>
         </div>
       </template>
       <h1>{{ domInfo.backgroundColor }}</h1>
-      <div
-        class="td-editor-whiteboard-border"
-        id="td-editor-whiteboard-border"
-        :style="{
-          left: whiteboardBox.left + props.positionInfo.left + 'px',
-          top: whiteboardBox.top + props.positionInfo.top + 'px',
-          width: state.width + 'px',
-          height: state.height + 'px',
-          backgroundColor: state.backgroundColor
-            ? state.backgroundColor
-            : 'transparent',
-          backgroundImage: 'url(data:' + state.backgroundImg + ')',
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center center',
-        }"
-      ></div>
+      <div class="td-editor-whiteboard-border" id="td-editor-whiteboard-border" :style="{
+    left: whiteboardBox.left + props.positionInfo.left + 'px',
+    top: whiteboardBox.top + props.positionInfo.top + 'px',
+    width: state.width + 'px',
+    height: state.height + 'px',
+    backgroundColor: state.backgroundColor
+      ? state.backgroundColor
+      : 'transparent',
+    backgroundImage: 'url(data:' + state.backgroundImg + ')',
+    backgroundSize: '100% 100%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+  }"></div>
     </div>
   </div>
 </template>
