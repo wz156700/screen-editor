@@ -14,7 +14,7 @@ const props = defineProps({
     type: String,
     require: true,
   },
-  jsonData: {
+  jsondata: {
     type: String,
     require: true,
   },
@@ -69,7 +69,7 @@ const state = reactive({
       realtime: false,
       calculable: true,
       inRange: {
-        color: ['#006edd', '#e0ffff',]
+        color: ['#e0ffff', '#006edd',]
       }
     },
     series: [
@@ -137,6 +137,13 @@ function setOption(option) {
   myChart.setOption(option);
 }
 
+//处理数据
+const handleData = (data) => {
+  state.option.series[0].data = data;
+
+  setOption(state.option);
+};
+
 onMounted(() => {
   infoMap();
 });
@@ -199,25 +206,26 @@ watch(() => props.highColorof1, (newVal) => {
 
 //监听页面数据变化
 watch(() => props.data, (newval) => {
-  console.log(newval)
+  console.log("地图数据改变了~", newval)
   if (newval) {
     let data = JSON.parse(JSON.stringify(newval))
     console.log("data~~~xixixi", typeof data)
-    // if (Object.keys(data).length == 0) {
-    //   return
-    // }
-    // handleData(data)
+    if (Object.keys(data).length == 0) {
+      return
+    }
+    handleData(data)
   }
 
 }, { immediate: true, deep: true })
 
-watch(() => props.jsonData, (newval) => {
+watch(() => props.jsondata, (newval) => {
   console.log('地图Json数据~~', newval)
-  if (newval) {
+  if (newval != "初始化" && newval) {
     let data = JSON.parse(JSON.stringify(newval))
     console.log("data~~~", data)
     echarts.registerMap("china", data);
-    myChart.setOption(state.option);
+    state.option.series[0].map = 'china'
+    setOption(state.option);
   }
 
 }, { immediate: true, deep: true })

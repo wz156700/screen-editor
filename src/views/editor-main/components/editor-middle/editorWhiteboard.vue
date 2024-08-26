@@ -35,7 +35,6 @@
     alignItems: `${item.alignW}`,
     justifyContent: `${item.alignH}`,
   }" :set-key="item.uuid">
-          {{ item.jsonData }}
           <component :is="item.type" class="td-editor-whiteboard-box-item-com" :key="item.uuid" v-bind="item.attribute"
             :data="item.data ? item.data : '初始化'" :jsondata="item.jsonData ? item.jsonData : '初始化'"></component>
         </div>
