@@ -209,7 +209,7 @@ const okButton = async () => {
           cover: imageData.value
         })
           .then((res) => {
-            console.log("res",res)
+            console.log("res", res)
             ElMessage({
               message: "创建成功",
               type: "success",

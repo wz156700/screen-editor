@@ -18,6 +18,9 @@
             <el-tab-pane label="散点图">
               <rightCom :menuList="scatterPlot"></rightCom>
             </el-tab-pane>
+            <el-tab-pane label="地图">
+              <rightCom :menuList="mapData"></rightCom>
+            </el-tab-pane>
             <el-tab-pane label="其他图表">
               <p style="color:white;text-align: center;line-height:45px;font-size: 1.15rem;">更多图表模板正在添加中......</p>
             </el-tab-pane>
@@ -30,9 +33,7 @@
         <div class="dropDowm">
           <el-tabs tab-position="left" style="width: 100%; height: 100%" class="demo-tabs">
 
-            <el-tab-pane label="地图">
-              <rightCom :menuList="mapData"></rightCom>
-            </el-tab-pane>
+
             <el-tab-pane label="边框">
               <rightCom :menuList="componentsData"></rightCom>
             </el-tab-pane>
@@ -45,6 +46,20 @@
           </el-tabs>
         </div>
       </div>
+
+      <div class="td-editorConfig-content-top-item">
+        <EditorIcon name="analysis" size="16px"></EditorIcon>
+        <span>模型</span>
+        <div class="dropDowm">
+          <el-tabs tab-position="left" style="width: 100%; height: 100%" class="demo-tabs">
+            <el-tab-pane label="城市">
+              <rightCom :menuList="modelData"></rightCom>
+            </el-tab-pane>
+
+          </el-tabs>
+        </div>
+      </div>
+
     </div>
 
     <!-- 展示列表 -->
@@ -71,6 +86,7 @@ import rightCom from "./rightCom.vue";
 import textCom from "./textCom.vue";
 import historyList from "./historyList.vue";
 import analysisData from "@/assets/componentList/analysis.js";
+import modelData from "@/assets/componentList/model.js";
 import linesData from "@/assets/componentList/line.js";
 import piesData from "@/assets/componentList/pie.js";
 import scatterPlot from "@/assets/componentList/scatterPlot.js";
@@ -132,7 +148,7 @@ const props = defineProps({
         z-index: 9;
         display: none;
         width: 31.25rem;
-        height: 18.75rem;
+        height: 28.75rem;
         background-color: #000;
       }
     }

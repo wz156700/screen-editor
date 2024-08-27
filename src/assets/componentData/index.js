@@ -105,7 +105,7 @@ export const getConfigData = (name, value) => {
         }
     }
     item.style = { ...Public };
-    for (let i = 0; i < itemData.attribute.length; i++) {
+    for (let i = 0; i < itemData?.attribute?.length; i++) {
         for (let k = 0; k < itemData.attribute[i].children.length; k++) {
             if (itemData.attribute[i].children[k].field) {
                 console.log('typeof value.attribute[itemData.attribute[i].children[k].field]', typeof value.attribute[itemData.attribute[i].children[k].field])
@@ -126,7 +126,7 @@ export const getConfigData = (name, value) => {
 
         }
     }
-    for (let i = 0; i < itemData.style.length; i++) {
+    for (let i = 0; i < itemData?.style?.length; i++) {
         for (let k = 0; k < itemData.style[i].children.length; k++) {
             item.style[itemData.style[i].children[k].field] = value.style[itemData.style[i].children[k].field] || itemData.style[i].children[k].default;
         }

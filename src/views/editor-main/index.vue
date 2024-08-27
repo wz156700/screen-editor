@@ -6,56 +6,26 @@
   <div class="td-editorMain">
     <!-- 上 -->
     <div class="td-editorMain-topBox">
-      <EditorTop
-        @saveItem="saveItem"
-        @previewItem="previewItem"
-        :domInfo="domInfo"
-      ></EditorTop>
+      <EditorTop @saveItem="saveItem" @previewItem="previewItem" :domInfo="domInfo"></EditorTop>
     </div>
     <!-- 中心 -->
     <div class="td-editorMain-main">
       <!-- 左侧 -->
-      <div
-        class="td-editorMain-main-left"
-        :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }"
-      >
-        <EditorLeft
-          @selectItem="selectItem"
-          :selectId="selectUUID"
-          :domData="domData"
-          @updataDOM="updataDOM"
-          @updateShowOrHideEles="updateShowOrHideEles"
-        >
+      <div class="td-editorMain-main-left" :style="{ width: state.isShowLeftBar ? '18.75rem' : '3.75rem' }">
+        <EditorLeft @selectItem="selectItem" :selectId="selectUUID" :domData="domData" @updataDOM="updataDOM"
+          @updateShowOrHideEles="updateShowOrHideEles">
         </EditorLeft>
       </div>
       <!-- 中间 -->
       <div class="td-editorMain-main-middle" ref="mainMiddle">
-        <EditorMiddle
-          :domData="domData"
-          @addDOM="addDOM"
-          @updataDOM="updataDOM"
-          @updataDOMArray="updataDOMArray"
-          @removeDOM="removeDOM"
-          @selectDom="selectDom"
-          :draggable="draggable"
-          ref="EditorMiddleRef"
-          :canvasInfo="canvasState"
-          :domInfo="domInfo"
-        ></EditorMiddle>
+        <EditorMiddle :domData="domData" @addDOM="addDOM" @updataDOM="updataDOM" @updataDOMArray="updataDOMArray"
+          @removeDOM="removeDOM" @selectDom="selectDom" :draggable="draggable" ref="EditorMiddleRef"
+          :canvasInfo="canvasState" :domInfo="domInfo"></EditorMiddle>
       </div>
       <!-- 右侧 -->
-      <div
-        class="td-editorMain-main-right"
-        :style="{ width: state.isShowRightBar ? '22.5rem' : '2.5rem' }"
-      >
-        <EditorRight
-          :propertyData="propertyData"
-          :propertyTable="propertyTable"
-          :selectId="selectUUID"
-          :domData="domData"
-          :canvasInfo="canvasState"
-          @updataDOM="updataDOM"
-        ></EditorRight>
+      <div class="td-editorMain-main-right" :style="{ width: state.isShowRightBar ? '22.5rem' : '2.5rem' }">
+        <EditorRight :propertyData="propertyData" :propertyTable="propertyTable" :selectId="selectUUID"
+          :domData="domData" :canvasInfo="canvasState" @updataDOM="updataDOM"></EditorRight>
       </div>
     </div>
   </div>
@@ -181,7 +151,7 @@ const updataDOMArray = (vals) => {
 };
 // 删除元素
 const removeDOM = (val) => {
-  alert("123");
+
   delete domData[val];
 };
 

@@ -7,6 +7,10 @@
 import * as d3 from "d3";
 import { onMounted, ref, watch } from "vue";
 
+//pinia仓库
+import { useCounterStore } from "@/store/editor";
+const dataStore = useCounterStore();
+
 const props = defineProps({
   positionInfo: {
     type: Object,
@@ -31,6 +35,7 @@ const getRodInfo = () => {
   if (apEditorRod.value) {
     apEditorRod.value.innerHTML = null;
   }
+  console.log("apEditorRod.value.offsetHeight, apEditorRod.value.offsetWidth", apEditorRod.value.offsetHeight, apEditorRod.value.offsetWidth)
   drawRod(apEditorRod.value.offsetHeight, apEditorRod.value.offsetWidth);
 };
 
@@ -83,6 +88,8 @@ watch(
     deep: true,
   }
 );
+
+
 </script>
 
 <style scoped>

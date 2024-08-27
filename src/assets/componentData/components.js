@@ -583,7 +583,7 @@ export const apWviewText1 = {
                     name: "文本内容",
                     type: "el-input",
                     field: "content",
-                    default: '文件组件',
+                    default: '',
                 },
                 {
                     name: "字体类型",

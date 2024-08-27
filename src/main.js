@@ -16,6 +16,7 @@ import "./assets/style/theme/dark-element.css";
 import EchartsDom from "./components/echarts/index";
 import APBorder from "./components/border/index";
 import Maps from './components/map/index';
+import Models from './components/model/index';
 import Customs from './components/custom/index';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
@@ -36,4 +37,4 @@ app.config.globalProperties = {
     indexDBUpdata,
     indexDBSearch,
 };
-app.use(router).use(pinia).use(ElementPlus).use(EchartsDom).use(APBorder).use(Customs).use(Maps).use(DataV).component("EditorIcon", EditorIcon).component("SvgIcon", SvgIcon).mount("#app");
+app.use(router).use(pinia).use(ElementPlus).use(EchartsDom).use(Models).use(APBorder).use(Customs).use(Maps).use(DataV).component("EditorIcon", EditorIcon).component("SvgIcon", SvgIcon).mount("#app");

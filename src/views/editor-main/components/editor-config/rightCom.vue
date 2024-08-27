@@ -28,7 +28,7 @@ defineProps({
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: 18.75rem;
+  height: 28.75rem;
   overflow-y: auto;
 }
 </style>

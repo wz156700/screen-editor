@@ -32,7 +32,7 @@
         <el-input v-model="form.name" />
       </el-form-item>
       <el-form-item label="分辨率" prop="ratio">
-        <el-select v-model="form.ratio" placeholder="请选择分辨率" style="width: 100%">
+        <el-select v-model="form.ratio" placeholder="请选择分辨率" style="width: 100%" disabled="true">
           <el-option v-for="item in ratioOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
