@@ -64,7 +64,7 @@ export const useCounterStore = defineStore("editor", {
     // 可以配置更多选项，例如存储的键、存储位置等
     strategies: [
       {
-        key: 'state.global.ratio',
+        key: 'my_counter',
         storage: localStorage,
       },
     ],

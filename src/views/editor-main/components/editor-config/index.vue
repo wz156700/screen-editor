@@ -52,7 +52,7 @@
         <span>模型</span>
         <div class="dropDowm">
           <el-tabs tab-position="left" style="width: 100%; height: 100%" class="demo-tabs">
-            <el-tab-pane label="城市">
+            <el-tab-pane label="gltf模型">
               <rightCom :menuList="modelData"></rightCom>
             </el-tab-pane>
 
